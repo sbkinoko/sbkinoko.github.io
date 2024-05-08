@@ -1,7 +1,7 @@
 # ダイアログを利用して画像を選択して開く方法
 ## 内容
 wpfを利用して、選択した画像ファイルを表示するアプリを作成します
-
+作成物のrepositoryは[こちら](https://github.com/sbkinoko/ImageTest)です
 ## レイアウトを作る
 button・imageを配置します[\[1\]](#参考)
 
