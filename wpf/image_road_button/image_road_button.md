@@ -34,6 +34,7 @@ MainWindow.xaml
 
 ```
 現状のレイアウトはこうです
+
 ![layout](../img/layout.png)
 
 ## ロジック
