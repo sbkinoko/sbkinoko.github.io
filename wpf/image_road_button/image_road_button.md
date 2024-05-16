@@ -84,10 +84,10 @@ private void selectFile()
 ![ダイアログのgif](../img/openImg.gif)
 
 ## 参考
-\[1\] [方法: グリッド要素を作成する](https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/controls/how-to-create-a-grid-element?view=netframeworkdesktop-4.8)
+[1] [方法: グリッド要素を作成する](https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/controls/how-to-create-a-grid-element?view=netframeworkdesktop-4.8)
 
-\[2\] [チュートリアル: C# でシンプルな WPF アプリケーションを作成する](https://learn.microsoft.com/ja-jp/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022#add-the-button-control)
+[2] [チュートリアル: C# でシンプルな WPF アプリケーションを作成する](https://learn.microsoft.com/ja-jp/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022#add-the-button-control)
 
-\[3\][【Tips】「ファイルを開く」ダイアログでファイルのフルパスを取得したい【OpenFileDialog】](https://qiita.com/ryojio2k/items/d6b1c39ca360373d9025)
+[3][【Tips】「ファイルを開く」ダイアログでファイルのフルパスを取得したい【OpenFileDialog】](https://qiita.com/ryojio2k/items/d6b1c39ca360373d9025)
 
-\[4\][\[WPF\] Imageコントロールで画像を表示する](http://blog.pionet.co.jp/experience/archives/2111)
+[4][\[WPF\] Imageコントロールで画像を表示する](http://blog.pionet.co.jp/experience/archives/2111)
