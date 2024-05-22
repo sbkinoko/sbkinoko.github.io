@@ -16,4 +16,4 @@ Fultter
 AWS
 
 ホームページも作りたいね
-
+→いったんここを充実させていく。今はmdで書いてるけど最終的にはhtml・css・javascriptで書きたい
