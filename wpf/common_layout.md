@@ -8,3 +8,6 @@ https://qiita.com/soi/items/12ceea4efcf31c1a7b93<br>
 
 callback とdelegate<br>
 https://hiropon-progra.com/csharp-callback-and-deligate/
+
+mediaElementの再生を操作<br>
+https://learn.microsoft.com/ja-jp/dotnet/api/system.windows.controls.mediaelement.position?view=windowsdesktop-8.0
