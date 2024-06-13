@@ -5,3 +5,6 @@ uerControle<br>
 https://qiita.com/soi/items/12ceea4efcf31c1a7b93<br>
 ビルドしないと動かなかった<br>
 それに関する記事もあった<br>https://qiita.com/nie/items/3e2f6f37b3425585952b
+
+callback とdelegate<br>
+https://hiropon-progra.com/csharp-callback-and-deligate/
