@@ -29,3 +29,6 @@ https://puarts.com/?pid=1785
 
 uniformGrid<br>
 https://www.paveway.info/entry/2019/04/29/wpf_uniformgrid
+
+viewModelからwindowsize調整<br>
+https://stackoverflow.com/questions/32137758/wpf-binding-window-height-to-viewmodel-property
