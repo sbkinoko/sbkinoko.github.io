@@ -6,7 +6,6 @@
 
 ### Android
 - [lambdaのhintが消えた](https://sbkinoko.github.io/android/display-scope.html)
-- [wpfで複数window表示する方法](https://sbkinoko.github.io/wpf/show_windows/show_windows)
  
 ## やりたいこと
 
