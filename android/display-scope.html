@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>Hintが消えた</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        blockquote {
+            background: #f9f9f9;
+            border-left: 10px solid #ccc;
+            margin: 1.5em 10px;
+            padding: 0.5em 10px;
+        }
+        blockquote p {
+            display: inline;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Android Studioでスコープが見えなくなった時の対処法</h1>
+    <p>
+        AndroidStudioをKoalaにアップデートしたらスコープ関数のhintの表示がなくなってしまいました。
+    </p>
+    <p>
+        今アクセスできるitが何者なのか、はたまたitを利用できる箇所にいるのかわからなくなって困ったのでgptに質問しました。<br>
+    </p>
+
+    <blockquote>
+        <p>4. インラインの型ヒントを有効にする<br>
+        インラインの型ヒントを有効にすることで、コードエディタ内に変数の型を表示することができます。これを有効にするには以下の手順に従います：<br>
+        Android Studioのメニューから File > Settings（Macの場合は Android Studio > Preferences）を開く。<br>
+        Editor > Inlay Hints > Kotlin に移動する。<br>
+        Types タブで Show type hints for をチェックし、必要な設定を有効にする。</p>
+    </blockquote>
+        
+    <p>
+        どうやらヒントに関する設定があるようです。
+    </p>
+    <p>
+        lambdaのhintをつけると見れるようになりました。
+    </p>
+    <table>
+        <tr><th>off</th><th>on</th></tr>
+        <tr>
+            <td><img src="no-lambdas-hint.png" alt="No Lambdas Hint"></td>
+            <td><img src="lambdas-hint.png" alt="Lambdas Hint"></td>
+        </tr>
+    </table>
+</body>
+</html>
