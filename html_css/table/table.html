@@ -49,6 +49,23 @@
             width: 100%;
             table-layout: fixed;
         }
+        code {
+            display: inline-block;
+            padding: 0.1em 0.25em; /* 文字周りの余白 */
+            color: #444; /* 文字色 */
+            background-color: #e7edf3; /* 背景色 */
+            border-radius: 3px; /* 角丸 */
+            border: solid 1px #d6dde4; /* 枠線 */
+        }
+        pre {
+            margin: 1em 0;
+            padding: 1em;
+            border-radius: 5px;
+            background: #25292f;
+            color: #fff;
+            overflow-x: auto; /* ⭐ */
+            -webkit-overflow-scrolling: touch; /* ⭐ */
+        }  
     </style>
 </head>
 <body>
@@ -65,10 +82,6 @@
         拡大縮小をすると割合が変なことになってしまいます……。
     </p>
 
-    <br>
-    <img src="step1.gif" width="100%">
-    <br>
-
     <pre>
         <code>
     &ltstyle>
@@ -80,7 +93,6 @@
         } 
     &lt/style></code></pre>
 
-
     <pre><code>
     &lttable>
         &lttr>&ltth class="width20">場所&lt/th>&ltth class="width40">できること&lt/th>&ltth class="width40">gif&lt/th>&lt/tr>
@@ -88,10 +100,15 @@
     &lt/table>
     </code></pre>
 
+    <br>
+    <img src="step1.gif" width="100%">
+    <br>
+
     <p>
         そこでこちらのサイト<a href>[2]</a>を参考にtableのstyleを定義しました。
         拡大縮小しても画面に対してtableの割合が固定されるようになりました。
     </p>
+    
     <br>
     <img src = "step2.gif">
     <br>
