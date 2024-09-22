@@ -2,7 +2,7 @@
 <html lang="jp">
 <head>
     <meta charset="UTF-8">
-    <title>ショートカットまとめ</title>
+    <title>htmlの表の幅を調整したい</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -52,17 +52,14 @@
         code {
             display: inline-block;
             padding: 0.1em 0.25em; /* 文字周りの余白 */
-            color: #444; /* 文字色 */
-            background-color: #e7edf3; /* 背景色 */
-            border-radius: 3px; /* 角丸 */
-            border: solid 1px #d6dde4; /* 枠線 */
+            color: #ffffff; /* 文字色 */
+            background-color:#25292f; /* 背景色 */
         }
         pre {
             margin: 1em 0;
             padding: 1em;
             border-radius: 5px;
             background: #25292f;
-            color: #fff;
             overflow-x: auto; /* ⭐ */
             -webkit-overflow-scrolling: touch; /* ⭐ */
         }  
@@ -74,7 +71,7 @@
     </h1>
 
     <p>
-       幅を設定しない状態だと、以下の様になり非常に見づらくなってしまいました。
+       幅を指定しない状態だと、以下の様になり非常に見づらくなってしまいました。
     </p>
 
     <p>
@@ -82,8 +79,7 @@
         拡大縮小をすると割合が変なことになってしまいます……。
     </p>
 
-    <pre>
-        <code>
+    <pre><code>
     &ltstyle>
         th.width20{
             width: 20%;
@@ -91,7 +87,9 @@
         th.width40{
             width: 40%;
         } 
-    &lt/style></code></pre>
+    &lt/style>
+
+</code></pre>
 
     <pre><code>
     &lttable>
@@ -108,7 +106,7 @@
         そこでこちらのサイト<a href>[2]</a>を参考にtableのstyleを定義しました。
         拡大縮小しても画面に対してtableの割合が固定されるようになりました。
     </p>
-    
+
     <br>
     <img src = "step2.gif">
     <br>
