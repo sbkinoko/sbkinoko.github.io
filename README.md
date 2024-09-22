@@ -2,6 +2,9 @@
 調べても忘れるし、参考にしたサイトがわからなくなりがちなのでまとめます
 備忘録ってやつです
 ## 書いたもの一覧
+### html/css
+- [表の幅を割合で指定](https://sbkinoko.github.io\html_css\table\table.html)
+
 ### wpf
 - [wpfで画像ファイルをひらいて表示する方法](https://sbkinoko.github.io/wpf/image_road_button/image_road_button)
 - [wpfで複数window表示する方法](https://sbkinoko.github.io/wpf/show_windows/show_windows)
