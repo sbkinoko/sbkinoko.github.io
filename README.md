@@ -1,6 +1,7 @@
 ﻿# sbkinoko.github.io
-調べても忘れるし、参考にしたサイトがわからなくなりがちなのでまとめます
-備忘録ってやつです
+調べても忘れるし、参考にしたサイトがわからなくなりがちなのでまとめます。
+<br>備忘録ってやつです。
+
 ## 書いたもの一覧
 ### html/css
 - [表の幅を割合で指定](https://sbkinoko.github.io/html_css/table/table.html)
@@ -26,5 +27,4 @@ Fultter
 
 AWS
 
-ホームページも作りたいね
-→いったんここを充実させていく。今はmdで書いてるけど最終的にはhtml・css・javascriptで書きたい
+ホームページをhtml・css・javascriptで書きたい
