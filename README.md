@@ -1,4 +1,6 @@
 ﻿# sbkinoko.github.io
+調べても忘れるし、参考にしたサイトがわからなくなりがちなのでまとめます
+備忘録ってやつです
 ## 書いたもの一覧
 ### wpf
 - [wpfで画像ファイルをひらいて表示する方法](https://sbkinoko.github.io/wpf/image_road_button/image_road_button)
