@@ -63,6 +63,17 @@
             overflow-x: auto; /* ⭐ */
             -webkit-overflow-scrolling: touch; /* ⭐ */
         }  
+        .box1 {
+            padding: 0.5em 1em;
+            margin: 2em 0;
+            font-weight: bold;
+            border: solid 3px #000000;
+            width: 60%;
+        }
+        .box1 p {
+            margin: 0; 
+            padding: 0;
+        }
     </style>
 </head>
 <body>
@@ -71,11 +82,8 @@
     </h1>
 
     <p>
-       幅を指定しない状態だと、以下の様になり非常に見づらくなってしまいました。
-    </p>
-
-    <p>
-        thのパラメータ設定をこちらのページ<a href="">[1]</a>を参考に行ったのですが、どうにもうまくいかず。
+       幅を指定しない状態だと見づらいものになりました。<br>
+        thのパラメータ設定をこちらのページ<a href="https://sbkinoko.github.io/html_css/table/table.html#ref">[1]</a>を参考に行ったのですが、どうにもうまくいかず。
         拡大縮小をすると割合が変なことになってしまいます……。
     </p>
 
@@ -98,20 +106,56 @@
     &lt/table>
     </code></pre>
 
-    <br>
-    <img src="step1.gif" width="100%">
-    <br>
+
+    <div class="box1" >
+        <img class="imgborder" src = "step1.gif">        
+    </div>
 
     <p>
-        そこでこちらのサイト<a href>[2]</a>を参考にtableのstyleを定義しました。
-        拡大縮小しても画面に対してtableの割合が固定されるようになりました。
+        ……tableの設定を忘れていました。
+        <br>styleに追加します。
     </p>
 
-    <br>
-    <img src = "step2.gif">
-    <br>
+    <pre><code>
+        table{
+            width: 100%;
+            table-layout: fixed;
+        }    
+</code></pre>
 
-    <p>それはそれとして、gifのサイズがおかしなことになっているので修正しました</p>
+    <div class="box1" >
+        <img class="imgborder" src = "step2.gif">        
+    </div>
+
+    <p>
+        表はいい感じになりました。
+        <br>それはそれとして、gifのサイズがおかしなことになっているので修正します。
+        <br>widthをautoから100%へ変更です。
+    </p>
+    <P>
+        
+    </P>
+    <pre><code>
+            &lttr>&lttd>定義場所&lt/td>&lttd>使用箇所を表示できる&ltbr>クリックすると対象にジャンプ&lt/td>&ltth>&ltimg src="ctrl_1.gif" width="100%">&lt/th>&lt/tr>
+    </code></pre>
+
+    <div class="box1" >
+        <img class="imgborder" src = "step3.gif">        
+    </div>
+
+    <p>
+        使いやすいかどうかはおいておいて、やりたいことができました。
+    </p>
+
+   <h1 id = "ref">
+     参考
+   </h1>
+
+   <ol>
+    <p>
+        <li>『CSS: table（テーブル）の列幅の割合を指定する』　<a href="https://step-learn.com/article/html-css/031-table-width-percent.html">https://step-learn.com/article/html-css/031-table-width-percent.html</a></li>
+    </p>
+    </ol>
 
 </body>
 </html>
