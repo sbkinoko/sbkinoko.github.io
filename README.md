@@ -6,7 +6,8 @@
 
 ### Android
 - [lambdaのhintが消えた](https://sbkinoko.github.io/android/scope/display-scope.html)
- 
+- [ショートカットまとめ](https://sbkinoko.github.io/android/shortcut/shortcut.html)
+
 ## やりたいこと
 
 TDD
