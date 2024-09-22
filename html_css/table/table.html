@@ -59,16 +59,44 @@
     <p>
        幅を設定しない状態だと、以下の様になり非常に見づらくなってしまいました。
     </p>
-    <img src="step1.png">
 
     <p>
-        thのパラメータ設定をこちらのページ[1]を参考に行ったのですが、どうにもうまくいかず。
+        thのパラメータ設定をこちらのページ<a href="">[1]</a>を参考に行ったのですが、どうにもうまくいかず。
         拡大縮小をすると割合が変なことになってしまいます……。
     </p>
-    <table>
-<tr><th>github.io</th><th>vscodeのpreview</th></tr>
-<tr><td><img src="step2.gif"></td><td><img src="vscode_step2.png"></td></tr>
 
-    </table>
+    <br>
+    <img src="step1.gif" width="100%">
+    <br>
+
+    <pre>
+        <code>
+    &ltstyle>
+        th.width20{
+            width: 20%;
+        }
+        th.width40{
+            width: 40%;
+        } 
+    &lt/style></code></pre>
+
+
+    <pre><code>
+    &lttable>
+        &lttr>&ltth class="width20">場所&lt/th>&ltth class="width40">できること&lt/th>&ltth class="width40">gif&lt/th>&lt/tr>
+        &lttr>&lttd>定義場所&lt/td>&lttd>使用箇所を表示できる&ltbr>クリックすると対象にジャンプ&lt/td>&ltth>&ltimg src="ctrl_1.gif" width="auto">&lt/th>&lt/tr>
+    &lt/table>
+    </code></pre>
+
+    <p>
+        そこでこちらのサイト<a href>[2]</a>を参考にtableのstyleを定義しました。
+        拡大縮小しても画面に対してtableの割合が固定されるようになりました。
+    </p>
+    <br>
+    <img src = "step2.gif">
+    <br>
+
+    <p>それはそれとして、gifのサイズがおかしなことになっているので修正しました</p>
+
 </body>
 </html>
