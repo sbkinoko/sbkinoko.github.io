@@ -28,3 +28,12 @@ Fultter
 AWS
 
 ホームページをhtml・css・javascriptで書きたい
+
+## 生息地
+- [Github](https://github.com/sbkinoko)
+  - 主にいじってるのはこれ
+    - [RPG](https://github.com/sbkinoko/RPGEngine2)
+- [youtube](https://www.youtube.com/@sb_knkk)
+- [twitter(X)](https://x.com/sb_kinoko)
+- [小説家になろう](https://mypage.syosetu.com/996419/)
+
