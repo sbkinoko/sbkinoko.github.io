@@ -1,4 +1,4 @@
 ﻿# sbkinoko.github.io
-![ページのトップ](https://sbkinoko.github.io/index.html)
+[ページのトップ](https://sbkinoko.github.io/index.html)
 
 
