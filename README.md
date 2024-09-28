@@ -1,4 +1,6 @@
 ﻿# sbkinoko.github.io
-- [ページのトップ](https://sbkinoko.github.io/index.html){:target="_blank}
+<a href="https://sbkinoko.github.io/index.html" target="_blank">
+ページのトップ
+</a>
 
 
