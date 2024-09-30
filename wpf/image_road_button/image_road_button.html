@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <title>ダイアログを利用して画像を選択して開く方法</title>
+    <link rel="styleSheet" href="../../style.css"/>    
+</head>
+<!--
+ &lt <
+    ただの箇条書き
+    <ol>
+        <li></li>
+    </ol>
+
+    数字箇条書き
+    <ol>
+        <li></li>
+    </ol>
+
+    <a href=""></a>
+ -->
+<body>
+    <h1>
+        ダイアログを利用して画像を選択して開く方法
+    </h1>
+
+    <h2>
+        内容
+    </h2>   
+    <p>
+        wpfを利用して、選択した画像ファイルを表示するアプリを作成します
+        作成物のrepositoryは<a href="https://github.com/sbkinoko/ImageTest">こちら</a>です
+    </p>
+
+    <h2>
+        レイアウトを作る
+    </h2>
+    <p>
+        button・imageを配置します<a href="#ref">[1]</a>
+    </p>
+
+    <p>
+        MainWindow.xaml.cs に追記
+    </p>
+
+    <pre><code>
+    &ltWindow x:Class="ImageTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ImageTest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    &ltGrid>
+        &ltGrid.ColumnDefinitions>
+            &ltColumnDefinition/>
+            &ltColumnDefinition/>
+        &lt/Grid.ColumnDefinitions>
+        &ltButton
+            Grid.Column="0"
+            >
+            open dialog
+        &lt/Button>
+        &ltImage
+            Grid.Column="1"
+            x:Name="roadedImage"
+            />
+        &lt/Grid>
+    &lt/Window>
+</code></pre>   
+
+    <p>
+    現状のレイアウトはこうです
+    </p>
+
+    <div class="box1" >
+        <img width="100%" src = "layout.png">        
+    </div>
+
+    <h2>
+        ロジック
+    </h2>
+    <p>
+        ボタンにロジックを埋め込んでおしまいです<a href="#ref">[2]</a><a href="#ref">[3]</a><a href="#ref">[4]</a>
+    </p>
+
+    <pre><code>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            selectFile();
+        }
+        
+        private void selectFile()
+        {
+            //OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            {
+                openFileDialog.Title = "ファイル選択ダイアログ";
+                openFileDialog.Filter = "すべてのファイル(*.*)|*.*";
+        
+                //ファイル選択ダイアログを開く
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    roadedImage.Source = new BitmapImage(new Uri(openFileDialog.FileName));
+                }
+            }
+        }
+</code></pre>
+
+    <p>
+        ダイアログを開くコード(<b>Result.Ok</b> と <b>using</b>)に関しては、動かなかったのでgptに聞いて修正しました。
+        <br>また、このままだとボタンを押したときに何も起きないのでButtonのClickを利用して紐づけ作業を行います
+    </p>
+
+    <pre><code>
+&ltButton
+    Click="Button_Click" 
+    Grid.Column="0"
+    >
+    open dialog
+&lt/Button>
+</code></pre>
+
+    <h2>
+        完成 
+    </h2>
+    <p>
+        挙動はこうです。思ってたよりすんなりできました
+    </p>
+
+    <div class="box1">
+        <img width="100%" src = "openImg.gif"> 
+    </div>
+
+    <h2 id="ref">
+        <ol>
+            <li>
+                方法: グリッド要素を作成する <a href="https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/controls/how-to-create-a-grid-element?view=netframeworkdesktop-4.8">https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/controls/how-to-create-a-grid-element?view=netframeworkdesktop-4.8</a>
+            </li>
+            <li>
+                チュートリアル: C# でシンプルな WPF アプリケーションを作成する 
+                <a href="https://learn.microsoft.com/ja-jp/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022#add-the-button-control">https://learn.microsoft.com/ja-jp/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022#add-the-button-control</a>
+            </li>
+            <li>
+                【Tips】「ファイルを開く」ダイアログでファイルのフルパスを取得したい【OpenFileDialog】 
+                <a href="https://qiita.com/ryojio2k/items/d6b1c39ca360373d9025">https://qiita.com/ryojio2k/items/d6b1c39ca360373d9025</a>
+            </li>
+            <li>
+                [WPF] Imageコントロールで画像を表示する
+                <a href="http://blog.pionet.co.jp/experience/archives/2111">http://blog.pionet.co.jp/experience/archives/2111</a>
+            </li>
+        </ol>
+    </h2>
+</body>
+</html>
