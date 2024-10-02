@@ -7,7 +7,7 @@ WPFの起動時に複数の画面を表示する [[1]](#参考)を参考に複�
 同じデータを参照するようにしてないのでそれぞれで画像を選択します<br>
 閉じる処理を共通化してないのでそれぞれのwindowを閉じる必要があります<br>
 
-![複数windowのgif](../img/show_windows.gif)
+![複数windowのgif](show_windows.gif)
 
 ## データの共通化
 本当は2つのウインドウを同時に閉じるっていうのをやりたかったんですが、[prism](https://github.com/PrismLibrary/Prism)というライブラリを使ったものしか見つけられなったので断念しました。<br>
@@ -194,7 +194,7 @@ dataContextを設定できればいいので別にこれでよかったんです
 これでアプリを動かすと以下の様になりました。
 複数のwindow、viewから単一のviewModelを参照することができました。
 
-![データ共有した複数windowのgif](../img/use_windows.gif)
+![データ共有した複数windowのgif](use_windows.gif)
 
 [公式のMVVMページ](https://learn.microsoft.com/ja-jp/dotnet/architecture/maui/mvvm)[\[6\]](#参考)もあったので張っておきます。<br>
 後半部分を実装したPRは[こちら](https://github.com/sbkinoko/ImageTest/pull/5/files)です。記事全体のPRは[こちら](https://github.com/sbkinoko/ImageTest/pull/4/files)です。
