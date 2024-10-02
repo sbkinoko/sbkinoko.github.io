@@ -1,8 +1,8 @@
 function writeHeader(rootDir) {
     $.ajax({
-        url: rootDir + "header.html", //パスはcommon.jsが読み込まれたHTMLファイルが基準
-        cache: false, //キャッシュを利用するか（お好みで）
-        async: true, //非同期で読み込むか（お好みで）
+        url: rootDir + "header.html",
+        cache: false, 
+        async: true,
         success: function(html){
             html = html.replace(/\{\$root\}/g, rootDir);
             document.write(html);
