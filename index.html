@@ -8,7 +8,12 @@
     <script type="text/javascript" src="main.js"></script>
 </head>
 <body>
-    <script type="text/javascript">writeHeader("./");</script>
+    <div id="header"></div>
+    <script>
+        $(document).ready(function() {
+            writeHeader();
+        });
+    </script>
     
     <h1>
         キノコの仕事部屋
