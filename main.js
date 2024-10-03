@@ -5,7 +5,16 @@ function writeHeader(rootDir) {
 }
 
 function writeAbout(rootDir){
-    writeContent("about",rootDir+CONTENT)
+    // writeContent("about",rootDir+CONTENT)
+    $.ajax({
+        url: rootDir + "home/about.html", 
+        cache: false, 
+        async: true, 
+        success: function(html){
+            html = html.replace(/\{\$root\}/g, rootDir);
+            $("#about").html(html)
+        }
+    });
 }
 
 function writeArticles(rootDir){
