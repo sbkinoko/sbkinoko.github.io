@@ -1,19 +1,25 @@
+const HOME = "/home"
+
 function writeHeader(rootDir) {
-    $("#header").load("header.html");
+    writeContent(header,rootDir)
 }
 
-function writeAbout(){
-    $("#about").load(rootDir+"home/about.html")
+function writeAbout(rootDir){
+    writeContent("about",rootDir+HOME)
 }
 
 function writeArticles(rootDir){
-    $("#articles").load(rootDir+"home/articles.html")
+    writeContent("articles",rootDir+HOME)
 }
 
 function writeWant(rootDir){
-    $("#want").load(rootDir+"home/want.html")
+    writeContent("want",rootDir+HOME)
 }
 
 function writeHabitat(rootDir){
-    $("#habitat").load(rootDir+"home/habitat.html")
+    writeContent("habitat",rootDir+HOME)
+}
+
+function writeContent(name,path){
+    $("#"+name).load(path+"/"+name+".html")
 }
