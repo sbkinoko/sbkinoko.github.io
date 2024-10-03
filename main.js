@@ -7,8 +7,8 @@ function writeHeader(rootDir) {
         cache: false, 
         async: true, 
         success: function(html){
-            html = html.replace(/\{\$root\}/g, rootDir);
-            $("#header").html(html)
+            // html = html.replace(/\{\$root\}/g, rootDir);
+            // $("#header").html(html)
         }
     });
 }
