@@ -1,7 +1,15 @@
 const CONTENT = "/content"
 
 function writeHeader(rootDir) {
-    writeContent("header",rootDir)
+    $.ajax({
+        url: rootDir + "header.html", 
+        cache: false, 
+        async: true, 
+        success: function(html){
+            html = html.replace(/\{\$root\}/g, rootDir);
+            $("#header").html(html)
+        }
+    });
 }
 
 function writeAbout(rootDir){

@@ -2,7 +2,7 @@
 <html lang="jp">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>about</title>
     <link rel="styleSheet" href="../../style.css"/>   
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
     <script type="text/javascript" src="../../main.js"></script> 
@@ -15,13 +15,13 @@
  -->
 <body>
     <div id="header"></div>
-    <h1>
-    </h1>
 
+    <div id="habitat"></div>
     <script>
         $(document).ready(function() {
-            var dir = "../../"
-            writeHeader(dir);
+            var rootDir = "../"
+            writeHeader(rootDir)
+            writeHabitat(rootDir)
         });
     </script>
 </body>
