@@ -1,23 +1,23 @@
-const HOME = "/home"
+const CONTENT = "/content"
 
 function writeHeader(rootDir) {
     writeContent(header,rootDir)
 }
 
 function writeAbout(rootDir){
-    writeContent("about",rootDir+HOME)
+    writeContent("about",rootDir+CONTENT)
 }
 
 function writeArticles(rootDir){
-    writeContent("articles",rootDir+HOME)
+    writeContent("articles",rootDir+CONTENT)
 }
 
 function writeWant(rootDir){
-    writeContent("want",rootDir+HOME)
+    writeContent("want",rootDir+CONTENT)
 }
 
 function writeHabitat(rootDir){
-    writeContent("habitat",rootDir+HOME)
+    writeContent("habitat",rootDir+CONTENT)
 }
 
 function writeContent(name,path){
