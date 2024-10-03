@@ -14,6 +14,6 @@ function writeWant(rootDir){
     $("#want").load(rootDir+"home/articles.html")
 }
 
-function writeWant(rootDir){
+function writeHabitat(rootDir){
     $("#habitat").load(rootDir+"home/habitat.html")
 }
