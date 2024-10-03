@@ -1,7 +1,7 @@
 const CONTENT = "/content"
 
 function writeHeader(rootDir) {
-    writeContent(header,rootDir)
+    writeContent("header",rootDir)
 }
 
 function writeAbout(rootDir){
