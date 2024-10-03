@@ -1,7 +1,6 @@
 const CONTENT = "/content"
 
 function writeHeader(rootDir) {
-    // writeContent("header",rootDir)
     $.ajax({
         url: rootDir + "header.html", 
         cache: false, 
