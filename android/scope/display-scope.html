@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="jp">
+
 <head>
     <meta charset="UTF-8">
     <title>Hintが消えた</title>
-    <link rel="styleSheet" href="../../style.css"/>   
+    <link rel="styleSheet" href="../../style.css" />
 </head>
+
 <body>
     <h1>Android Studioでitが見えなくなった時の対処法</h1>
     <p>
@@ -16,23 +18,27 @@
 
     <blockquote>
         <p>4. インラインの型ヒントを有効にする<br>
-        インラインの型ヒントを有効にすることで、コードエディタ内に変数の型を表示することができます。これを有効にするには以下の手順に従います：<br>
-        Android Studioのメニューから File > Settings（Macの場合は Android Studio > Preferences）を開く。<br>
-        Editor > Inlay Hints > Kotlin に移動する。<br>
-        Types タブで Show type hints for をチェックし、必要な設定を有効にする。</p>
+            インラインの型ヒントを有効にすることで、コードエディタ内に変数の型を表示することができます。これを有効にするには以下の手順に従います：<br>
+            Android Studioのメニューから File > Settings（Macの場合は Android Studio > Preferences）を開く。<br>
+            Editor > Inlay Hints > Kotlin に移動する。<br>
+            Types タブで Show type hints for をチェックし、必要な設定を有効にする。</p>
     </blockquote>
-        
+
     <p>
         どうやらヒントに関する設定があるようです。
         <br>そもそもヒントという名前だったのですね、知りませんでした。
         <br>lambdaのhintの設定をつけると、エディタ上で見られるようになりました。
     </p>
     <table>
-        <tr><th>off</th><th>on</th></tr>
+        <tr>
+            <th>off</th>
+            <th>on</th>
+        </tr>
         <tr>
             <td class="fill"><img width="auto" src="no-lambdas-hint.png" alt="No Lambdas Hint"></td>
-            <td class="fill"><img  width="auto" src="lambdas-hint.png" alt="Lambdas Hint"></td>
+            <td class="fill"><img width="auto" src="lambdas-hint.png" alt="Lambdas Hint"></td>
         </tr>
     </table>
 </body>
+
 </html>
