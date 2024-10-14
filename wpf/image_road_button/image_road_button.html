@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>ダイアログを利用して画像を選択して開く方法</title>
     <link rel="styleSheet" href="../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../main.js"></script>
 </head>
 <!--
  &lt <
@@ -22,6 +24,9 @@
  -->
 
 <body>
+
+    <div id="header"></div>
+
     <h1>
         ダイアログを利用して画像を選択して開く方法
     </h1>
@@ -158,6 +163,13 @@
             </li>
         </ol>
     </h2>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "../../"
+            writeHeader(dir);
+        });
+    </script>
 </body>
 
 </html>

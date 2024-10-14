@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <title>Hintが消えた</title>
     <link rel="styleSheet" href="../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../main.js"></script>
 </head>
 
 <body>
+    <div id="header"></div>
+
     <h1>Android Studioでitが見えなくなった時の対処法</h1>
     <p>
         AndroidStudioをKoalaにアップデートしたらスコープのhintの表示がなくなってしまいました。
@@ -39,6 +43,13 @@
             <td class="fill"><img width="auto" src="lambdas-hint.png" alt="Lambdas Hint"></td>
         </tr>
     </table>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "../../"
+            writeHeader(dir);
+        });
+    </script>
 </body>
 
 </html>

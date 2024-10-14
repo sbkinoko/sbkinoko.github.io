@@ -16,6 +16,8 @@
     -->
 
 <body>
+    <div id="header"></div>
+
     <h1>KMPでRealmを使ってみる</h1>
     <h2>
         採用理由
@@ -303,6 +305,14 @@ Details: Internal error in file lowering : io.realm.kotlin.compiler.RealmModelLo
                 </a>
             </li>
         </ol>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "../../"
+            writeHeader(dir);
+        });
+    </script>
 </body>
 
 </html>
