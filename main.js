@@ -29,5 +29,12 @@ function writeHabitat(rootDir){
 }
 
 function writeContent(name,path){
-    $("#"+name).load(path+"/"+name+".html")
+    $.ajax({
+        url: path+"/"+name+".html", 
+        cache: false, 
+        async: true, 
+        success: function(html){
+            $("#"+name).html(html)
+        }
+    })
 }
