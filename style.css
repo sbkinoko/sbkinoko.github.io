@@ -1,6 +1,9 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
+    padding-left: 200px;
+    padding-right: 200px;
+    background-color: #afd147;
 }
 h1 {
     font-size: 24px;
@@ -74,10 +77,22 @@ pre {
     height:fit-content;
     align-items: center;
     justify-content: center;
-    padding: 10px;
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-left: -240px;
+    margin-right: -240px;
+    margin-top: -40px;
+    background-color: #e94709;
+    border: #000000 solid 5px;
+}
+.header_boxed a,a:hover ,a:link{
+    color: #ffffff;
 }
 .header_boxed h1{
     margin-right: 20px;
+    font-size: 36px;
+    color: #ffffff;
     white-space: nowrap;
 }
 .header_boxed nav{
@@ -95,6 +110,8 @@ pre {
     flex: 1;
     display: flex;
     padding-top:10px;
+    font-size: 24px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     padding-bottom:10px;
     align-items: center;
     text-align: center;
