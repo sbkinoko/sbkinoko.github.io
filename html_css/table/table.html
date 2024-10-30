@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <title>htmlの表の幅を調整したい</title>
     <link rel="styleSheet" href="../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../main.js"></script>
 </head>
 
 <body>
+    <div id="header"></div>
+
     <h1>
         htmlの表の幅を調整したい
     </h1>
@@ -90,6 +94,13 @@
             </li>
         </p>
     </ol>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "../../"
+            writeHeader(dir);
+        });
+    </script>
 
 </body>
 
