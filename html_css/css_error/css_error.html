@@ -21,6 +21,94 @@
         CSSを読み込めないエラーが起きる
     </h1>
 
+    <div class="box1">
+        <img width="100%" src="error-icon.png">
+    </div>
+
+    <pre><code>This page failed to load a stylesheet from a URL.
+
+1 request
+
+ style.css
+1 source
+css_error.html:0</code></pre>
+
+    <pre><code>GET https://sbkinoko.github.io/html_css/css_error/style.css net::ERR_ABORTED 404 (Not Found)</code></pre>
+
+    <p>
+        0行目でエラーが起きてます。なんやねん……。
+        <br>エラーが起きているときのコードとページのみためはこちらです。
+    </p>
+
+    <pre><code>
+&lt!DOCTYPE html>
+&lthtml lang="jp">
+
+&lthead>
+    &ltmeta charset="UTF-8">
+    &lttitle>CSSのエラー&lt/title>
+    &ltlink rel="styleSheet" href="./../../style.css" />
+    &ltscript src="https://code.jquery.com/jquery-3.3.1.min.js">&lt/script>
+    &ltscript type="text/javascript" src="./../../main.js">&lt/script>
+&lt/head>
+
+
+&ltbody>
+    &ltdiv id="header"></div>
+    &lth1>
+        CSSを読み込めないエラーが起きる
+    &lt/h1>
+
+    &ltscript>
+        $(document).ready(function () {
+            var dir = "../../"
+            writeHeader(dir);
+        });
+    &lt/script>
+ &lt/body>
+
+ &lt/html>
+</code></pre>
+
+    <div class="box1">
+        <img width="100%" src="page.png">
+    </div>
+    <p>
+        このページなので完成形はこのページで確認できます。
+        <br>試行錯誤のPRは<a href="https://github.com/sbkinoko/sbkinoko.github.io/pull/16">
+            こちら</a>です。
+    </p>
+    <p>
+        さて、問題を考えます。
+        <br>「cssを読み込めない」というエラーが発生しているはずなのに、ページには色がついています。
+        <br>エラーが起きているcssは
+    </p>
+    <code>https://sbkinoko.github.io/html_css/css_error/style.css</code>
+    <p>です。</p>
+    <p>
+        指定した覚えもなければ、作成もしていないのでエラーがでてもしょうがないですね。
+    </p>
+
+    <p>
+        開発者ツールでnetworkを確認すると、headerで指定しているcss・jsファイルはどちらも存在しています。
+        <br>やはり知らないところで勝手に指定されているcss(css_error/style.css)が悪さをしています。
+    </p>
+
+    <div class="box1">
+        <img width="100%" src="network.png">
+    </div>
+
+    <p>
+        <lu>
+            <li>
+                他のページでも同様の問題が起こっていること
+            </li>
+            <li>
+                root直下に置いていて同じフォルダにcssがあるtopページでは問題が起こってないこと
+            </li>
+        </lu>
+        から、勝手に同じフォルダにあるcssを指定する問題があると考えます。
+    </p>
     <script>
         $(document).ready(function () {
             var dir = "../../"
