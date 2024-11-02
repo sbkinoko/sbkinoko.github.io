@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSSのエラー</title>
+    <link rel="stylesheet" href="./../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../main.js"></script>
+</head>
+<!--
+ &lt <
+    <ol>
+        <li></li>
+    </ol>
+ -->
+
+<body>
+    <div id="header"></div>
+    <h1>
+        CSSを読み込めないエラーが起きる
+    </h1>
+
+    <div class="box1">
+        <img width="100%" src="error-icon.png">
+    </div>
+
+    <pre><code>This page failed to load a stylesheet from a URL.
+
+1 request
+
+ style.css
+1 source
+css_error.html:0</code></pre>
+
+    <pre><code>GET https://sbkinoko.github.io/html_css/css_error/style.css net::ERR_ABORTED 404 (Not Found)</code></pre>
+
+    <p>
+        0行目でエラーが起きてます。
+        <br>エラーが起きているときのコードとページのみためはこちらです。
+    </p>
+
+    <pre><code>
+&lt!DOCTYPE html>
+&lthtml lang="jp">
+
+&lthead>
+    &ltmeta charset="UTF-8">
+    &lttitle>CSSのエラー&lt/title>
+    &ltlink rel="styleSheet" href="./../../style.css" />
+    &ltscript src="https://code.jquery.com/jquery-3.3.1.min.js">&lt/script>
+    &ltscript type="text/javascript" src="./../../main.js">&lt/script>
+&lt/head>
+
+
+&ltbody>
+    &ltdiv id="header"></div>
+    &lth1>
+        CSSを読み込めないエラーが起きる
+    &lt/h1>
+
+    &ltscript>
+        $(document).ready(function () {
+            var dir = "../../"
+            writeHeader(dir);
+        });
+    &lt/script>
+ &lt/body>
+
+ &lt/html>
+</code></pre>
+
+    <div class="box1">
+        <img width="100%" src="page.png">
+    </div>
+
+    <p>
+        さて、問題を考えます。
+        <br>「cssを読み込めない」というエラーが発生しているはずなのに、ページには色がついています。
+        <br>エラーが起きているcssは
+    </p>
+    <code>https://sbkinoko.github.io/html_css/css_error/style.css</code>
+    <p>です。</p>
+    <p>
+        指定した覚えもなければ、作成もしていないです。そんなもんエラーがでてもしょうがないですね。
+    </p>
+
+    <p>
+        開発者ツールでnetworkを確認すると、headerで指定しているcss・jsファイルはどちらも存在しています。
+        <br>やはり知らないところで勝手に指定されているcss(css_error/style.css)が悪さをしています。
+    </p>
+
+    <div class="box1">
+        <img width="100%" src="network.png">
+    </div>
+
+    <br>
+
+    <lu>
+        <li>
+            他のページでも同様の問題が起こっていること
+        </li>
+        <li>
+            root直下に置いていて同じフォルダにcssがあるtopページでは問題が起こってないこと
+        </li>
+    </lu>
+    <p>
+        から、勝手に同じフォルダにあるcssを指定する問題があると考えます。
+        <br>ではなぜ、同フォルダのcssを探しに行ってしまってたのでしょうか？
+    </p>
+    <p>
+        答えは単純で、同フォルダのcssを要求している箇所があったからでした。
+        <br>writeHeaderの中身と読み込んでいるheaderの中身は以下の通りです。
+    </p>
+
+    <pre><code>function writeHeader(rootDir) {
+    $.ajax({
+        url: rootDir + "header.html", 
+        cache: false, 
+        async: true, 
+        success: function(html){
+            html = html.replace(/\{\$root\}/g, rootDir);
+            $("#header").html(html)
+        }
+    });
+}</code></pre>
+
+    <pre><code>&lthead>
+    &ltlink rel="styleSheet" href="style.css" />
+&lt/head>
+    
+&ltheader class="header_boxed">
+    &lth1>キノコの仕事部屋&lt/h1>
+    &ltnav>
+        &ltul>
+            &ltli>&lta href="{$root}index.html">top&lt/a>&lt/li>
+            &ltli>&lta href="{$root}home/about.html">about&lt/a>&lt/li>
+            &ltli>&lta href="{$root}home/articles.html">記事一覧&lt/a>&lt/li>
+            &ltli>&lta href="{$root}home/want.html">やりたいこと&lt/a>&lt/li>
+            &ltli>&lta href="{$root}home/habitat.html">生息地&lt/a>&lt/li>
+        &lt/ul>
+    &lt/nav>
+&lt/header>
+</code></pre>
+
+    <p>
+        ヘッダーにアクセスしているファイルから見たパスにする必要があるので、他のページへのリンクと同じように、呼び出し元のパスを受け取れるようにします。
+    </p>
+
+    <p>
+        before
+    </p>
+
+    <pre><code>&lthead>
+    &ltlink rel="styleSheet" href="style.css" />
+&lt/head></code></pre>
+
+    <p>after</p>
+
+    <pre><code>&lthead>
+        &ltlink rel="styleSheet" href="{$root}style.css" />
+&lt/head></code></pre>
+
+    <p>
+        エラーが起こらなくなりました。やったね。
+    </p>
+
+    <div class="box1">
+        <img width="100%" src="after.png">
+    </div>
+
+    <p>
+        <br>エラーが起きていてもうまく表示できていた理由について考察です。
+        <br>現状どこでも同じcssを利用しています。headerで指定しているcssが読み取れなくても、呼び出し元(今でいうとこのページのstylesheet)で同じcssを用意できています。なので問題なく指定したスタイルで表示できていたと考えています。
+        <br>となると、headerで指定しなくてもいいですね。むしろ指定しないほうが健全なので、削除しましょう。
+    </p>
+
+    <p>
+        0行目でエラーになったときは困りましたが、順々に要素をたどっていけばなんとかなるもんですね。
+        ではまた。
+    </p>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "../../"
+            writeHeader(dir);
+        });
+    </script>
+</body>
+
+</html>
