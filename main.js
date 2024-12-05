@@ -34,7 +34,7 @@ function writeList(
         cache: false, 
         async: true, 
         success: function(html){
-            html.replace(/\{tag}/g,tag)
+            html.replace(/\{tag\}/g,tag)
             $("#"+name).html(html)
         }
     })
