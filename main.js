@@ -23,7 +23,7 @@ function writeHtmlList(
 ){
     writeList(
         "htmlList",
-        opentTag,
+        openTag,
         closeTag,
         rootDir+HTML_CSS,
     )
