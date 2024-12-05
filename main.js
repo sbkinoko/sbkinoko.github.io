@@ -18,18 +18,21 @@ function writeHeader(rootDir) {
 
 function writeHtmlList(
     rootDir,
-    tag,
+    openTag,
+    closeTag
 ){
     writeList(
         "htmlList",
-        tag,
+        opentTag,
+        closeTag,
         rootDir+HTML_CSS,
     )
 }
 
 function writeList(
     name,
-    tag,
+    openTag,
+    closeTag,
     path
 ){
     $.ajax({
@@ -38,9 +41,13 @@ function writeList(
         async: true, 
         success: function(html){
             html = html.replace(
-                /\{tag\}/g,
-                tag
+                /\{openTag\}/g,
+                openTag
+            ).replace(
+                /\{closeTag\}/g,
+                closeTag 
             )
+            
             $("#"+name).html(html)
         }
     })
