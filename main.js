@@ -1,4 +1,5 @@
 const CONTENT = "/content"
+const HTML_CSS = "/html_css"
 
 function writeHeader(rootDir) {
     $.ajax({
@@ -12,23 +13,71 @@ function writeHeader(rootDir) {
     });
 }
 
+function writeHtmlList(
+    rootDir,
+    tag,
+){
+    writeList(
+         "htmlList",
+        tag,
+        rootDir+HTML_CSS,
+    )
+}
+
+function writeList(
+    name,
+    tag,
+    path
+){
+    $.ajax({
+        url: path+"/"+name+".html", 
+        cache: false, 
+        async: true, 
+        success: function(html){
+            html.replace(/\{tag}/g,tag)
+            $("#"+name).html(html)
+        }
+    })
+}
+
 function writeAbout(rootDir){
-    writeContent("about",rootDir+CONTENT)
+    writeContent(
+        "about",
+        rootDir+CONTENT
+    )
 }
 
-function writeArticles(rootDir){
-    writeContent("articles",rootDir+CONTENT)
+function writeArticles(
+    rootDir
+){
+    writeContent(
+        "articles",
+        rootDir+CONTENT
+    )
 }
 
-function writeWant(rootDir){
-    writeContent("want",rootDir+CONTENT)
+function writeWant(
+    rootDir
+){
+    writeContent(
+        "want",
+        rootDir+CONTENT
+    )
 }
 
-function writeHabitat(rootDir){
-    writeContent("habitat",rootDir+CONTENT)
+function writeHabitat(
+    rootDir
+){
+    writeContent(
+        "habitat",
+        rootDir+CONTENT
+    )
 }
 
-function writeContent(name,path){
+function writeContent(
+    name,
+    path
+){
     $.ajax({
         url: path+"/"+name+".html", 
         cache: false, 

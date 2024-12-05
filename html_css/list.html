@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HTML/CSSの記事一覧</title>
+    <link rel="styleSheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../main.js"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <div>
+        <a href="https://sbkinoko.github.io/home/articles.html">記事一覧</a>
+    </div>
+
+    <div id="htmlList"></div>
+    <script>
+        $(document).ready(function () {
+            var dir = "../"
+            writeHeader(
+                dir
+            );
+            writeList(
+                dir,
+                "h2",
+            );
+        });
+    </script>
+</body>
+
+</html>
