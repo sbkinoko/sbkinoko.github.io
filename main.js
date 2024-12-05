@@ -18,7 +18,7 @@ function writeHtmlList(
     tag,
 ){
     writeList(
-         "htmlList",
+        "htmlList",
         tag,
         rootDir+HTML_CSS,
     )
