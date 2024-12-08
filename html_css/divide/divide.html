@@ -49,7 +49,7 @@
     <p>
         PRは<a
             href="https://github.com/sbkinoko/sbkinoko.github.io/pull/21/files">こちら</a>です。cssのクラスセレクタを理解していなかったせいでコミットはかなり大変なことになっています。
-        <br>また、移動していないときのリンクの色を間違っていたので別途修正しています。
+        <br>また、移動していないときのリンクの色を間違っていたので<a href="https://github.com/sbkinoko/sbkinoko.github.io/pull/27">別途修正</a>しています。
     </p>
 
     <h2>
@@ -116,7 +116,7 @@
         <br>そのままaタグを入れると見出しなのに一度ページを開いていると移動済みの色になってしまいます。見出しの色が変わっているのは不格好なので、専用の設定をしたクラスを用意して見た目の修正を行います。アクセシビリティのもろもろを考えると下線があったほうが良いと思いますが、見出しに下線がついているのは気になるので今回はなしです<a href="#ref">[2]</a>。
     </p>
 
-    <pre><code>a.linkedH,a:visited .linkedH {
+    <pre><code>a.linkedH,a:visited.linkedH a:active.linkedH,a:link.linkedH{
     color: #000000;
     text-decoration:none;
 }
