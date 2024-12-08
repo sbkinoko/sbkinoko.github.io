@@ -11,7 +11,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-a.linkedH,a:visited .linkedH {
+a.linkedH,a:visited.linkedH a:active.linkedH,a:link.linkedH{
     color: #000000;
     text-decoration:none;
 }
@@ -45,6 +45,10 @@ table {
     margin-top: 20px;
 }
 
+table {
+    width: 100%;
+    table-layout: fixed;
+}
 
 th,
 td {
@@ -75,7 +79,6 @@ table.noBorder td{
     max-width: 100%;
     height: auto;
 }
-
 
 code {
     display: inline-block;
