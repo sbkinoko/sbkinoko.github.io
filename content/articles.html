@@ -2,22 +2,9 @@
     書いた記事一覧
 </h2>
 
-<ul>
-    <li>
-        <h3>
-            html/css
-        </h3>
-    </li>
-    <ul>
-        <li><a href="https://sbkinoko.github.io/html_css/table/table.html"> 表の幅を割合で指定</a></li>
-        <li>
-            <a href="https://sbkinoko.github.io/html_css/css_error/css_error.html">
-                CSSを読み込めないエラーが起きる
-            </a>
-        </li>
-        <li><a href="https://sbkinoko.github.io/html_css/wip/wip.html">wip(書きたいやつ)</a></li>
-    </ul>
+<div id="htmlList"></div>
 
+<ul>
     <li>
         <h3>
             wpf
@@ -70,3 +57,15 @@
         </li>
     </ul>
 </ul>
+
+
+<script>
+    $(document).ready(function () {
+        var rootDir = "../"
+        writeHtmlList(
+            rootDir,
+            "<h3><a class=\"linkedH\" href=\"https://sbkinoko.github.io/html_css/list.html\">",
+            "</a></h3>",
+        );
+    });
+</script>

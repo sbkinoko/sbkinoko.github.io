@@ -1,4 +1,5 @@
 const CONTENT = "/content"
+const HTML_CSS = "/html_css"
 
 function writeHeader(
     rootDir
@@ -15,6 +16,43 @@ function writeHeader(
             $("#header").html(html)
         }
     });
+}
+
+function writeHtmlList(
+    rootDir,
+    openTag,
+    closeTag
+){
+    writeList(
+        "htmlList",
+        openTag,
+        closeTag,
+        rootDir+HTML_CSS,
+    )
+}
+
+function writeList(
+    name,
+    openTag,
+    closeTag,
+    path
+){
+    $.ajax({
+        url: path+"/"+name+".html", 
+        cache: false, 
+        async: true, 
+        success: function(html){
+            html = html.replace(
+                /\{openTag\}/g,
+                openTag
+            ).replace(
+                /\{closeTag\}/g,
+                closeTag 
+            )
+            
+            $("#"+name).html(html)
+        }
+    })
 }
 
 function writeAbout(
