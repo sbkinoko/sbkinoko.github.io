@@ -10,7 +10,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-a,a:visited .linkedH {
+a.linkedH,a:visited .linkedH {
     color: #000000;
     text-decoration:none;
 }
