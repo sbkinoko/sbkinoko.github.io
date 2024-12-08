@@ -9,13 +9,15 @@ h1 {
     font-size: 24px;
     margin-bottom: 20px;
 }
-a.h a:visited{
+
+a,a:visited .linkedH {
     color: #000000;
     text-decoration:none;
 }
-a.h a:hover a:link a:active{
+a:hover.linkedH{
     color: white;
 }
+
 p {
     font-size: 16px;
     margin-bottom: 10px;
