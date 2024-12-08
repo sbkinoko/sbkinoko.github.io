@@ -58,7 +58,6 @@ function writeList(
 function writeAbout(
     rootDir
 ) {
-
     writeContent(
         "about",
         rootDir + CONTENT
