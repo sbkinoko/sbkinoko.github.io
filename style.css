@@ -11,7 +11,7 @@ h1 {
     margin-bottom: 20px;
 }
 
-a.linkedH,a:visited.linkedH a:active.linkedH{
+a.linkedH,a:visited.linkedH a:active.linkedH,a:link.linkedH{
     color: #000000;
     text-decoration:none;
 }
