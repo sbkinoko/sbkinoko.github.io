@@ -11,12 +11,14 @@ h1 {
     margin-bottom: 20px;
 }
 
-a.linkedH,a:visited.linkedH a:active.linkedH,a:link.linkedH{
+a.linkedH,
+a:visited.linkedH a:active.linkedH,
+a:link.linkedH {
     color: #000000;
-    text-decoration:none;
+    text-decoration: none;
 }
 
-a:hover.linkedH{
+a:hover.linkedH {
     color: white;
 }
 
@@ -36,24 +38,37 @@ blockquote p {
     display: inline;
 }
 
-table {
-    width: 100%;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-    margin-top: 20px;
+table.normal {
+    text-align: center;
 }
 
-table {
+table.fixWidth {
     width: 100%;
     table-layout: fixed;
+}
+
+div.scrollx {
+    overflow-x: scroll;
+}
+
+table.img {
+    width: 600px;
+    table-layout: fixed;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th.width20 {
+    width: 20%;
+}
+
+th.width40 {
+    width: 40%;
 }
 
 th,
 td {
     border: 1px solid #ddd;
-    padding: 8px;
     text-align: center;
 }
 
@@ -61,15 +76,16 @@ th {
     background-color: #f2f2f2;
 }
 
-
 table.noBorder {
+    margin-left: auto;
     width: "";
 }
 
 table.noBorder tr {
     width: "";
 }
-table.noBorder td{
+
+table.noBorder td {
     width: "";
     border: none;
     text-align: left;
