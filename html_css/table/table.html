@@ -14,9 +14,20 @@
 
     <div>
         <a href="https://sbkinoko.github.io/home/articles.html">書いた記事一覧</a>
-        > 
-        <a href = "https://sbkinoko.github.io/html_css/list.html">HTML/CSS</a>
+        >
+        <a href="https://sbkinoko.github.io/html_css/list.html">HTML/CSS</a>
     </div>
+
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2024/09/12</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2024/12/09</td>
+        </tr>
+    </table>
 
     <h1>
         htmlの表の幅を調整したい
@@ -24,66 +35,74 @@
 
     <p>
         幅を指定しない状態だと見づらいものになりました。<br>
-        thのパラメータ設定をこちらのページ<a
-            href="https://sbkinoko.github.io/html_css/table/table.html#ref">[1]</a>を参考に行ったのですが、どうにもうまくいかず。
-        拡大縮小をすると割合が変なことになってしまいます……。
+        thのパラメータ設定をこちらのページ<a href="https://sbkinoko.github.io/html_css/table/table.html#ref">[1]</a>を参考に実装しました。
     </p>
 
-    <pre><code>
-    &ltstyle>
-        th.width20{
-            width: 20%;
-        }
-        th.width40{
-            width: 40%;
-        } 
-    &lt/style>
+    <pre><code>th.width20{
+    width: 20%;
+}
+th.width40{
+    width: 40%;
+}</code></pre>
 
-</code></pre>
+    <pre><code>&lt;table>
+    &lt;tr>
+        &lt;th class="width20">20%&lt;/th>
+        &lt;th class="width40">40%&lt;/th>
+        &lt;th class="width40">40%&lt;/th>
+    &lt;/tr>
+    &lt;tr>
+        &lt;td>20%&lt;/td>
+        &lt;td>40%&lt;/td>
+        &lt;td>40%&lt;/td>
+    &lt;/tr>
+&lt;/table></code></pre>
 
-    <pre><code>
-    &lttable>
-        &lttr>&ltth class="width20">場所&lt/th>&ltth class="width40">できること&lt/th>&ltth class="width40">gif&lt/th>&lt/tr>
-        &lttr>&lttd>定義場所&lt/td>&lttd>使用箇所を表示できる&ltbr>クリックすると対象にジャンプ&lt/td>&ltth>&ltimg src="ctrl_1.gif" width="auto">&lt/th>&lt/tr>
-    &lt/table>
-    </code></pre>
+    <table>
+        <tr>
+            <th class="width20">20%</th>
+            <th class="width40">40%</th>
+            <th class="width40">40%</th>
+        </tr>
+        <tr>
+            <td>20%</td>
+            <td>40%</td>
+            <td><img src="sample.png" width="100%"></td>
+        </tr>
+    </table>
 
-
-    <div class="box1">
-        <img width="100%" src="step1.gif">
-    </div>
+    <P>
+        styleはcssで定義しました
+    </P>
 
     <p>
-        ……tableの設定を忘れていました。
+        が、どうにもうまくいかず。
+        拡大縮小をすると割合が変なことになってしまいます。
+        ……と思っていたらtableの設定を忘れていました。
         <br>styleに追加します。
     </p>
 
-    <pre><code>
-        table{
-            width: 100%;
-            table-layout: fixed;
-        }    
+    <pre><code>table.fixWidth{
+    width: 100%;
+    table-layout: fixed;
+} </code></pre>
+
+<pre><code>&lt;table class="fixWidth">
+    ～以下省略～
 </code></pre>
 
-    <div class="box1">
-        <img width="100%" src="step2.gif">
-    </div>
-
-    <p>
-        表はいい感じになりました。
-        <br>それはそれとして、gifのサイズがおかしなことになっているので修正します。
-        <br>widthをautoから100%へ変更です。
-    </p>
-    <P>
-
-    </P>
-    <pre><code>
-            &lttr>&lttd>定義場所&lt/td>&lttd>使用箇所を表示できる&ltbr>クリックすると対象にジャンプ&lt/td>&ltth>&ltimg src="ctrl_1.gif" width="100%">&lt/th>&lt/tr>
-    </code></pre>
-
-    <div class="box1">
-        <img width="100%" src="step3.gif">
-    </div>
+    <table class="fixWidth">
+        <tr>
+            <th class="width20">20%</th>
+            <th class="width40">40%</th>
+            <th class="width40">40%</th>
+        </tr>
+        <tr>
+            <td>20%</td>
+            <td>40%</td>
+            <td><img src="sample.png" width="100%"></td>
+        </tr>
+    </table>
 
     <p>
         使いやすいかどうかはおいておいて、やりたいことができました。
@@ -95,8 +114,10 @@
 
     <ol>
         <p>
-            <li>『CSS: table（テーブル）の列幅の割合を指定する』　<a
-                    href="https://step-learn.com/article/html-css/031-table-width-percent.html">https://step-learn.com/article/html-css/031-table-width-percent.html</a>
+            <li>『CSS: table（テーブル）の列幅の割合を指定する』 2024/12/09
+                <br><a href="https://step-learn.com/article/html-css/031-table-width-percent.html">
+                    https://step-learn.com/article/html-css/031-table-width-percent.html
+                </a>
             </li>
         </p>
     </ol>

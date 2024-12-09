@@ -36,31 +36,33 @@ blockquote p {
     display: inline;
 }
 
-table {
-    width: 100%;
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-    margin-top: 20px;
+table.normal{
+    text-align: center;
 }
 
-table {
+
+table.fixWidth{
     width: 100%;
     table-layout: fixed;
+}
+
+th.width20{
+    width: 20%;
+}
+
+th.width40{
+    width: 40%;
 }
 
 th,
 td {
     border: 1px solid #ddd;
-    padding: 8px;
     text-align: center;
 }
 
 th {
     background-color: #f2f2f2;
 }
-
 
 table.noBorder {
     width: "";
