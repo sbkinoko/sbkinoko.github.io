@@ -50,6 +50,7 @@ table.fixWidth {
 div.scrollx {
     overflow-x: scroll;
     align-items: center;
+    width: 100%;
 }
 
 table.img {
