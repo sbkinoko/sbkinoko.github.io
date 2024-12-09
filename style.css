@@ -11,12 +11,14 @@ h1 {
     margin-bottom: 20px;
 }
 
-a.linkedH,a:visited.linkedH a:active.linkedH,a:link.linkedH{
+a.linkedH,
+a:visited.linkedH a:active.linkedH,
+a:link.linkedH {
     color: #000000;
-    text-decoration:none;
+    text-decoration: none;
 }
 
-a:hover.linkedH{
+a:hover.linkedH {
     color: white;
 }
 
@@ -36,21 +38,30 @@ blockquote p {
     display: inline;
 }
 
-table.normal{
+table.normal {
     text-align: center;
 }
 
-
-table.fixWidth{
+table.fixWidth {
     width: 100%;
     table-layout: fixed;
 }
 
-th.width20{
+div.scrollx {
+    overflow-x: scroll;
+    align-items: center;
+}
+
+table.img {
+    width: 600px;
+    table-layout: fixed;
+}
+
+th.width20 {
     width: 20%;
 }
 
-th.width40{
+th.width40 {
     width: 40%;
 }
 
@@ -71,7 +82,8 @@ table.noBorder {
 table.noBorder tr {
     width: "";
 }
-table.noBorder td{
+
+table.noBorder td {
     width: "";
     border: none;
     text-align: left;

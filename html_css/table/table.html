@@ -33,19 +33,33 @@
         htmlの表の幅を調整したい
     </h1>
 
+    <h2>
+        やりたいこと
+    </h2>
     <p>
-        幅を指定しない状態だと見づらいものになりました。<br>
+        幅を指定しない状態だと見づらいものになりました。
+        <br>見やすさ向上のために、表は画面いっぱいに表示したいです。
+    </p>
+
+    <h2>
+        画面の端から端まで表示
+    </h2>
+    <p>
         thのパラメータ設定をこちらのページ<a href="https://sbkinoko.github.io/html_css/table/table.html#ref">[1]</a>を参考に実装しました。
     </p>
 
-    <pre><code>th.width20{
+    <pre><code>table.fixWidth{
+    width: 100%;
+    table-layout: fixed;
+}
+th.width20{
     width: 20%;
 }
 th.width40{
     width: 40%;
 }</code></pre>
 
-    <pre><code>&lt;table>
+    <pre><code>&lt;table class="fixWidth">
     &lt;tr>
         &lt;th class="width20">20%&lt;/th>
         &lt;th class="width40">40%&lt;/th>
@@ -58,38 +72,9 @@ th.width40{
     &lt;/tr>
 &lt;/table></code></pre>
 
-    <table>
-        <tr>
-            <th class="width20">20%</th>
-            <th class="width40">40%</th>
-            <th class="width40">40%</th>
-        </tr>
-        <tr>
-            <td>20%</td>
-            <td>40%</td>
-            <td><img src="sample.png" width="100%"></td>
-        </tr>
-    </table>
-
     <P>
-        styleはcssで定義しました
+        styleはcssで定義しました。<br>なのでstyleタグは省いてます。
     </P>
-
-    <p>
-        が、どうにもうまくいかず。
-        拡大縮小をすると割合が変なことになってしまいます。
-        ……と思っていたらtableの設定を忘れていました。
-        <br>styleに追加します。
-    </p>
-
-    <pre><code>table.fixWidth{
-    width: 100%;
-    table-layout: fixed;
-} </code></pre>
-
-<pre><code>&lt;table class="fixWidth">
-    ～以下省略～
-</code></pre>
 
     <table class="fixWidth">
         <tr>
@@ -105,21 +90,69 @@ th.width40{
     </table>
 
     <p>
-        使いやすいかどうかはおいておいて、やりたいことができました。
+        というわけでやりたいことができました。ズームしても画面幅いっぱいに表示されます。
     </p>
+
+    <h2>
+        画像はズームしたい
+    </h2>
+    <p>
+        画像を入れている状態で画面を拡大したときは、画像も拡大したいので別の方法も探します。
+        <br>横幅を指定して、スクロールするようにすればよさそうです<a href="ref">[2]</a>。
+    </p>
+
+    <pre><code>div.scrollx {
+    overflow-x: scroll;
+    align-items: center;
+}
+
+table.img {
+    width: 600px;
+    table-layout: fixed;
+}</code></pre>
+
+    <pre><code>&lt;div class="scrollX">
+    &lt;table class="img">
+        ~省略~
+    &lt;/table>
+&lt;/div></code></pre>
+
+    <p>
+        ということで、作った表は以下の通りです
+    </p>
+
+    <div class="scrollX">
+        <table class="img">
+            <tr>
+                <th class="width20">20%</th>
+                <th class="width40">40%</th>
+                <th class="width40">40%</th>
+            </tr>
+            <tr>
+                <td>20%</td>
+                <td>40%</td>
+                <td><img src="sample.png" width="100%"></td>
+            </tr>
+        </table>
+    </div>
 
     <h1 id="ref">
         参考
     </h1>
 
     <ol>
-        <p>
-            <li>『CSS: table（テーブル）の列幅の割合を指定する』 2024/12/09
-                <br><a href="https://step-learn.com/article/html-css/031-table-width-percent.html">
-                    https://step-learn.com/article/html-css/031-table-width-percent.html
-                </a>
-            </li>
-        </p>
+        <li>『CSS: table（テーブル）の列幅の割合を指定する』 2024/12/09
+            <br><a href="https://step-learn.com/article/html-css/031-table-width-percent.html">
+                https://step-learn.com/article/html-css/031-table-width-percent.html
+            </a>
+        </li>
+        <li>
+            『【HTML/CSS】横スクロールできる表（テーブル）の作り方』 2024/12/09
+            <br><a href="https://tomiwa-tech.co.jp/blog/scrollable-table/">
+                https://tomiwa-tech.co.jp/blog/scrollable-table/
+            </a>
+        </li>
+
     </ol>
 
     <script>
