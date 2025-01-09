@@ -1,5 +1,6 @@
 const CONTENT = "/content"
 const HTML_CSS = "/html_css"
+const ANDROID ="android"
 
 function writeHeader(
     rootDir
@@ -31,6 +32,19 @@ function writeHtmlList(
     )
 }
 
+function writeAndroidList(
+    rootDir,
+    openTag,
+    closeTag
+){
+    writeList(
+        "androidList",
+        openTag,
+        closeTag,
+        rootDir+ANDROID,
+    )
+}
+
 function writeList(
     name,
     openTag,
@@ -48,6 +62,9 @@ function writeList(
             ).replace(
                 /\{closeTag\}/g,
                 closeTag 
+            ).replace(
+               /\{\$root\}/g,
+                path
             )
             
             $("#"+name).html(html)
