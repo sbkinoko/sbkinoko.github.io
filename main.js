@@ -120,7 +120,7 @@ function writeList(
                 /\{\$root\}/g,
                 path
             )
-
+            // root になるように修正
             $("#" + name).html(html)
         }
     })
