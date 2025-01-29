@@ -33,7 +33,7 @@ function writeBreadcrumb(
                 /\{\$list\}/g,
                 list,
             )
-            $("#breadcrumb").html()
+            $("#breadcrumb").html(html)
         }
     });
 }
