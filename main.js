@@ -2,6 +2,42 @@ const CONTENT = "/content"
 const HTML_CSS = "/html_css"
 const ANDROID ="android"
 
+const LIST = "<a href=\"{$root}/home/articles\">記事一覧</a>"
+const ANDROID_LIST = "<a href=\"{$root}/android/list\">Android/Kotlin</a>"
+
+function writeBreadcrumb(
+    rootDir,
+    place,
+){
+    $.ajax({
+        url: rootDir+"/common/breadcrumb.html",
+        cache: false,
+        async: true,
+        success: function (html) {
+            list =""
+
+            switch(place){
+                case "ganre":
+                    list =LIST
+                    break
+                case "android":
+                    list = LIST 
+                    + ">" + ANDROID_LIST
+                    break
+            }
+            list = list.replace(
+                /\{\$root\}/g,
+                rootDir
+            );
+            html = html.replace(
+                /\{\$list\}/g,
+                list,
+            )
+            $("#breadcrumb").html(html)
+        }
+    });
+}
+
 function writeHeader(
     rootDir
 ) {
