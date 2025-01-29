@@ -17,6 +17,7 @@
 
 <body>
     <div id="header"></div>
+    <div id="breadcrumb"></div>
     <table class="noBorder">
         <tr>
             <td>作成日</td>
@@ -257,6 +258,7 @@ data class UserData(
         $(document).ready(function () {
             var dir = "../../"
             writeHeader(dir);
+            writeBreadcrumb(dir,"android")
         });
     </script>
 </body>
