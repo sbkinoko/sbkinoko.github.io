@@ -25,11 +25,11 @@ function writeBreadcrumb(
                     + ">" + ANDROID_LIST
                     break
             }
-            list.replace(
+            list = list.replace(
                 /\{\$root\}/g,
                 rootDir
             );
-            html.replace(
+            html = html.replace(
                 /\{\$list\}/g,
                 list,
             )
