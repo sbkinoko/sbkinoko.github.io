@@ -10,25 +10,29 @@ function writeBreadcrumb(
     place,
 ){
     $.ajax({
-        url: "",
+        url: rootDir+"/common/breadcrumb.html",
         cache: false,
         async: true,
         success: function (html) {
-            breadcrumb =""
+            list =""
 
             switch(place){
                 case "ganre":
-                    breadcrumb =LIST
+                    list =LIST
                     break
                 case "android":
-                    breadcrumb = LIST 
+                    list = LIST 
                     + ">" + ANDROID_LIST
                     break
             }
-            breadcrumb.replace(
+            list.replace(
                 /\{\$root\}/g,
                 rootDir
             );
+            html.replace(
+                /\{\$list\}/g,
+                list,
+            )
             $("#breadcrumb").html()
         }
     });
