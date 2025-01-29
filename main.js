@@ -47,7 +47,7 @@ function writeHeader(
     rootDir
 ) {
     $.ajax({
-        url: rootDir + "header.html",
+        url: rootDir + "/header.html",
         cache: false,
         async: true,
         success: function (html) {
