@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>wpfで複数のwindowを利用</title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+</head>
+<!--
+ &lt <
+    <ol>
+        <li></li>
+    </ol>
+ -->
+
+<body>
+    <div id="header"></div>
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2024/05/17</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/02/01</td>
+        </tr>
+    </table>
+    <h1>
+        wpfで複数のwindowを利用
+    </h1>
+    <h2>
+        起動時に複数のwindowを表示
+    </h2>
+
+    <p>
+        WPFの起動時に複数の画面を表示する <a href="#ref">[1]</a>を参考に複数window起動するようにしました。あまりにもそのままなのでコードは参考先を参照してください。
+        <br>作成時のPRは<a href="https://github.com/sbkinoko/ImageTest/pull/3">こちら</a>です。
+    </p>
+
+    <p>
+        動作は以下の通りです。
+        <br>同じデータを参照するようにしてないのでそれぞれで画像を選択します。
+        <br>閉じる処理を共通化してないのでそれぞれのwindowを閉じる必要があります。<br>
+    </p>
+
+    <img src="show_windows.gif">
+
+    <h2>
+        データの共通化
+    </h2>
+
+    <p>
+        とりあえず２つのwindowに共通のデータを入れようと思ったので`viewModel`を使ってみます。同時に閉じるのはもう少し調べます。
+        <br>いくつかのサイト(#参考)[2][3]を参考にしました。
+        <br>画像を開くロジックを移動させるより、1から作ったほうが差分が小さそうなのでロジックを新規作成しました。実装したものは以下の通りです。
+    </p>
+
+    <p>
+        TestCommand.cs
+    </p>
+    <pre><code>namespace ImageTest
+{
+    public class TestCommand : ICommand
+    {
+        private AppViewModel viewModel { get; set; }
+
+        public TestCommand(AppViewModel viewModel)
+        {
+            this.viewModel = viewModel;
+        }
+
+        public event EventHandler? CanExecuteChanged
+        {
+            add
+            {
+                CommandManager.RequerySuggested += value;
+            }
+            remove
+            {
+                CommandManager.RequerySuggested -= value;
+            }
+        }
+
+        public bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object? parameter)
+        {
+            viewModel.Value += "a";
+        }
+    }
+}</code></pre>
+
+    <p>
+        buttonにbindingするためにICommandを継承させます。詳しくは参考サイト<a
+            href="#ref">[2]</a>を見てください、丸投げします。[この辺](https://resanaplaza.com/2020/07/27/%E4%B8%96%E7%95%8C%E3%81%A7%E4%B8%80%E7%95%AA%E7%9F%AD%E3%81%84%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%81%A7%E8%A6%9A%E3%81%88%E3%82%8Bmvvm%E5%85%A5%E9%96%80/#index_id8)です。
+        上記のクラスがやることは文字列を長くすることです。
+    </p>
+
+    <p>
+        AppViewModel.cs
+    </p>
+    <pre><code>namespace ImageTest
+{
+    public class AppViewModel : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private string test = "";
+
+        public TestCommand TestCommand { get; set; }
+
+        public AppViewModel()
+        {
+            TestCommand = new TestCommand(this);
+        }
+
+        public string Value
+        {
+            get
+            {
+                return test;
+            }
+
+            set
+            {
+                test = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(
+                        this,
+                        new PropertyChangedEventArgs("Value")
+                    );
+                }
+            }
+        }
+    }
+}
+</code></pre>
+    <p>
+        Valueが変更されたことをviewに通知することでviewが最新の情報を参照できるようになります。
+        レイアウトもちょい修正しました。
+    </p>
+
+    <p>
+        MainWIndow.xml(SubWindowも同じ変更を)
+    </p>
+    <pre><code>&ltGrid>
+    &ltGrid.ColumnDefinitions>
+        &ltColumnDefinition/>
+        &ltColumnDefinition/>
+    &lt/Grid.ColumnDefinitions>
+    &ltGrid>
+        &ltGrid.RowDefinitions>
+            &ltRowDefinition/>
+            &ltRowDefinition/>
+            &ltRowDefinition/>
+        &lt/Grid.RowDefinitions>
+        &ltTextBox
+            Grid.Row="0"
+            Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            />
+        &ltButton
+            Grid.Row="1"
+            Command="{Binding TestCommand}"
+            >
+            text change
+        &lt/Button>
+        &ltButton
+            Click="Button_Click"
+            Grid.Row="2"
+        >
+            open dialog
+        &lt/Button>
+    &lt/Grid>
+
+    &ltImage
+        Grid.Column="1"
+        x:Name="roadedImage"
+        />
+&lt/Grid>
+</code></pre>
+    <p>
+        Gridの一部を変更した感じです。
+        <br>テキストボックスで文章を変えてもviewModelに反映されないのは気持ち悪かったので双方向でbindingしました<a href="#ref">[4]</a>。
+        <br>該当部だけピックしておきます。
+    </p>
+
+    <pre><code>&ltTextBox
+    Grid.Row="0"
+    Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+    />  
+    </code></pre>
+
+    <p>
+        で、viewModelを複数のwindowに紐づけます。複数windowを表示<a
+            href="#ref">[1]</a>を参考にしてwindowを複数表示するようにしたので、そのままapp.xml.csをベースにviewModelの紐づけを行います。stackOverFLowの回答<a
+            href="#ref">[5]</a>を参考にxmlで設定したかったんですが、うまくいかず……。
+        <br>結局巡り巡って最初に見ていたサイト<a href="#ref">[2]</a>(の<a
+            href="https://resanaplaza.com/2020/07/27/%e4%b8%96%e7%95%8c%e3%81%a7%e4%b8%80%e7%95%aa%e7%9f%ad%e3%81%84%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%81%a7%e8%a6%9a%e3%81%88%e3%82%8bmvvm%e5%85%a5%e9%96%80/#index_id6:~:text=%E5%AE%9F%E9%9A%9B%E3%80%81%E3%81%84%E3%81%8F%E3%81%A4%E3%81%8B%E3%81%AE%E5%85%A5%E9%96%80%E3%82%B5%E3%82%A4%E3%83%88%E3%81%A7%E3%81%AF%E3%80%81%E3%82%B3%E3%83%B3%E3%82%B9%E3%83%88%E3%83%A9%E3%82%AF%E3%82%BF%E3%81%A7%E3%82%AF%E3%83%A9%E3%82%B9%E3%82%92%E7%94%9F%E6%88%90%E3%81%99%E3%82%8B%E3%82%B5%E3%83%B3%E3%83%97%E3%83%AB%E3%81%8C%E6%8E%B2%E8%BC%89%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82">この辺</a>)を参考にして、実装しました。
+    </p>
+
+    <p>
+        App.xml.cs
+    </p>
+
+    <pre><code>public partial class App : Application
+{
+
+    static MainWindow objMainWindow;
+    static SubWindow objSubWindow;
+
+    static AppViewModel objAppViewModel;
+
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        objAppViewModel = new AppViewModel();
+
+        objMainWindow = new MainWindow(
+            objAppViewModel
+            );
+        objSubWindow = new SubWindow(
+            objAppViewModel
+            );
+
+        objMainWindow.Show();
+        objSubWindow.Show();
+    }
+}
+    </code></pre>
+
+    <p>
+        実際には別のサイトも見たような気もしますが、見失ってしまいした残念……。多分stackOverFlowだったと思うんだけどな……。こまめにメモを取るなり、ブクマするなり、すぐに書くなりしないとだめですね。<br>
+        あと、しれっと書き足す必要があるのが、これです。
+    </p>
+    <p>
+        MainWindow.xaml.cs(SubWindowも)
+    </p>
+    <pre><code>public MainWindow(AppViewModel sharedViewModel)
+{
+    this.DataContext = sharedViewModel;
+    InitializeComponent();
+}
+    </code></pre>
+    <p>
+        一部抜粋です。
+        <br>window作成時に、applicationレベルからviewModelをinjectしてあげることにしました。
+        dataContextを設定できればいいので別にこれでよかったんですね。
+        <br> 複数のwindow、viewから単一のviewModelを参照することができました。
+        <br>これでアプリを動かすと以下の様になります。
+    </p>
+
+    <img src="use_windows.gif">
+
+    <p>
+        公式のMVVMページ <a href="#ref">[6]</a>もあったので張っておきます。<br>
+        後半部分を実装したPRは <a href="https://github.com/sbkinoko/ImageTest/pull/5/files">こちら</a>です。記事全体のPRは<a
+            href="https://github.com/sbkinoko/ImageTest/pull/4/files">こちら</a>です。
+    </p>
+
+    <h2>
+        まとめ
+    </h2>
+    <p>
+        複数ウィンドウでデータを共有する方法を調べて実装しました。
+        2025/02/01
+        <br>メイン画面を閉じたら他のウィンドウを閉じる方法がありました<a href="#ref">[7]</a>。どこかで試したいですね。
+        <br>Prismというライブラリを利用しないといけない記述をどこかで見た気がしていたので書いていましたが、削除しました。どこでみたんだろうか、本当に……。
+    </p>
+    <h2 id="ref">
+        参考
+    </h2>
+    <ol>
+        <li>『WPFの起動時に複数の画面を表示する』 Todo Software Factory (2025/02/01)
+            <br><a href="https://todosoft.net/blog/?p=279">
+                https://todosoft.net/blog/?p=279
+            </a>
+        </li>
+        <li>『世界で一番短いサンプルで覚えるMVVM入門』 初学者DIYプログラミング入門 (2025/02/01)
+            <br><a
+                href="https://resanaplaza.com/2020/07/27/%e4%b8%96%e7%95%8c%e3%81%a7%e4%b8%80%e7%95%aa%e7%9f%ad%e3%81%84%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%81%a7%e8%a6%9a%e3%81%88%e3%82%8bmvvm%e5%85%a5%e9%96%80/">
+                https://resanaplaza.com/2020/07/27/%e4%b8%96%e7%95%8c%e3%81%a7%e4%b8%80%e7%95%aa%e7%9f%ad%e3%81%84%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%81%a7%e8%a6%9a%e3%81%88%e3%82%8bmvvm%e5%85%a5%e9%96%80/
+            </a>
+        </li>
+        <li>『【C#】WPFでMVVMをフレームワークなしでシンプルに構築する』 Zenn (2025/02/01)
+            <br><a href="https://zenn.dev/takuty/articles/b12f4011871058">
+                https://zenn.dev/takuty/articles/b12f4011871058
+            </a>
+        </li>
+        <li>『【WPF覚書】双方向データバインディング』 Qiita (2025/02/01)
+            <br><a href="https://qiita.com/TAK_EMI/items/d7991a34f815d9d73e32">
+                https://qiita.com/TAK_EMI/items/d7991a34f815d9d73e32
+            </a>
+        </li>
+        <li>『How to have multiple Views using the same ViewModel in MVVM?』 stackoverflow (2025/02/01)
+            <br><a
+                href="https://stackoverflow.com/questions/51537011/how-to-have-multiple-views-using-the-same-viewmodel-in-mvvm">
+                https://stackoverflow.com/questions/51537011/how-to-have-multiple-views-using-the-same-viewmodel-in-mvvm
+            </a>
+        </li>
+        <li>『Model-View-ViewModel (MVVM)』 Learn (2025/02/01)
+            <br><a href="https://learn.microsoft.com/ja-jp/dotnet/architecture/maui/mvvm">
+                https://learn.microsoft.com/ja-jp/dotnet/architecture/maui/mvvm
+            </a>
+        </li>
+
+        <li>『[C#][WPF] メイン画面を閉じたときに残りのウィンドウも閉じる。』 Invisible Works
+            (2025/02/01)
+            <br><a href="https://www.invisible-works.com/archives/2021/10/post-4668/">
+                https://www.invisible-works.com/archives/2021/10/post-4668/
+            </a>
+        </li>
+    </ol>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "../../../"
+            writeHeader(dir);
+        });
+    </script>
+</body>
+
+</html>
