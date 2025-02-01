@@ -1,29 +1,34 @@
 const CONTENT = "/content"
 const HTML_CSS = "/html_css"
-const ANDROID ="android"
+const ANDROID = "/android"
+const WPF = "/articles/wpf"
 
 const LIST = "<a href=\"{$root}/home/articles\">記事一覧</a>"
 const ANDROID_LIST = "<a href=\"{$root}/android/list\">Android/Kotlin</a>"
+const WPF_LIST = "<a href=\"{$root}/articles/wpf/list\">WPF</a>"
 
 function writeBreadcrumb(
     rootDir,
     place,
-){
+) {
     $.ajax({
-        url: rootDir+"/common/breadcrumb.html",
+        url: rootDir + "/common/breadcrumb.html",
         cache: false,
         async: true,
         success: function (html) {
-            list =""
+            list = ""
 
-            switch(place){
+            switch (place) {
                 case "ganre":
-                    list =LIST
+                    list = LIST
                     break
                 case "android":
-                    list = LIST 
-                    + ">" + ANDROID_LIST
+                    list = LIST
+                        + ">" + ANDROID_LIST
                     break
+                case "wpf":
+                    list = LIST
+                        + ">" + WPF_LIST
             }
             list = list.replace(
                 /\{\$root\}/g,
@@ -42,7 +47,7 @@ function writeHeader(
     rootDir
 ) {
     $.ajax({
-        url: rootDir + "header.html",
+        url: rootDir + "/header.html",
         cache: false,
         async: true,
         success: function (html) {
@@ -59,12 +64,12 @@ function writeHtmlList(
     rootDir,
     openTag,
     closeTag
-){
+) {
     writeList(
         "htmlList",
         openTag,
         closeTag,
-        rootDir+HTML_CSS,
+        rootDir + HTML_CSS,
     )
 }
 
@@ -72,12 +77,25 @@ function writeAndroidList(
     rootDir,
     openTag,
     closeTag
-){
+) {
     writeList(
         "androidList",
         openTag,
         closeTag,
-        rootDir+ANDROID,
+        rootDir + ANDROID,
+    )
+}
+
+function writeWpfList(
+    rootDir,
+    openTag,
+    closeTag
+) {
+    writeList(
+        "wpfList",
+        openTag,
+        closeTag,
+        rootDir + WPF,
     )
 }
 
@@ -86,24 +104,24 @@ function writeList(
     openTag,
     closeTag,
     path
-){
+) {
     $.ajax({
-        url: path+"/"+name+".html", 
-        cache: false, 
-        async: true, 
-        success: function(html){
+        url: path + "/" + name + ".html",
+        cache: false,
+        async: true,
+        success: function (html) {
             html = html.replace(
                 /\{openTag\}/g,
                 openTag
             ).replace(
                 /\{closeTag\}/g,
-                closeTag 
+                closeTag
             ).replace(
-               /\{\$root\}/g,
+                /\{\$root\}/g,
                 path
             )
-            
-            $("#"+name).html(html)
+            // root になるように修正
+            $("#" + name).html(html)
         }
     })
 }

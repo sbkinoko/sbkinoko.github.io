@@ -6,19 +6,9 @@
 
 <div id="androidList"></div>
 
-<ul>
-    <li>
-        <h3>
-            wpf
-        </h3>
-    </li>
-    <ul>
-        <li><a href="https://sbkinoko.github.io/wpf/image_road_button\image_road_button.html">wpfで画像ファイルをひらいて表示する方法</a>
-        </li>
-        <li><a href="https://sbkinoko.github.io/wpf/show_windows/show_windows">wpfで複数window表示する方法</a></li>
-        <li><a href="https://sbkinoko.github.io/wpf/wip/wip.html">wip(書きたいやつ)</a></li>
-    </ul>
+<div id="wpfList"></div>
 
+<ul>
     <li>
         <h3>YouTube</h3>
     </li>
@@ -52,7 +42,7 @@
 
 <script>
     $(document).ready(function () {
-        var rootDir = "../"
+        var rootDir = ".."
         writeHtmlList(
             rootDir,
             "<h3><a class=\"linkedH\" href=\"https://sbkinoko.github.io/html_css/list.html\">",
@@ -62,6 +52,12 @@
         writeAndroidList(
             rootDir,
             "<h3><a class=\"linkedH\" href=\"./../android/list.html\">",
+            "</a></h3>",
+        );
+        
+        writeWpfList(
+            rootDir,
+            "<h3><a class=\"linkedH\" href=\"./../articles/wpf/list.html\">",
             "</a></h3>",
         );
 

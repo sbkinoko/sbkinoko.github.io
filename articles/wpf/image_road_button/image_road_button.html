@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>ダイアログを利用して画像を選択して開く方法</title>
-    <link rel="styleSheet" href="./../../style.css" />
+    <link rel="styleSheet" href="./../../../style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="./../../main.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
 </head>
 <!--
  &lt <
@@ -26,6 +26,17 @@
 <body>
 
     <div id="header"></div>
+    <div id="breadcrumb"></div>
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2024/08/12</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/01/29</td>
+        </tr>
+    </table>
 
     <h1>
         ダイアログを利用して画像を選択して開く方法
@@ -141,33 +152,47 @@
     </div>
 
     <h2 id="ref">
-        <ol>
-            <li>
-                方法: グリッド要素を作成する <a
-                    href="https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/controls/how-to-create-a-grid-element?view=netframeworkdesktop-4.8">https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/controls/how-to-create-a-grid-element?view=netframeworkdesktop-4.8</a>
-            </li>
-            <li>
-                チュートリアル: C# でシンプルな WPF アプリケーションを作成する
-                <a
-                    href="https://learn.microsoft.com/ja-jp/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022#add-the-button-control">https://learn.microsoft.com/ja-jp/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022#add-the-button-control</a>
-            </li>
-            <li>
-                【Tips】「ファイルを開く」ダイアログでファイルのフルパスを取得したい【OpenFileDialog】
-                <a
-                    href="https://qiita.com/ryojio2k/items/d6b1c39ca360373d9025">https://qiita.com/ryojio2k/items/d6b1c39ca360373d9025</a>
-            </li>
-            <li>
-                [WPF] Imageコントロールで画像を表示する
-                <a
-                    href="http://blog.pionet.co.jp/experience/archives/2111">http://blog.pionet.co.jp/experience/archives/2111</a>
-            </li>
-        </ol>
+        参考
     </h2>
+    <ol>
+        <li>
+            『方法: グリッド要素を作成する』 Microsoft Learn 
+            <br><a
+                href="https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/controls/how-to-create-a-grid-element?view=netframeworkdesktop-4.8">
+                https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/controls/how-to-create-a-grid-element?view=netframeworkdesktop-4.8
+            </a>
+            <br>(2025/01/29)
+        </li>
+        <li>
+            『チュートリアル: C# でシンプルな WPF アプリケーションを作成する』 Microsoft Learn 
+            <br><a
+                href="https://learn.microsoft.com/ja-jp/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022#add-the-button-control">
+                https://learn.microsoft.com/ja-jp/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022#add-the-button-control
+            </a>
+            <br>(2025/01/29)
+        </li>
+        <li>
+            『【Tips】「ファイルを開く」ダイアログでファイルのフルパスを取得したい【OpenFileDialog】』Qiita 
+            <br> <a href="https://qiita.com/ryojio2k/items/d6b1c39ca360373d9025">
+                https://qiita.com/ryojio2k/items/d6b1c39ca360373d9025
+            </a>
+            <br>(2025/01/29)
+        </li>
+        <li>
+            『[WPF] Imageコントロールで画像を表示する』 pionet 
+            <br><a href="http://blog.pionet.co.jp/experience/archives/2111">
+                http://blog.pionet.co.jp/experience/archives/2111
+            </a>
+            <br>(2025/01/29)
+        </li>
+    </ol>
+
 
     <script>
         $(document).ready(function () {
-            var dir = "../../"
+            var dir = "../../.."
             writeHeader(dir);
+            writeWpfList(dir)
         });
     </script>
 </body>
