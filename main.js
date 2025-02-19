@@ -1,6 +1,6 @@
 const CONTENT = "/content"
 const HTML_CSS = "/html_css"
-const ANDROID = "/android"
+const ANDROID = "/articles/android"
 const WPF = "/articles/wpf"
 
 const LIST = "<a href=\"{$root}/home/articles\">記事一覧</a>"
