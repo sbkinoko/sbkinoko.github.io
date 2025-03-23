@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Composeの更新タイミング</title>
+    <title>StateFlowとComposable</title>
     <link rel="styleSheet" href="./../../../style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./../../../main.js"></script>
@@ -20,25 +20,446 @@
     <table class="noBorder">
         <tr>
             <td>作成日</td>
-            <td></td>
+            <td>2025/03/24</td>
         </tr>
         <tr>
             <td>最終更新日</td>
-            <td></td>
+            <td>2025/03/24</td>
         </tr>
     </table>
     <h1>
+        StateFlowとComposable
     </h1>
-    
-    <a href="#ref">[]</a>
+
+    <h2>
+        背景
+    </h2>
+
+    <p>
+        StateFlowやComposableについて詳しくなかったので調べてみます。
+        <br>更新したいのに更新されなかったりして色々困りました。
+    </p>
+
+    <h2>
+        困ったこと
+    </h2>
+    <p>
+        まず最初に困ったことを確認します。
+    </p>
+    <img src="screen1.gif">
+    <p>
+        数値をいくつか表示し、+で加算するプログラムです。ボタンを押すと一部の数値が更新されてます。
+        <br>表示している内容は以下のクラスです。
+        <br>作成したコードは、<a href="https://github.com/sbkinoko/DataClassTest">こちらのリポジトリ</a>にあります。
+    </p>
+
+    <pre><code>class KmpViewModel {
+
+    var counter = 0
+
+    val mCounterClass = mutableStateOf(
+    CounterClass()
+    )
+
+    val mCounterData = mutableStateOf(
+    CounterData()
+    )
+
+    val mCounterDataVar1 = mutableStateOf(
+    CounterDataVar()
+    )
+
+    val mCounterDataVar2 = mutableStateOf(
+    CounterDataVar()
+    )
+
+    ~省略~
+}
+    </code></pre>
+
+    <p>
+        それぞれのクラスは以下の通りです。
+    </p>
+
+    <pre><code>class CounterClass(
+    var count: Int = 0,
+)
+
+data class CounterData(
+    val count: Int = 0,
+)
+
+data class CounterDataVar(
+    var count: Int = 0,
+)</code></pre>
+
+    <p>
+        上から
+        <br>・通常のクラス
+        <br>・valのデータクラス
+        <br>・varのデータクラス
+        <br>になっています。
+    </p>
+
+    <p>
+        <br>valのデータクラスのcountを変更するにはcopyが必要で、varのデータクラスのcoutを変更するのはcopyでも代入でもできます。
+        <br>dataクラスについては別途調べたのでここでは省略します(<a href="../data/data.html">これ</a>)。
+    </p>
+
+    <p>
+        <br> さて本筋に戻ります。
+        <br>ボタンを押した時に呼ぶコードは以下の通りです。
+        <br>var1はcountを直接変更、var2はcopyでvalueを上書きするの違いです。
+        <br>どれも共通で値を1加算します。
+    </p>
+    <pre><code>class KmpViewModel {
+    ~省略~
+
+    fun addCount() {
+        counter++
+
+        mCounterClass.value.count++
+
+        mCounterData.value = mCounterData.value.run {
+            copy(
+                count = count + 1
+            )
+        }
+
+        mCounterDataVar1.value.count++
+
+        mCounterDataVar2.value = mCounterDataVar2.value.run {
+            copy(
+                count = count + 1
+            )
+        }
+    }
+}</code></pre>
+
+    <p>
+        全部同時に加算しているはずなのに1と2で表示内容が変わってしまいます。
+        <br>さぁ、困りました。
+    </p>
+
+    <h2>patern1</h2>
+    <p>パターン1のコードは以下の通りです。すべての数値を同じ関数で取得しています。</p>
+
+    <pre><code>@Composable
+fun Pattern1(
+    viewModel: KmpViewModel,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text("Pattern1")
+        Text(
+            text = "counter : ${viewModel.counter}"
+        )
+
+        val mCounterClass by viewModel.mCounterClass
+        Text(
+            text = "mCounterClass : ${mCounterClass.count}"
+        )
+
+        val mCounterData by viewModel.mCounterData
+        Text(
+            text = "mCounterData : ${mCounterData.count}"
+        )
+
+        val mCounterDataVar1 by viewModel.mCounterDataVar1
+        Text(
+            text = "mCounterData1 : ${mCounterDataVar1.count}"
+        )
+
+        val mCounterDataVar2 by viewModel.mCounterDataVar2
+        Text(
+            text = "mCounterData2 : ${mCounterDataVar2.count}"
+        )
+    }
+}</code></pre>
+
+
+    <h2>
+        pattern2
+    </h2>
+    <p>
+        対して、pattern2です。
+        <br>それぞれ独立した関数になっています。
+    </p>
+
+    <pre><code>@Composable
+fun Pattern2(
+    viewModel: KmpViewModel,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+
+        Text("Pattern2")
+
+        CounterComponent(
+            viewModel = viewModel,
+        )
+
+        CounterClassComponent(
+            viewModel = viewModel,
+        )
+
+        CounterDataComponent(
+            viewModel = viewModel,
+        )
+
+        CounterDataVar1Component(
+            viewModel = viewModel,
+        )
+
+        CounterDataVar2Component(
+            viewModel = viewModel
+        )
+    }
+}
+
+@Composable
+fun CounterComponent(
+    viewModel: KmpViewModel,
+) {
+    Text(
+        text = "counter : ${viewModel.counter}"
+    )
+}
+
+@Composable
+fun CounterClassComponent(
+    viewModel: KmpViewModel,
+) {
+    val mCounterClass by viewModel.mCounterClass
+
+    Text(
+        text = "mCounterClass : ${mCounterClass.count}"
+    )
+}
+
+@Composable
+fun CounterDataComponent(
+    viewModel: KmpViewModel,
+) {
+    val mCounterData by viewModel.mCounterData
+    Text(
+        text = "mCounterData : ${mCounterData.count}"
+    )
+}
+
+@Composable
+fun CounterDataVar1Component(
+    viewModel: KmpViewModel,
+) {
+    val mCounterDataVar1 by viewModel.mCounterDataVar1
+    Text(
+        text = "mCounterData1 : ${mCounterDataVar1.count}"
+    )
+}
+
+@Composable
+fun CounterDataVar2Component(
+    viewModel: KmpViewModel,
+) {
+    val mCounterDataVar2 by viewModel.mCounterDataVar2
+    Text(
+        text = "mCounterData2 : ${mCounterDataVar2.count}"
+    )
+}</code></pre>
+
+    <h2>
+        Composableについて
+    </h2>
+    <p>
+        上記の話は単純で、mutableStateを利用していると、値を変更したときcomposeに通知されます。以下Android公式の資料<a href="#ref">[1]</a>からの引用です(<a
+            href="https://developer.android.com/develop/ui/compose/lifecycle?hl=ja#:~:text=%E5%AE%89%E5%AE%9A%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%8C%E5%8F%AF%E5%A4%89%E3%81%A7%E3%81%82%E3%82%8B%E5%9E%8B%E3%81%AE%E4%BB%A3%E8%A1%A8%E4%BE%8B%E3%81%AF%E3%80%81Compose%20%E3%81%AE%20MutableState%20%E5%9E%8B%E3%81%A7%E3%81%99%E3%80%82%E5%80%A4%E3%81%8C%20MutableState%20%E3%81%AB%E4%BF%9D%E6%8C%81%E3%81%95%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E5%A0%B4%E5%90%88%E3%80%81State%20%E3%81%AE%20.value%20%E3%83%97%E3%83%AD%E3%83%91%E3%83%86%E3%82%A3%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B%E5%A4%89%E6%9B%B4%E3%81%AF%20Compose%20%E3%81%AB%E9%80%9A%E7%9F%A5%E3%81%95%E3%82%8C%E3%82%8B%E3%81%9F%E3%82%81%E3%80%81%E7%8A%B6%E6%85%8B%E3%82%AA%E3%83%96%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AF%E5%85%A8%E4%BD%93%E3%81%A8%E3%81%97%E3%81%A6%E5%AE%89%E5%AE%9A%E3%81%97%E3%81%A6%E3%81%84%E3%82%8B%E3%81%A8%E8%A6%8B%E3%81%AA%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82">このへん</a>)。
+    </p>
+    <blockquote>
+        安定しているが可変である型の代表例は、Compose の MutableState 型です。値が MutableState に保持されている場合、State の .value プロパティに対する変更は Compose
+        に通知されるため、状態オブジェクトは全体として安定していると見なされます。
+    </blockquote>
+
+    <p>
+        前半は胸を張って説明できるほど理解してませんが、後半が何を言いたいかはわかります。
+    </p>
+    <p>
+        通知が来たComposeは再度処理が走ります<a href="#ref">[2]</a>(<a href="https://developer.android.com/develop/ui/compose/state?hl=ja#:~:text=%E5%86%8D%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%82%BA%3A%20%E3%83%87%E3%83%BC%E3%82%BF%E3%81%8C%E5%A4%89%E6%9B%B4%E3%81%95%E3%82%8C%E3%81%9F%E3%81%A8%E3%81%8D%E3%80%81%E3%82%B3%E3%83%B3%E3%83%9D%E3%82%B8%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E6%9B%B4%E6%96%B0%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%82%B6%E3%83%96%E3%83%AB%E3%82%92%E5%86%8D%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%80%82">このへん</a>)。
+        <br>パターン1は全てが同じ階層にあるので、それぞれのデータが通知を送るかどうかによらず、全てのデータの最新情報にアクセスします。よって、全てのデータが同時に更新されます。
+        <br>対してパターン2では、通知が来たComposeのみ処理が走ります。よって、mutbleStateを利用していて、valueを上書きしている2つのみ数値が変わるということになります。
+    </p>
+
+    <p>
+        これがデータ更新が画面に反映されることもあれば、されないこともあることの原因の様です。
+        <br>更新したい場合は、mutableStateのvalueを上書きするように気をつけたいですね。
+    </p>
+
+    <h2>recompositionのSkip</h2>
+    <p>
+        公式ドキュメント <a href="#ref">[1]</a>を見ていたら、興味深い記述を見つけました(<a
+            href="https://developer.android.com/develop/ui/compose/lifecycle?hl=ja#skipping">このへん</a>)。
+    </p>
+    <blockquote>
+        再コンポジション中に、対象となるコンポーザブル関数の入力が前回のコンポジションから変更されていない場合、その関数の実行が完全にスキップされることがあります。
+    </blockquote>
+
+    <p>
+        なんと、不要な呼び出しは勝手に回避してくれるようです。すごい。
+        <br>基本的な挙動を試してくれた記事がQiita<a href="#ref">[3]</a>にあるので、実際の動きが気になる型はこちらも確認してみてください。
+    </p>
+
+    <h2>実装</h2>
+    <p>
+        それはそれとして、自分でもやってみたいので実装します。
+        <br>というか、実際に作っているゲームで困ったので原因を特定せねばなりません。
+    </p>
+
+    <p>
+        viewModel
+    </p>
+
+    <pre><code>val uiState = mutableStateOf(
+    UIState(
+        TextData1(""),
+        TextData2(""),
+    )
+)
+
+fun updateUIState() {
+    uiState.value = uiState.value.let {
+        it.copy(
+            textData2 = it.textData2.run {
+                copy(text = text + "a")
+            }
+        )
+    }
+}</code></pre>
+
+    <p>layout</p>
+    <pre><code>@Composable
+fun Pattern3(
+    viewModel: KmpViewModel,
+    modifier: Modifier = Modifier,
+) {
+
+    val uiState by viewModel.uiState
+
+    println("ComposeTest pattern3")
+
+    Column(modifier = modifier) {
+        Text1(uiState.textData1)
+        Text2(uiState.textData2)
+        Button(onClick = {
+            viewModel.updateUIState()
+        }) {
+            Text("change")
+        }
+    }
+}
+
+@Composable
+private fun Text1(
+    textData1: TextData1,
+) {
+    println("ComposeTest text1")
+    Text(textData1.text)
+}
+
+@Composable
+private fun Text2(
+    textData2: TextData2,
+) {
+    println("ComposeTest text2")
+    Text(textData2.text)
+}
+</code></pre>
+
+    <p>
+        ボタンをクリックすると、textData2にaが追加される状態です。
+        <br>この状態でボタンを押してログを確認すると……。
+    </p>
+
+    <img src="pattern3_1.gif">
+
+    <p>
+        なんと、text1も呼び出されているではありませんか。スキップしてくれるなんて嘘だったのか!!
+        <br>……と言いたくなりますが、スキップされるには条件がありました。
+        <br>公式[1]からの引用です(<a
+            href="https://developer.android.com/develop/ui/compose/lifecycle?hl=ja#skipping:~:text=%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%82%BA%E5%8F%AF%E8%83%BD%E3%81%AA%E9%96%A2%E6%95%B0%E3%81%AF%E3%80%81%E6%AC%A1%E3%81%AE%E5%A0%B4%E5%90%88%E3%82%92%E9%99%A4%E3%81%8D%E3%82%B9%E3%82%AD%E3%83%83%E3%83%97%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82">この辺</a>)。
+    </p>
+    <blockquote>
+        コンポーズ可能な関数は、次の場合を除きスキップできます。
+        <br>・関数に Unit 以外の戻り値の型があります
+        <br>・関数に @NonRestartableComposable アノテーションが付いているか、 @NonSkippableComposable
+        <br>・必須パラメータの型が不安定です
+    </blockquote>
+
+    <p>
+        引用と言いつつ、ちょっと整形してます。
+    </p>
+    <p>
+        textDataの中身を確認してみましょう。
+    </p>
+
+    <pre><code>data class TextData1(
+    val text: String,
+    val someList:List<Int> = emptyList(),
+)
+
+data class TextData2(
+    val text: String,
+)
+</code></pre>
+
+    <p>
+        なんと、こっそりリストが入っているではありませんか。
+        <br>list型は安定した型とはみなされないため、TextData1も安定した型とみなされずに、これでは毎回呼び出されてしまっても不思議ではありません。
+        <br>というわけで、TextData1クラスに@Stableをつけて再挑戦します。
+    </p>
+
+    <img src="pattern3_2.gif">
+
+    <p>
+        無事にtext2だけ呼ばれるようになりました。
+        <br>そのまま起動したらうまく行かなかったのですが、先駆者の知恵 <a href="#ref">[2]</a>を借りて、クリーンビルドしたら通るようになりました。
+    </p>
+
+    <h2>
+        まとめ
+    </h2>
+
+    <p>
+        以上、Composeについて色々調べました。
+        <br>『更新を省略できていい』という話はなんとなく知っていたのですが、詳細までは知らなかったのでいい機会になりました。
+        <br>これで今作ってるゲームのUIStateを作るリファクタを進められそうです。
+        <br>今回見つかった課題は安定した型が何かをもう少し調べることですかね。途中で胸を張って説明できないとも書きましたし。あとは、UIStateについても調べて書いてみてもいいかもしれません。
+        <br>とまぁ、今後の課題も見つかったので今回はこの辺で。
+        <br>ではまた。
+    </p>
 
     <h2 id="ref">
         参考
     </h2>
     <ol>
-        <li>『』 ページ名 ()
-            <br><a href="">
-
+        <li>『コンポーザブルのライフサイクル』 Android Developers
+            (2025/03/23)
+            <br><a href="https://developer.android.com/develop/ui/compose/lifecycle?hl=ja">
+                https://developer.android.com/develop/ui/compose/lifecycle?hl=ja
+            </a>
+        </li>
+        <li>『状態と Jetpack Compose』 Android Developers (2025/03/24)
+            <br><a href="https://developer.android.com/develop/ui/compose/state?hl=ja">
+                https://developer.android.com/develop/ui/compose/state?hl=ja
+            </a>
+        </li>
+        <li>『JetpackComposeのViewModelにおける状態管理を試してみた』 Qiita (2025/03/23)
+            <br><a href="https://qiita.com/ymd_aaa/items/7bb9e05460267c2499d7">
+                https://qiita.com/ymd_aaa/items/7bb9e05460267c2499d7
             </a>
         </li>
     </ol>
