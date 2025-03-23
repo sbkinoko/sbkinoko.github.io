@@ -37,7 +37,6 @@
 
     <p>
         StateFlowやComposableについて詳しくなかったので調べてみます。
-        <br>更新したいのに更新されなかったりして色々困りました。
     </p>
 
     <h2>
@@ -107,9 +106,8 @@ data class CounterDataVar(
     </p>
 
     <p>
-        <br> さて本筋に戻ります。
         <br>ボタンを押した時に呼ぶコードは以下の通りです。
-        <br>var1はcountを直接変更、var2はcopyでvalueを上書きするの違いです。
+        <br>var1は「countを直接変更」、var2は「copyでvalueを上書きする」といった違いがあります。
         <br>どれも共通で値を1加算します。
     </p>
     <pre><code>class KmpViewModel {
@@ -209,17 +207,7 @@ fun Pattern2(
             viewModel = viewModel,
         )
 
-        CounterDataComponent(
-            viewModel = viewModel,
-        )
-
-        CounterDataVar1Component(
-            viewModel = viewModel,
-        )
-
-        CounterDataVar2Component(
-            viewModel = viewModel
-        )
+        ~~ 省略 ~~
     }
 }
 
@@ -243,38 +231,12 @@ fun CounterClassComponent(
     )
 }
 
-@Composable
-fun CounterDataComponent(
-    viewModel: KmpViewModel,
-) {
-    val mCounterData by viewModel.mCounterData
-    Text(
-        text = "mCounterData : ${mCounterData.count}"
-    )
-}
+~~ 省略 ~~
 
-@Composable
-fun CounterDataVar1Component(
-    viewModel: KmpViewModel,
-) {
-    val mCounterDataVar1 by viewModel.mCounterDataVar1
-    Text(
-        text = "mCounterData1 : ${mCounterDataVar1.count}"
-    )
-}
-
-@Composable
-fun CounterDataVar2Component(
-    viewModel: KmpViewModel,
-) {
-    val mCounterDataVar2 by viewModel.mCounterDataVar2
-    Text(
-        text = "mCounterData2 : ${mCounterDataVar2.count}"
-    )
-}</code></pre>
+</code></pre>
 
     <h2>
-        Composableについて
+        データの更新について
     </h2>
     <p>
         上記の話は単純で、mutableStateを利用していると、値を変更したときcomposeに通知されます。以下Android公式の資料<a href="#ref">[1]</a>からの引用です(<a
@@ -289,7 +251,8 @@ fun CounterDataVar2Component(
         前半は胸を張って説明できるほど理解してませんが、後半が何を言いたいかはわかります。
     </p>
     <p>
-        通知が来たComposeは再度処理が走ります<a href="#ref">[2]</a>(<a href="https://developer.android.com/develop/ui/compose/state?hl=ja#:~:text=%E5%86%8D%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%82%BA%3A%20%E3%83%87%E3%83%BC%E3%82%BF%E3%81%8C%E5%A4%89%E6%9B%B4%E3%81%95%E3%82%8C%E3%81%9F%E3%81%A8%E3%81%8D%E3%80%81%E3%82%B3%E3%83%B3%E3%83%9D%E3%82%B8%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E6%9B%B4%E6%96%B0%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%82%B6%E3%83%96%E3%83%AB%E3%82%92%E5%86%8D%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%80%82">このへん</a>)。
+        通知が来たComposeは再度処理が走ります<a href="#ref">[2]</a>(<a
+            href="https://developer.android.com/develop/ui/compose/state?hl=ja#:~:text=%E5%86%8D%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%82%BA%3A%20%E3%83%87%E3%83%BC%E3%82%BF%E3%81%8C%E5%A4%89%E6%9B%B4%E3%81%95%E3%82%8C%E3%81%9F%E3%81%A8%E3%81%8D%E3%80%81%E3%82%B3%E3%83%B3%E3%83%9D%E3%82%B8%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%92%E6%9B%B4%E6%96%B0%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%82%B6%E3%83%96%E3%83%AB%E3%82%92%E5%86%8D%E5%AE%9F%E8%A1%8C%E3%81%99%E3%82%8B%E3%81%93%E3%81%A8%E3%80%82">このへん</a>)。
         <br>パターン1は全てが同じ階層にあるので、それぞれのデータが通知を送るかどうかによらず、全てのデータの最新情報にアクセスします。よって、全てのデータが同時に更新されます。
         <br>対してパターン2では、通知が来たComposeのみ処理が走ります。よって、mutbleStateを利用していて、valueを上書きしている2つのみ数値が変わるということになります。
     </p>
@@ -310,7 +273,7 @@ fun CounterDataVar2Component(
 
     <p>
         なんと、不要な呼び出しは勝手に回避してくれるようです。すごい。
-        <br>基本的な挙動を試してくれた記事がQiita<a href="#ref">[3]</a>にあるので、実際の動きが気になる型はこちらも確認してみてください。
+        <br>基本的な挙動を試してくれた記事がQiita<a href="#ref">[3]</a>にあるので、実際の動きが気になる方はこちらも確認してみてください。
     </p>
 
     <h2>実装</h2>
@@ -341,6 +304,7 @@ fun updateUIState() {
 }</code></pre>
 
     <p>layout</p>
+    
     <pre><code>@Composable
 fun Pattern3(
     viewModel: KmpViewModel,
@@ -389,7 +353,7 @@ private fun Text2(
     <p>
         なんと、text1も呼び出されているではありませんか。スキップしてくれるなんて嘘だったのか!!
         <br>……と言いたくなりますが、スキップされるには条件がありました。
-        <br>公式[1]からの引用です(<a
+        <br>公式<a href="#ref">[1]</a>からの引用です(<a
             href="https://developer.android.com/develop/ui/compose/lifecycle?hl=ja#skipping:~:text=%E3%82%B3%E3%83%B3%E3%83%9D%E3%83%BC%E3%82%BA%E5%8F%AF%E8%83%BD%E3%81%AA%E9%96%A2%E6%95%B0%E3%81%AF%E3%80%81%E6%AC%A1%E3%81%AE%E5%A0%B4%E5%90%88%E3%82%92%E9%99%A4%E3%81%8D%E3%82%B9%E3%82%AD%E3%83%83%E3%83%97%E3%81%A7%E3%81%8D%E3%81%BE%E3%81%99%E3%80%82">この辺</a>)。
     </p>
     <blockquote>
@@ -419,6 +383,9 @@ data class TextData2(
     <p>
         なんと、こっそりリストが入っているではありませんか。
         <br>list型は安定した型とはみなされないため、TextData1も安定した型とみなされずに、これでは毎回呼び出されてしまっても不思議ではありません。
+    </p>
+
+    <p>
         <br>というわけで、TextData1クラスに@Stableをつけて再挑戦します。
     </p>
 
@@ -437,6 +404,9 @@ data class TextData2(
         以上、Composeについて色々調べました。
         <br>『更新を省略できていい』という話はなんとなく知っていたのですが、詳細までは知らなかったのでいい機会になりました。
         <br>これで今作ってるゲームのUIStateを作るリファクタを進められそうです。
+    </p>
+
+    <p>
         <br>今回見つかった課題は安定した型が何かをもう少し調べることですかね。途中で胸を張って説明できないとも書きましたし。あとは、UIStateについても調べて書いてみてもいいかもしれません。
         <br>とまぁ、今後の課題も見つかったので今回はこの辺で。
         <br>ではまた。
