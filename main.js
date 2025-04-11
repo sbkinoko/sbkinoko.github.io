@@ -21,7 +21,7 @@ function writeBreadcrumb(
             list = ""
 
             switch (place) {
-                case "ganre":
+                case "genre":
                     list = LIST
                     break
                 case "android":
