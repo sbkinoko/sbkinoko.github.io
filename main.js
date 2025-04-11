@@ -4,9 +4,9 @@ const ANDROID = "/articles/android"
 const KyoPro = "/articles/kyopro"
 const WPF = "/articles/wpf"
 
-const LIST = "<a href=\"{$root}/home/articles\">記事一覧</a>"
-const ANDROID_LIST = "<a href=\"{$root}/android/list\">Android/Kotlin</a>"
-const WPF_LIST = "<a href=\"{$root}/articles/wpf/list\">WPF</a>"
+const LIST = "<a href=\"{$root}/home/articles.html\">記事一覧</a>"
+const ANDROID_LIST = "<a href=\"{$root}/android/list.html\">Android/Kotlin</a>"
+const WPF_LIST = "<a href=\"{$root}/articles/wpf/list.html\">WPF</a>"
 const KYOPRO_LIST = "<a href=\"{$root}/articles/kyopro/list.html\">競プロ</a>"
 
 function writeBreadcrumb(
