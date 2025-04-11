@@ -1,7 +1,7 @@
 const CONTENT = "/content"
 const HTML_CSS = "/html_css"
 const ANDROID = "/articles/android"
-const KyoPro = "/articles/KyoPro"
+const KyoPro = "/articles/kyopro"
 const WPF = "/articles/wpf"
 
 const LIST = "<a href=\"{$root}/home/articles\">記事一覧</a>"
@@ -104,6 +104,19 @@ function writeWpfList(
     )
 }
 
+function writeKyoProList(
+    rootDir,
+    openTag,
+    closeTag
+) {
+    writeList(
+        "kyoproList",
+        openTag,
+        closeTag,
+        rootDir + KyoPro
+    )
+}
+
 function writeList(
     name,
     openTag,
@@ -129,19 +142,6 @@ function writeList(
             $("#" + name).html(html)
         }
     })
-}
-
-function writeKyoProList(
-    rootDir,
-    openTag,
-    closeTag
-) {
-    writeList(
-        "kyoproList",
-        openTag,
-        closeTag,
-        rootDir + KyoPro
-    )
 }
 
 function writeAbout(
