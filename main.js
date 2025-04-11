@@ -7,7 +7,7 @@ const WPF = "/articles/wpf"
 const LIST = "<a href=\"{$root}/home/articles\">記事一覧</a>"
 const ANDROID_LIST = "<a href=\"{$root}/android/list\">Android/Kotlin</a>"
 const WPF_LIST = "<a href=\"{$root}/articles/wpf/list\">WPF</a>"
-const KYOPRO_LIST = "<a href=\"{$root}/articles/kyopro/list\">競プロ</a>"
+const KYOPRO_LIST = "<a href=\"{$root}/articles/kyopro/list.html\">競プロ</a>"
 
 function writeBreadcrumb(
     rootDir,
