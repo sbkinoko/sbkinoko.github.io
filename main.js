@@ -1,11 +1,13 @@
 const CONTENT = "/content"
 const HTML_CSS = "/html_css"
 const ANDROID = "/articles/android"
+const KyoPro = "/articles/KyoPro"
 const WPF = "/articles/wpf"
 
 const LIST = "<a href=\"{$root}/home/articles\">記事一覧</a>"
 const ANDROID_LIST = "<a href=\"{$root}/android/list\">Android/Kotlin</a>"
 const WPF_LIST = "<a href=\"{$root}/articles/wpf/list\">WPF</a>"
+const KYOPRO_LIST = "<a href=\"{$root}/articles/kyopro/list\">競プロ</a>"
 
 function writeBreadcrumb(
     rootDir,
@@ -29,6 +31,9 @@ function writeBreadcrumb(
                 case "wpf":
                     list = LIST
                         + ">" + WPF_LIST
+                case "kyopro":
+                    list = LIST
+                        + ">" + KYOPRO_LIST
             }
             list = list.replace(
                 /\{\$root\}/g,
@@ -124,6 +129,19 @@ function writeList(
             $("#" + name).html(html)
         }
     })
+}
+
+function writeKyoProList(
+    rootDir,
+    openTag,
+    closeTag
+) {
+    writeList(
+        "kyoproList",
+        openTag,
+        closeTag,
+        rootDir + KyoPro
+    )
 }
 
 function writeAbout(
