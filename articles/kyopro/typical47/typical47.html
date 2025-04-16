@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>典型47の復習</title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+    <script type="text/javascript"
+        asyncsrc="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=MML_SVG"></script>
+
+</head>
+<!--
+ &lt <
+    <ol>
+        <li></li>
+    </ol>
+ -->
+
+<body>
+    <div id="header"></div>
+    <div>
+        <table class="noBorder">
+            <tr>
+                <td>作成日</td>
+                <td>2025/04/16</td>
+            </tr>
+            <tr>
+                <td>最終更新日</td>
+                <td>2025/04/16</td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <h1>
+            典型47の復習
+        </h1>
+
+        <h2>
+            背景
+        </h2>
+
+        <p>
+            コードの理解に時間がかかったので、せっかくだから整理しておきます。
+        </p>
+
+        <h2>
+            内容
+        </h2>
+
+        <p>
+            そのまま読もうとしてもわかりにくい操作のコードの解読を行います。
+            <br>コードは<a href="https://github.com/E869120/kyopro_educational_90/blob/main/sol/047-02.cpp">こちら</a><a
+                href="#ref">[1]</a>の主催者のものを引用します。解説は<a href="https://x.com/e869120/status/1396289540222906368">こちら</a><a
+                href="#ref">[2]</a>の解説も合わせて参考にしてください。
+        </p>
+
+        <h2>
+            斜めに並ぶ色を指定してチェックする
+        </h2>
+
+        <pre><code>int answer = 0;
+for (int i = 0; i < 3; ++i) {
+    vector<int> seq2(N);
+    for (int j = 0; j < N; ++j) {
+        seq2[j] = (i - seq3[j] + 3) % 3;
+    }
+   
+    ~省略~
+}
+cout << answer << endl;
+return 0;
+        </code></pre>
+
+        <p>
+            ネストされている2つのfor文は一旦省略します。
+            <br>
+            <a href="https://x.com/e869120/status/1396289540222906368">公式解説</a>
+            <a href="#ref">[2]</a>
+            を手掛かりに考えるとこのiに関するループ部分は、「斜めに並んでいる色を指定して、その色が並んでいるかをチェックする操作」と予想できます。
+            <br>並んでいる色がRの場合、BとGを入れ替えた文字列を生成して、並んでいるのがBの場合RとG、並んでいるのがGの場合RとBを入れ替えたものをseq2として生成します。。
+            <br>省略している部分は、文字列の一致判定を行い想定している色が並んでいるならばansを加算する処理が行われています。
+            <br>iが色に対応していると考え、i=0ならR、i=1ならG、i=2ならBとしてコードを読んでいました。
+            <br>しかしこれは間違いです。以下にiとseq[j]の対応表を示します。
+        </p>
+        <p>iとseq3[j]から求まるseq2の値の表</p>
+        <table>
+            <tr>
+                <td>iの値&nbsp;\&nbsp;seq3[j]の値</td>
+                <td>0(R)</td>
+                <td>1(G)</td>
+                <td>2(B)</td>
+            </tr>
+            <tr>
+                <td>i=0</td>
+                <td>0</td>
+                <td>2</td>
+                <td>1</td>
+            </tr>
+            <tr>
+                <td>i=1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>2</td>
+            </tr>
+            <tr>
+                <td>i=2</td>
+                <td>2</td>
+                <td>1</td>
+                <td>0</td>
+            </tr>
+        </table>
+
+        <p>
+            <br>i=1を緑が並んでいると想定してしまうと、1(G)が0に変わっているので前提(並んでいる色をそのままに、他の色を入れ替え)が破綻してしまいます。表をよく見ると、i=1のときにseq2とseq3が等しくなっているのは2です。つまり、i=1のときは、青が並んでいると想定してseq2を作成しています。
+            <br>ややこしいですね。これを理解するのに時間がかかりました。
+        </p>
+        <p>
+            <br>この部分は「3-seq3でmod3の値を入れ替え(0は0、1を2、2を1)、i足してスライドさせている」くらいの操作だと思います。
+            <br>並び方は3!なので全6通り。012を元の並びとしたとき、上の場合は全員元の席にいるか違う席にいるかで、下の場合は1人元の席にいて、他2人は入れ替わっている状態です。
+            <br>i=0のときに、「たまたま0に該当するRが入れ替わってないと」考えるのが自然ですかね。
+        </p>
+        <table>
+            <tr>
+                <td>012</td>
+                <td>201</td>
+                <td>120</td>
+            </tr>
+            <tr>
+                <td>021</td>
+                <td>102</td>
+                <td>210</td>
+            </tr>
+        </table>
+        <p>
+            mod4の場合、同様に操作すると0321となってしまい、うまく行きません。残念。使い道はわからないけど。
+        </p>
+
+        <h2>2つのfor文</h2>
+        <pre><code>int power3 = 1, hash1 = 0, hash2 = 0;
+for (int j = 0; j < N; ++j)
+{
+    hash1 = (hash1 * 3 + seq1[j]) % mod;
+    hash2 = (hash2 + power3 * seq2[N - j - 1]) % mod;
+    if (hash1 == hash2)
+    {
+        ++answer;
+    }
+    power3 = power3 * 3 % mod;
+}
+
+power3 = 1, hash1 = 0, hash2 = 0;
+for (int j = 0; j < N - 1; ++j)
+{
+    hash1 = (hash1 + power3 * seq1[N - j - 1]) % mod;
+    hash2 = (hash2 * 3 + seq2[j]) % mod;
+    if (hash1 == hash2)
+    {
+        ++answer;
+    }
+    power3 = power3 * 3 % mod;
+}        </code></pre>
+        <p>
+            先ほど省略した、S・Tの部分文字列の比較を行うfor文です。
+            <br>添え字に注目すると、上のfor文はk>=0の(s1から徐々に文字を拾っていく)処理に該当し、下のfor文がk&lt;0の(t1から徐々に文字を拾っていく)処理に該当します。
+        </p>
+
+        <h2>hashの操作</h2>
+        <p>
+            下のfor文において、赤い部分の線が1色か確認したあと青い部分の線が1色であることを確認します。このとき、sの部分文字列は先頭に新しい文字を持ってくるのに対して、tの部分文字列は末尾に新しい文字を持ってきます。
+        </p>
+        <img src="add_str.png">
+        <p>
+            <br>したがって、hashの更新は次の操作で行います。
+        </p>
+        <ul>
+            <li>
+                hash1は桁数に応じた3のべき乗を乗じたseq1を足す
+            </li>
+            <li>
+                hash2は1つ左シフトして末尾にseq2を足す
+            </li>
+        </ul>
+        <p>
+            <br>10進数で12に対して3を付け加える場合、以下の操作になることを踏まえるとわかりやすいです。
+        </p>
+        <ul>
+            <li>
+                先頭に3を足したい場合、3*10^2として足して312
+            </li>
+            <li>
+                末尾に3を足したい場合、12*10+3として足して123
+            </li>
+        </ul>
+        <p>
+            解説の
+        </p>
+        <math>
+            <msub>
+                <mi>h</mi>
+                <mi>0</mi>
+            </msub>
+            <mo>=</mo>
+            <mn>0</mn>
+        </math>
+        <br>
+        <math>
+            <msub>
+                <mi>h</mi>
+                <mi>k</mi>
+            </msub>
+            <mo>=</mo>
+            <mi>(</mi>
+            <mi>b</mi>
+            <msub>
+                <mi>h</mi>
+                <mi>k-1</mi>
+            </msub>
+            <mo>&plus;</mo>
+            <msub>
+                <mi>X</mi>
+                <mi>k</mi>
+            </msub>
+            <mi>)</mi>
+            <mi>&nbsp;mod&nbsp;p</mi>
+        </math>
+        <p>
+            の部分はこのコードに直接関連します。一方、部分文字列のhashを求める式は直接は関係していません。
+            <br>上記の操作は文字列をb進数の数値に変換する操作と考えると何を言いたいかがわかりやすいと思います。
+            <br>また、そのまま数値に変換すると大きくなりすぎるのでmodを取っています。modを取るとかぶるんじゃないかと不安になりますが、めったにないので気にしなくて良さそうです<a
+                href="#ref">[3]</a>。
+            <br>そもそもそんなことを言い始めたら、java等のhashCodeも文字数に制限がある以上、かぶる可能性が0ではありませんしね。
+        </p>
+    </div>
+
+    <h2>まとめ</h2>
+    <p>
+        コードの解読を行いました。
+        <br>関連アルゴリズムのZ-Algorithmについてはまだ理解は出来てないので、これは今後の課題にしようと思います。
+        <br>課題も見つかったので今回はこの辺で。
+        <br>ではまた。
+    </p>
+
+    <div>
+        <h2 id="ref">
+            参考
+        </h2>
+        <ol>
+            <li>公式のコード GitHub (2025/04/15)
+                <br><a href="https://github.com/E869120/kyopro_educational_90/blob/main/sol/047-02.cpp">
+                    https://github.com/E869120/kyopro_educational_90/blob/main/sol/047-02.cpp
+                </a>
+            </li>
+            <li>公式の解説ツイート X(旧Twitter) (2025/04/15)
+                <br><a href="https://x.com/e869120/status/1396289540222906368">
+                    https://x.com/e869120/status/1396289540222906368
+                </a>
+            </li>
+            <li>『蟻本片手に学ぶアルゴリズム ~ローリングハッシュ~』 Qiita (2025/04/15)
+                <br><a href="https://qiita.com/hirominn/items/80464ee381c8d400725f">
+                    https://qiita.com/hirominn/items/80464ee381c8d400725f
+                </a>
+            </li>
+            <!-- <li>『』 ページ名 ()
+            <br><a href="">
+
+            </a>
+        </li> -->
+        </ol>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "../../../"
+            writeHeader(dir);
+        });
+    </script>
+</body>
+
+</html>
