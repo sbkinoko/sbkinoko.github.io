@@ -7,6 +7,8 @@
     <link rel="styleSheet" href="./../../../style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./../../../main.js"></script>
+    <script type="text/javascript"
+        asyncsrc="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=MML_SVG"></script>
 </head>
 <!--
  &lt <
@@ -32,12 +34,237 @@
         枝刈りの計算量見積もり
     </h1>
 
+    <h2>
+        背景
+    </h2>
+
+    <p>
+        <a href="https://atcoder.jp/contests/typical90">
+            競プロ典型90問
+        </a>
+        を解いている中で、枝刈りDFSで解ける問題がちらほらあったので、実際の計算量の見積もりをしてみようと思いました。
+        DFS/枝刈りについて整理した記事は
+        <a href="./../dfs/dfs.html">
+            こちら
+        </a>
+        です。
+    </p>
+
+    <h2>
+        内容
+    </h2>
+
+    <p>
+        自身の提出でdfsを含みACを取っているもの、かつ主催者解説でDFSが取り上げられていないものを振り返ります。
+        <br>基本的に脳金解法になります。全探索しようとしてるししょうがないね。
+    </p>
+
+    <h2>
+        032 - AtCoder Ekiden（★3）
+    </h2>
+
+    <p>
+        問題は
+        <a href="https://atcoder.jp/contests/typical90/tasks/typical90_af">
+            こちら
+        </a>
+        。
+    </p>
+    <details>
+        <summary>
+            計算量考察
+        </summary>
+
+        <p>
+            <br>提出コードは<a href="https://atcoder.jp/contests/typical90/submissions/64123310">
+                こちら
+            </a>。
+            <br>今作るならまだ走ってないランナーを管理してDFSしますね。N人のランナー見て走ったかどうか管理するのは効率が悪い気がします。
+        </p>
+
+        <p>
+            さて、本題に入って計算量の見積もりです。
+            <br>雑に全探索する場合、襷渡しをするとき全てのランナーについて見るので、O(N^N)になってしまいます。
+            <br>ここから、走ったランナーに襷を渡すパターンを刈ります。
+            <br>今までに走ったランナーがk人だった場合、襷を渡せる残りのランナーはN-k人になります。kが0~N-1の範囲で動き、そのパターン数をかければよいので、
+        </p>
+
+        <math>
+            <munderover>
+                <mi>
+                    &prod;
+                </mi>
+                <mrow>
+                    <mi>k</mi>
+                    <mo>=</mo>
+                    <mn>0</mn>
+                </mrow>
+                <mi>N-1</mi>
+            </munderover>
+            <mo>(</mo>
+            <mrow>
+                <mi>N</mi>
+                <mo>-</mo>
+                <mi>k</mi>
+            </mrow>
+            <mo>)</mo>
+            <mo>=</mo>
+            <munderover>
+                <mi>
+                    &prod;
+                </mi>
+                <mrow>
+                    <mi>k</mi>
+                    <mo>=</mo>
+                    <mn>1</mn>
+                </mrow>
+                <mi>N</mi>
+            </munderover>
+            <mrow>
+                <mi>k</mi>
+            </mrow>
+            <mo>=</mo>
+            <mi>
+                N!
+            </mi>
+        </math>
+        <p>
+            となり、N!通りとなります。N^Nと比べると大分探索範囲が減りました。N!通りの探索は想定解法と同じ探索量です。
+            <br>&prod;は総積記号です。ギリシャ文字&pi;の大文字でProductから来ています<a href="#ref">[1]</a>。
+        </p>
+
+        <p>
+            ここからが大変で、今回の設定では襷を渡せない人の組み合わせがM組存在します。これを含めた計算量の見積もりをしてみましょう。
+            <br>1人当たり
+            <math>
+                <mfrac>
+                    <mrow>
+                        <mn>2</mn>
+                        <mi>M</mi>
+                    </mrow>
+                    <mi>N</mi>
+                </mfrac>
+            </math>
+            人に渡せないことになります。
+            <br>M組のペアに登場する人数が2M人いて、それをN人に分配して平均を出しています。
+            <br>1人目から2人目に襷を渡せない確率は残り人数がN-1人なので、
+            <math>
+                <mfrac>
+                    <mrow>
+                        <mn>2</mn>
+                        <mi>M</mi>
+                    </mrow>
+                    <mrow>
+                        <mi>N</mi>
+                        <mo>(</mo>
+                        <mi>N</mi>
+                        <mo>&minus;</mo>
+                        <mn>1</mn>
+                        <mo>)</mo>
+                    </mrow>
+                </mfrac>
+            </math>
+            です。
+            <br>簡単化のために、この確率で残りの襷も渡せると考えましょう。襷渡しはN-1回行われるのでの確率をN-1回乗じればよいです。
+            <br>よって見積もった探索量は、
+        </p>
+        <math>
+            <msup>
+                <mrow>
+                    <mo>(</mo>
+                    <mn>1</mn>
+                    <mo>&minus;</mo>
+                    <mfrac>
+                        <mrow>
+                            <mn>2</mn>
+                            <mi>M</mi>
+                        </mrow>
+                        <mrow>
+                            <mi>N</mi>
+                            <mo>&it;</mo>
+                            <mo>(</mo>
+                            <mi>N</mi>
+                            <mo>&minus;</mo>
+                            <mn>1</mn>
+                            <mo>)</mo>
+                        </mrow>
+                    </mfrac>
+                    <mo>)</mo>
+                </mrow>
+                <mrow>
+                    <mi>N</mi>
+                    <mo>&minus;</mo>
+                    <mn>1</mn>
+                </mrow>
+            </msup>
+            <mi>N</mi>
+            <mo>!</mo>
+            <mo>&it;</mo>
+        </math>
+        <p>
+            となります。
+            <br>Mが大きくなればなるほど渡せない組み合わせが増えて探索量が減る形になってるのであってそうです。
+            <br>平均人数で見て組み立てたので実際の探索量は違います。厳密に考えるなら
+            <br>あとは途中まで走った時点で最速タイムより遅かった場合、その組み合わせは最後まで見る必要がないのでもう少しだけ削れますね。
+        </p>
+
+        <p>
+            振り返りのついでに追加課題のM&lt;=18の場合について考えます。<br>残念ながら先ほどのコードでは、N=18にしたときに探索範囲がとんでもないことになってしまうのでTLEです。Mが最大値の半数としても、log(18!)-18log(2)≒10となり10の10乗以上の探索範囲が出てきます。
+            <br>全員の全区間のタイムが950以上だとするとスコアによる枝刈りも全然できないのでまったく歯が立ちません。
+            <br>ユーザー解説によるとbitDPでO(N^2* 2^N)解けるらしいです <a href="#ref">[2]</a>。N=20としても大体400 *
+            (10^3)^2なのでN&lt=18なら充分解けますね、すごい。Mに依存しないというのもいいですね。
+            <br> <a href="https://qiita.com/satomshr/items/1e75f5c5ee053de8d494">
+                こちらの記事
+            </a>
+            のコードがコメントも豊富でわかりやすかったのでリンクを張っておきます<a href="#ref">[3]</a>。
+        </p>
+
+    </details>
+
+    <h2>
+        045 - Simple Grouping（★6）
+    </h2>
+
+    <p>
+
+    </p>
+
+    <h2>
+        051 - Typical Shop（★5）
+    </h2>
+
+    <h2>
+        063 - Monochromatic Subgrid（★4）
+    </h2>
+
+    <h2>
+        まとめ
+    </h2>
+
+    <p>
+
+    </p>
     <a href="#ref">[]</a>
 
     <h2 id="ref">
         参考
     </h2>
     <ol>
+        <li>『総積の記号Π（パイ）の意味と性質』 高校数学の美しい物語 (2025/05/15)
+            <br><a href="https://manabitimes.jp/math/2802">
+                https://manabitimes.jp/math/2802
+            </a>
+        </li>
+        <li>典型32ユーザー解説 Atcoder (2025/05/15)
+            <br><a href="https://atcoder.jp/contests/typical90/editorial/10181">
+                https://atcoder.jp/contests/typical90/editorial/10181
+            </a>
+        </li>
+        <li>『【競プロ典型 90 問】032 - AtCoder Ekiden で bitDP を学ぶ』 Qiita (2025/05/15)
+            <br><a href="https://qiita.com/satomshr/items/1e75f5c5ee053de8d494">
+                https://qiita.com/satomshr/items/1e75f5c5ee053de8d494
+            </a>
+        </li>
         <li>『』 ページ名 ()
             <br><a href="">
 
@@ -57,7 +284,7 @@
             var dir = "../../../"
             writeHeader(dir);
             writeBreadcrumb(dir, "kyopro")
-            
+
             writeKyoProList(
                 dir,
                 "<h2><a class=\"linkedH\" href=\"./../list.html\">",
