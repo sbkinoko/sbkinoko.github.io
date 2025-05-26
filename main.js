@@ -17,6 +17,8 @@ function articleHeaderFooter(
     writeBreadcrumb(root, type);
 
     var href = "\"" + root + "articles/" + type + "/list.html\""
+
+    console.log(href)
     writeListWithTarget(
         root,
         type,
@@ -168,6 +170,7 @@ function writeListWithTarget(
     closeTag,
     target,
 ) {
+    console.log(root + "/articles/" + name + "/list.html")
     $.ajax({
         url: root + "/articles/" + name + "/list.html",
         cache: false,
