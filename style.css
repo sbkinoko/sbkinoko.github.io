@@ -24,7 +24,27 @@ a:hover.linkedH {
 
 p {
     font-size: 16px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    text-indent: 1em;
+    text-align: justify;
+}
+
+p.top {
+    margin-top: 10px;
+}
+
+p.bottom {
     margin-bottom: 10px;
+}
+
+p.solo {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p.noindent {
+    text-indent: 0em;
 }
 
 blockquote {
@@ -49,6 +69,10 @@ table.fixWidth {
 
 div.scrollx {
     overflow-x: scroll;
+}
+
+img{
+    margin: 10px;
 }
 
 table.img {
@@ -99,16 +123,26 @@ table.noBorder td {
 code {
     display: inline-block;
     padding: 0.1em 0.25em;
-    /* 文字周りの余白 */
     color: #ffffff;
-    /* 文字色 */
     background-color: #25292f;
-    /* 背景色 */
+}
+
+code.filename {
+    color: #000000; 
+    padding: 0.25em;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-bottom: 1em;
+    background: rgba(241, 241, 195);
+    text-align: left;
 }
 
 pre {
     margin: 1em 0;
-    padding: 1em;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-bottom: 1em;
+    padding-top: 0em;
     border-radius: 5px;
     background: #25292f;
     overflow-x: auto;
