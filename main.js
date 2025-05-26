@@ -16,10 +16,10 @@ function articleHeaderFooter(
     writeHeader(root);
     writeBreadcrumb(root, type);
 
-    var href = "\""+root + "/articles/" + type + "/list.html\""
+    var href = "\"" + root + "articles/" + type + "/list.html\""
     writeListWithTarget(
         root,
-        type + "List",
+        type,
         "<h2><a class=\"linkedH\" href=\"" + href + ">",
         "</a></h2>",
         "relatedList",
@@ -169,7 +169,7 @@ function writeListWithTarget(
     target,
 ) {
     $.ajax({
-        url: root + "/articles/" + name + ".html",
+        url: root + "/articles/" + name + "/list.html",
         cache: false,
         async: true,
         success: function (html) {
