@@ -10,15 +10,15 @@ const WPF_LIST = "<a href=\"{$root}/articles/wpf/list.html\">WPF</a>"
 const KYOPRO_LIST = "<a href=\"{$root}/articles/kyopro/list.html\">競プロ</a>"
 
 function articleHeaderFooter(
-    dir,
+    root,
     type,
 ) {
-    writeHeader(dir);
-    writeBreadcrumb(dir, type);
+    writeHeader(root);
+    writeBreadcrumb(root, type);
 
     var href = "\""+root + "/articles/" + type + "/list.html\""
     writeContentWithTarget(
-        dir,
+        root,
         type + "List",
         "<h2><a class=\"linkedH\" href=\"" + href + ">",
         "</a></h2>",
@@ -162,11 +162,11 @@ function writeList(
 }
 
 function writeListWithTarget(
+    root,
     name,
-    target,
     openTag,
     closeTag,
-    root,
+    target,
 ) {
     $.ajax({
         url: root + "/articles/" + name + ".html",
