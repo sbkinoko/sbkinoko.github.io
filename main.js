@@ -9,6 +9,24 @@ const ANDROID_LIST = "<a href=\"{$root}/articles/android/list.html\">Android/Kot
 const WPF_LIST = "<a href=\"{$root}/articles/wpf/list.html\">WPF</a>"
 const KYOPRO_LIST = "<a href=\"{$root}/articles/kyopro/list.html\">競プロ</a>"
 
+function articleHeaderFooter(
+    root,
+    type,
+) {
+    writeHeader(root);
+    writeBreadcrumb(root, type);
+
+    var href = "\"" + root + "articles/" + type + "/list.html\""
+
+    writeListWithTarget(
+        root,
+        type,
+        "<h2><a class=\"linkedH\" href=" + href + ">",
+        "</a></h2>",
+        "relatedList",
+    )
+}
+
 function writeBreadcrumb(
     rootDir,
     place,
@@ -140,6 +158,35 @@ function writeList(
             )
             // root になるように修正
             $("#" + name).html(html)
+        }
+    })
+}
+
+function writeListWithTarget(
+    root,
+    name,
+    openTag,
+    closeTag,
+    target,
+) {
+    var path = root + "articles/" + name + "/" + name + "List.html"
+
+    $.ajax({
+        url: path,
+        cache: false,
+        async: true,
+        success: function (html) {
+            html = html.replace(
+                /\{openTag\}/g,
+                openTag
+            ).replace(
+                /\{closeTag\}/g,
+                closeTag
+            ).replace(
+                /\{\$root\}/g,
+                root + "articles/" + name
+            )
+            $("#" + target).html(html)
         }
     })
 }

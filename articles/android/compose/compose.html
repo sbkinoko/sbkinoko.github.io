@@ -11,6 +11,7 @@
 
 <body>
     <div id="header"></div>
+    <div id="breadcrumb"></div>
     <table class="noBorder">
         <tr>
             <td>作成日</td>
@@ -491,10 +492,16 @@ private fun Text2(
             </a>
         </li>
     </ol>
+
+    <div id="relatedList"></div>
+
     <script>
         $(document).ready(function () {
             var dir = "./../../../"
-            writeHeader(dir);
+            articleHeaderFooter(
+                dir,
+                "android",
+            );
         });
     </script>
 </body>
