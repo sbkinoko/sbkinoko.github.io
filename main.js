@@ -185,7 +185,7 @@ function writeListWithTarget(
                 closeTag
             ).replace(
                 /\{\$root\}/g,
-                root
+                root + "articles/" + type
             )
             $("#" + target).html(html)
         }
