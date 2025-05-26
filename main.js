@@ -17,7 +17,7 @@ function articleHeaderFooter(
     writeBreadcrumb(root, type);
 
     var href = "\""+root + "/articles/" + type + "/list.html\""
-    writeContentWithTarget(
+    writeListWithTarget(
         root,
         type + "List",
         "<h2><a class=\"linkedH\" href=\"" + href + ">",
