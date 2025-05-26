@@ -22,7 +22,7 @@ function articleHeaderFooter(
     writeListWithTarget(
         root,
         type,
-        "<h2><a class=\"linkedH\" href=\"" + href + ">",
+        "<h2><a class=\"linkedH\" href=" + href + ">",
         "</a></h2>",
         "relatedList",
     )
