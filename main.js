@@ -16,7 +16,7 @@ function articleHeaderFooter(
     writeHeader(dir);
     writeBreadcrumb(dir, type);
 
-    var href = root + "/articles/" + type + "/list.html\""
+    var href = "\""+root + "/articles/" + type + "/list.html\""
     writeContentWithTarget(
         dir,
         type + "List",
@@ -166,7 +166,7 @@ function writeListWithTarget(
     target,
     openTag,
     closeTag,
-    path,
+    root,
 ) {
     $.ajax({
         url: root + "/articles/" + name + ".html",
@@ -181,7 +181,7 @@ function writeListWithTarget(
                 closeTag
             ).replace(
                 /\{\$root\}/g,
-                path
+                root
             )
             $("#" + target).html(html)
         }
