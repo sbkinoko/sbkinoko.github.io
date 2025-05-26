@@ -16,7 +16,7 @@ function articleHeaderFooter(
     writeHeader(root);
     writeBreadcrumb(root, type);
 
-    var href = "\"" + root + "articles/" + type + "/list.html\""
+    var href = "\"" + root + "articles/" + type + "/" + type + "List.html\""
 
     console.log(href)
     writeListWithTarget(
