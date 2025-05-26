@@ -170,9 +170,10 @@ function writeListWithTarget(
     closeTag,
     target,
 ) {
-    console.log(root + "/articles/" + name + "/list.html")
+    var path = root + "articles/" + name + "/" + name + "List.html"
+    console.log(path)
     $.ajax({
-        url: root + "/articles/" + name + "/list.html",
+        url: path,
         cache: false,
         async: true,
         success: function (html) {
