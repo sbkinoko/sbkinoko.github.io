@@ -55,26 +55,26 @@
     </p>
 
     <pre>
-        <code class="filename">KmpViewModel.kt</code>
-        <code>class KmpViewModel {
+<code class="filename">KmpViewModel.kt</code>
+<code>class KmpViewModel {
 
-    var counter = 0
+var counter = 0
 
-    val mCounterClass = mutableStateOf(
-    CounterClass()
-    )
+val mCounterClass = mutableStateOf(
+CounterClass()
+)
 
-    val mCounterData = mutableStateOf(
-    CounterData()
-    )
+val mCounterData = mutableStateOf(
+CounterData()
+)
 
-    val mCounterDataVar1 = mutableStateOf(
-    CounterDataVar()
-    )
+val mCounterDataVar1 = mutableStateOf(
+CounterDataVar()
+)
 
-    val mCounterDataVar2 = mutableStateOf(
-    CounterDataVar()
-    )
+val mCounterDataVar2 = mutableStateOf(
+CounterDataVar()
+)
 
     ~省略~
 }</code>
@@ -179,8 +179,8 @@ data class CounterDataVar(
     </p>
 
     <pre>
-        <code class="filename">Pattern1.kt</code>
-        <code>@Composable
+<code class="filename">Pattern1.kt</code>
+<code>@Composable
 fun Pattern1(
     viewModel: KmpViewModel,
     modifier: Modifier = Modifier,
@@ -224,8 +224,8 @@ fun Pattern1(
     </p>
 
     <pre>
-        <code class="filename">Pattern2.kt</code>
-        <code>@Composable
+<code class="filename">Pattern2.kt</code>
+<code>@Composable
 fun Pattern2(
     viewModel: KmpViewModel,
     modifier: Modifier = Modifier,
@@ -335,8 +335,8 @@ fun CounterClassComponent(
     </p>
 
     <pre>
-        <code class="filename">viewModel.kt</code>
-        <code>val uiState = mutableStateOf(
+<code class="filename">viewModel.kt</code>
+<code>val uiState = mutableStateOf(
     UIState(
         TextData1(""),
         TextData2(""),
@@ -354,8 +354,8 @@ fun updateUIState() {
 }</code></pre>
 
     <pre>
-        <code class="filename">layout.kt</code>
-        <code>@Composable
+<code class="filename">layout.kt</code>
+<code>@Composable
 fun Pattern3(
     viewModel: KmpViewModel,
     modifier: Modifier = Modifier,
@@ -421,8 +421,8 @@ private fun Text2(
     </p>
 
     <pre>
-        <code class="filename">TextData1.kt</code>
-        <code>data class TextData1(
+<code class="filename">TextData1.kt</code>
+<code>data class TextData1(
     val text: String,
     val someList:List<Int> = emptyList(),
 )
