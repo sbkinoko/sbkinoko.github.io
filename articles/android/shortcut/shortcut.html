@@ -10,8 +10,19 @@
 </head>
 
 <body>
-
     <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2024/09/22</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/05/27</td>
+        </tr>
+    </table>
 
     <h1>
         Android Studio で使うと便利なショートカット集
@@ -20,9 +31,10 @@
     <p>
         気が向いたときに更新していきます
     </p>
-    <p>
+
+    <h2>
         【Ctrl】押しながらクリック
-    </p>
+    </h2>
     <table>
         <tr>
             <th class="width20">場所</th>
@@ -32,24 +44,29 @@
         <tr>
             <td>定義場所</td>
             <td>使用箇所を表示できる<br>クリックすると対象にジャンプ</td>
-            <th><img src="ctrl_1.gif" width="100%"></th>
+            <td><img src="ctrl_1.gif" width="100%"></td>
         </tr>
         <tr>
             <td>定義場所</td>
             <td>使用箇所を表示できる<br>右上をクリックすると一覧を固定できる<br>こっちのほうが便利だと思う</td>
-            <th><img src="ctrl_3.gif" width="100%"></th>
+            <td><img src="ctrl_3.gif" width="100%"></td>
         </tr>
         <tr>
             <td>利用箇所</td>
             <td>定義場所にジャンプ</td>
-            <th><img src="ctrl_2.gif" width="100%"></th>
+            <td><img src="ctrl_2.gif" width="100%"></td>
         </tr>
     </table>
 
+    <div id="relatedList"></div>
+
     <script>
         $(document).ready(function () {
-            var dir = "./../../.."
-            writeHeader(dir);
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "android",
+            );
         });
     </script>
 </body>
