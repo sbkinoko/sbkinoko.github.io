@@ -17,6 +17,17 @@
 
 <body>
     <div id="header"></div>
+    <div id="breadcrumb"></div>
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2024/10/12</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/05/27</td>
+        </tr>
+    </table>
 
     <h1>KMPでRealmを使ってみる</h1>
     <h2>
@@ -24,20 +35,25 @@
     </h2>
     <p>
         単語帳を作りたいのでデータ永続化のためにデータベースを探していました。
-        <br>なんやかんやあってRealm<a href="#ref">[1]</a>を採用することになりました。
-        <br>採用理由は
+        なんやかんやあってRealm<a href="#ref">[1]</a>を採用することになりました。
+    </p>
+    <p>
+        採用理由は
     </p>
     <blockquote>kotlin android database おすすめ</blockquote>
-    <p>
+    <p class="noindent">
         で調べて最初に出てきた記事<a href="#ref">[2]</a>でおすすめされていたライブラリだからです。
-        <br>英語で
+    </p>
+    <p>
+        英語で
     </p>
     <blockquote>kotlin multiplatform database recommend</blockquote>
-    <p>
+    <p class="noindent">
         と調べても、一番上の質問板<a href="#ref">[3]</a>ではRealmがおすすめされています。だいぶおすすめっぽいです。
-        <br>Android公式のRoom<a href="#ref">[4]</a>も使ってみたかったのですが、ページトップに書いてあるとおりAndroidJetpackの一部とのことで、
+    </p>
+    <p>
+        Android公式のRoom<a href="#ref">[4]</a>も使ってみたかったのですが、ページトップに書いてあるとおりAndroidJetpackの一部とのことで、
         めちゃめちゃAndroidのなのでkmpで利用するには適さないと考えました。
-        <br>
     </p>
 
     <h2>
@@ -45,12 +61,21 @@
     </h2>
     <p>
         自分用のテンプレリポジトリがあるのでこいつに実装します。
-        <br>動作もわかりやすいので、適当にボタンをおいてカウンタを実装しました。
-        ボタンをタップしたらボタン内部の数字が1大きくなります。
-        <br>該当差分は<a href="https://github.com/sbkinoko/kmpTemplate/pull/4">こちら</a>です。Android公式のMVVMに従って実装したつもりです。
-        <br>koinを導入してあるので使ってもよいのですが、例としてわかりにくくなるので今回はなしです。
-        <br>動作はこんな感じ。
     </p>
+    <p>
+        動作もわかりやすいので、適当にボタンをおいてカウンタを実装しました。
+        ボタンをタップしたらボタン内部の数字が1大きくなります。
+    </p>
+    <p>
+        該当差分は<a href="https://github.com/sbkinoko/kmpTemplate/pull/4">こちら</a>です。Android公式のMVVMに従って実装したつもりです。
+    </p>
+    <p>
+        koinを導入してあるので使ってもよいのですが、例としてわかりにくくなるので今回はなしです。
+    </p>
+    <p>
+        動作はこんな感じ。
+    </p>
+
     <div class="box1">
         <img width="100%" src="make-button.gif" alt="カウントアップボタンのgif">
     </div>
@@ -58,14 +83,20 @@
     <h2>
         ライブラリ導入
     </h2>
-    <p>これはまだ永続化していないので、一度アプリを落とすとカウントがリセットされてしまいます。これを永続化するためにRealmを導入します。
-        <br>とりあえず依存関係の追加をおこないました。PRは<a href="https://github.com/sbkinoko/kmpTemplate/pull/5/files">こちら</a>です。
+    <p>
+        上記のままだと、まだ永続化していないので、一度アプリを落とすとカウントがリセットされてしまいます。これを永続化するためにRealmを導入します。
+    </p>
+    <p>
+        とりあえず依存関係の追加をおこないました。PRは<a href="https://github.com/sbkinoko/kmpTemplate/pull/5/files">こちら</a>です。
     </p>
 
     <p>
-        <br>gradle/libs.versions.toml
+        <br>
     </p>
-    <pre><code>[versions]
+
+    <pre>
+<code class="filename">gradle/libs.versions.toml</code>
+<code>[versions]
 ~~ 省略 ~~
 realm="1.16.0"
 
@@ -79,22 +110,17 @@ realm = {id = "io.realm.kotlin",version.ref ="realm"}
 </code></pre>
 
     <p>
-        プラグインとライブラリの依存関係を追加します。
-        <br>バージョンは『Kotlin SDK のインストール』<a href="#id">[5]</a>の数字を参考にしました。
-    </p>
-    <p>
-        <br>build.gradle.kts
+        プラグインとライブラリの依存関係を追加します。バージョンは『Kotlin SDK のインストール』<a href="#id">[5]</a>の数字を参考にしました。
     </p>
 
-    <pre><code>
-alias(libs.plugins.realm) apply false
-        </code></pre>
+    <pre>
+<code class="filename">build.gradle.kts</code>
+<code>alias(libs.plugins.realm) apply false
+</code></pre>
 
-    <p>
-        <br>composeApp/build.gradle.kts
-    </p>
-    <pre><code>
-plugins {
+    <pre>
+<code>composeApp/build.gradle.kts</code>
+<code>plugins {
     ~~ 省略 ~~
     alias(libs.plugins.realm) apply false
 }
@@ -115,8 +141,7 @@ kotlin{
         ~~ 省略 ~~
     }
     ~~ 省略 ~~
-}
-        </code></pre>
+}</code></pre>
 
     <p>
         プロジェクト配下とApp配下のgradleに追加したライブラリ・プラグインを追加します。
@@ -127,12 +152,14 @@ kotlin{
     </h2>
     <p>
         作ったリポジトリの内部で永続化を行います。差分は<a href="https://github.com/sbkinoko/kmpTemplate/pull/6/files">こちら</a>です。
-        <br>ここからはクイックスタート<a href="">[6]</a>を参考に実装を行います
     </p>
     <p>
-        <br>composeApp/src/commonMain/kotlin/domain/Count.kt
+        ここからはクイックスタート<a href="">[6]</a>を参考に実装を行います。
     </p>
-    <pre><code>package domain
+
+    <pre>
+<code class="filename">composeApp/src/commonMain/kotlin/domain/Count.kt</code>
+<code>package domain
 
 import io.realm.kotlin.types.RealmObject
 import io.realm.kotlin.types.annotations.PrimaryKey
@@ -146,30 +173,35 @@ class Counter : RealmObject {
 
     <p>
         『オブジェクトモデルを定義する』<a href="#id">[7]</a>を参考に保存したいオブジェクトを定義しました。
-        <br>保存したいのは数値だけなので、PrimaryKeyとcountだけ用意しました。
-        <br>repositoryの各行の説明に入ります。
+    </p>
+    <p>
+        保存したいのは数値だけなので、PrimaryKeyとcountだけ用意しました。
+    </p>
+    <p class="top">
+        repositoryの各行の説明に入ります。
     </p>
     <pre><code>    private val config: RealmConfiguration = RealmConfiguration.create(schema = setOf(Counter::class))
     private val realm: Realm = Realm.open(config)</code></pre>
     <p>
-        『Realmを開く』<a href="#id">[8]</a>を参考にCounterクラスを読み込みます。
-        <br>今回利用したいものはCounterなので、schemaにはCounterだけ追加します。
+        『Realmを開く』<a href="#id">[8]</a>を参考にCounterクラスを読み込みます。今回利用したいものはCounterなので、schemaにはCounterだけ追加します。
     </p>
 
     <pre><code>    private val counter: Counter = realm.query&ltCounter>().first().find() ?:
-        realm.writeBlocking {
-            copyToRealm(
-                Counter()
-                )
-            }
-    </code></pre>
+    realm.writeBlocking {
+        copyToRealm(
+            Counter()
+            )
+        }    </code></pre>
+
     <p>
-        <br>『オブジェクトの作成、読み取り、更新、削除』<a href="#ref">[9]</a>を参考に読み書きをします。
-        <br>エルビス演算子(?:)の前で、queryを利用してCounter
-        のデータを読み出します。1つしか保存していないので検索ワードはなしで、そのまま取り出します。
-        <br>エルビス演算子以降は書き込みを参考にデータの新規作成を行います。
-        初回起動時はデータが保存されておらず、queryの結果がnullになるので
-        書き込み処理を入れてあげます。
+        『オブジェクトの作成、読み取り、更新、削除』<a href="#ref">[9]</a>を参考に読み書きをします。
+    </p>
+    <p>
+        エルビス演算子(?:)の前で、queryを利用してCounter
+        のデータを読み出します。1つしか保存していないので検索ワードはなしで、そのまま取り出します。エルビス演算子以降は書き込みを参考にデータの新規作成を行います。
+    </p>
+    <p>
+        初回起動時はデータが保存されておらず、queryの結果がnullになるので 書き込み処理を入れてあげます。
     </p>
 
     <pre><code>    findLatest(counter)?.apply {
@@ -178,8 +210,12 @@ class Counter : RealmObject {
     }</code></pre>
     <p>
         値を更新した際に、同時にDBも更新しています。
-        <br>読み出しているcounterインスタンスの値を更新します。
-        <br>参考にしたのは引き続き、『オブジェクトの作成、読み取り、更新、削除』<a href="#ref">[9]</a>です。
+    </p>
+    <p>
+        読み出しているcounterインスタンスの値を更新します。
+    </p>
+    <p>
+        参考にしたのは引き続き、『オブジェクトの作成、読み取り、更新、削除』<a href="#ref">[9]</a>です。
     </p>
 
     <pre><code>    init{
@@ -195,8 +231,12 @@ class Counter : RealmObject {
     </h2>
     <p>
         以上で完成です。
-        <br>DBに保存して永続化しているので、アプリを終了しても数値を継続利用できます。
-        <br>全体の差分は<a href="https://github.com/sbkinoko/kmpTemplate/pull/7/files">こちら</a>です
+    </p>
+    <p>
+        DBに保存して永続化しているので、アプリを終了しても数値を継続利用できます。
+    </p>
+    <p>
+        全体の差分は<a href="https://github.com/sbkinoko/kmpTemplate/pull/7/files">こちら</a>です
     </p>
     <div class="box1">
         <img width="100%" src="use-db.gif" alt="DBを使って保存しているgif">
@@ -208,10 +248,15 @@ class Counter : RealmObject {
     <p>
         公式ページ<a href="#id">[10]</a>や公式のgithub<a href="#id">[11]</a>を見ていると、Atlas Device Sync +
         Realm SDKsの組み合わせが2024/09にdeprecatedになったようです。この作業は10月に入ってから始めたのでほんとに直前に発表されています。タイムリーです。
-        <br>警告に従うならRealm Kotlinの3.0.0以上のバージョンを利用するか、syncの機能の利用を避けなくてはなりません。
-        <br>Atlas Device Syncについて調べると、デバイス間で同期をとる機能のよう<a href="#id">[12]</a>です。今回の実装だとあまり関係ないですね。
-        <br>でもせっかくなのでバージョンアップしたい気持ちがあります。1.16.0から3.0.0にアップデートするのは大変です。一気にメジャーバージョンが2個も上がることあるんですね……。
-        <br>現状のコードではバージョンを3.0.0にすると以下のエラーが発生してしまいます。
+    </p>
+    <p>
+        警告に従うならRealm Kotlinの3.0.0以上のバージョンを利用するか、syncの機能の利用を避けなくてはなりません。
+    </p>
+    <p>
+        Atlas Device Syncについて調べると、デバイス間で同期をとる機能のよう<a href="#id">[12]</a>です。今回の実装だとあまり関係ないですね。
+    </p>
+    <p>
+        でもせっかくなのでバージョンアップしたい気持ちがあります。1.16.0から3.0.0にアップデートするのは大変です。一気にメジャーバージョンが2個も上がることあるんですね……。現状のコードではバージョンを3.0.0にすると以下のエラーが発生してしまいます。
     </p>
 
     <pre><code>kmpTemplate/composeApp/src/commonMain/kotlin/domain/Count.kt:-1:-1
@@ -221,7 +266,9 @@ Details: Internal error in file lowering : io.realm.kotlin.compiler.RealmModelLo
     <p>
         (2024/10/10現在、)このエラーコードで検索をかけても8件しかヒットしませんでした。
         調べても沼りそうなので今回は引き返すことにします。どこかで対策したいです。
-        <br>と、まぁ今後の目標もたったところで今回はこの辺で終わります。
+    </p>
+    <p>
+        と、まぁ今後の目標もたったところで今回はこの辺で終わります。
     </p>
 
     <div id="ref">
@@ -307,10 +354,15 @@ Details: Internal error in file lowering : io.realm.kotlin.compiler.RealmModelLo
         </ol>
     </div>
 
+    <div id="relatedList"></div>
+
     <script>
         $(document).ready(function () {
             var dir = "./../../.."
-            writeHeader(dir);
+            articleHeaderFooter(
+                dir,
+                "android",
+            );
         });
     </script>
 </body>
