@@ -77,7 +77,7 @@
     </p>
 
     <div class="box1">
-        <img width="100%" src="make-button.gif" alt="カウントアップボタンのgif">
+        <img class="normalImg" src="make-button.gif" alt="カウントアップボタンのgif">
     </div>
 
     <h2>
@@ -119,7 +119,7 @@ realm = {id = "io.realm.kotlin",version.ref ="realm"}
 </code></pre>
 
     <pre>
-<code>composeApp/build.gradle.kts</code>
+<code class="filename">composeApp/build.gradle.kts</code>
 <code>plugins {
     ~~ 省略 ~~
     alias(libs.plugins.realm) apply false
@@ -177,21 +177,24 @@ class Counter : RealmObject {
     <p>
         保存したいのは数値だけなので、PrimaryKeyとcountだけ用意しました。
     </p>
+
     <p class="top">
         repositoryの各行の説明に入ります。
     </p>
+
     <pre><code>    private val config: RealmConfiguration = RealmConfiguration.create(schema = setOf(Counter::class))
     private val realm: Realm = Realm.open(config)</code></pre>
+
     <p>
         『Realmを開く』<a href="#id">[8]</a>を参考にCounterクラスを読み込みます。今回利用したいものはCounterなので、schemaにはCounterだけ追加します。
     </p>
 
     <pre><code>    private val counter: Counter = realm.query&ltCounter>().first().find() ?:
-    realm.writeBlocking {
-        copyToRealm(
-            Counter()
-            )
-        }    </code></pre>
+        realm.writeBlocking {
+            copyToRealm(
+                Counter()
+                )
+            }    </code></pre>
 
     <p>
         『オブジェクトの作成、読み取り、更新、削除』<a href="#ref">[9]</a>を参考に読み書きをします。
@@ -208,6 +211,7 @@ class Counter : RealmObject {
             count = value
         }
     }</code></pre>
+
     <p>
         値を更新した際に、同時にDBも更新しています。
     </p>
@@ -220,8 +224,8 @@ class Counter : RealmObject {
 
     <pre><code>    init{
         count = counter.count
-    }
-</code></pre>
+    }</code></pre>
+
     <p>
         大したことはしてなく、初回表示を0ではなくしただけです。
     </p>
@@ -239,7 +243,7 @@ class Counter : RealmObject {
         全体の差分は<a href="https://github.com/sbkinoko/kmpTemplate/pull/7/files">こちら</a>です
     </p>
     <div class="box1">
-        <img width="100%" src="use-db.gif" alt="DBを使って保存しているgif">
+        <img class="normalImg" src="use-db.gif" alt="DBを使って保存しているgif">
     </div>
 
     <h2>

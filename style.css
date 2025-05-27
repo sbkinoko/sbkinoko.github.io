@@ -75,6 +75,10 @@ img{
     margin: 10px;
 }
 
+img.normalImg{
+    width: 300px;
+}
+
 table.img {
     width: 600px;
     table-layout: fixed;
