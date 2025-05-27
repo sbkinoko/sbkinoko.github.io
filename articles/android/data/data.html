@@ -56,8 +56,12 @@
 
     <p>
         冒頭の引用です。一部改行を入れています。
-        <br>データを保持するためのクラスで、コンパイラがメンバ関数を自動で作成してくれるそうです。便利ですね。これらのメソッドは、プライマリコンストラクタのプロパティに関して作成されます。
-        <br>……ところでメソッドではなくメンバ関数と呼ぶんですね。また関数とメソッドの違いがわからなくなってしまいました。
+    </p>
+    <p>
+        データを保持するためのクラスで、コンパイラがメンバ関数を自動で作成してくれるそうです。便利ですね。これらのメソッドは、プライマリコンストラクタのプロパティに関して作成されます。
+    </p>
+    <p>
+        ところでメソッドではなくメンバ関数と呼ぶんですね。また関数とメソッドの違いがわからなくなってしまいました。
     </p>
 
     <h2>
@@ -74,12 +78,20 @@
 
     <p>
         インスタンスの等価性を確認するのメソッドです。
-        <br>javaの話<a href="#ref">[2]</a>ですが、equalsで利用する値と紐づけた唯一の値を作成する必要があるそうです。自作する場合はかなりめんどくさそうなので、自動で生成してくれるのはありがたいです。
-        <br>データクラスの場合、プライマリコンストラクタ内のパラメータが等しければ同値となります。
-        <br>今回利用したクラスとテストは以下の通りです。正し、一部省略しています。リポジトリは<a href ="https://github.com/sbkinoko/DataClassTest">こちら</a>です
+    </p>
+    <p>
+        javaの話<a href="#ref">[2]</a>ですが、equalsで利用する値と紐づけた唯一の値を作成する必要があるそうです。自作する場合はかなりめんどくさそうなので、自動で生成してくれるのはありがたいです。
+    </p>
+    <p>
+        データクラスの場合、プライマリコンストラクタ内のパラメータが等しければ同値となります。
+    </p>
+    <p>
+        今回利用したクラスとテストは以下の通りです。正し、一部省略しています。リポジトリは<a href="https://github.com/sbkinoko/DataClassTest">こちら</a>です
     </p>
 
-    <pre><code>class User(
+    <pre>
+<code class="filename">User.kt</code>
+<code>class User(
     var name: String,
     var age:Int,
 )
@@ -89,7 +101,9 @@ data class UserData(
     var age: Int,
 )</code></pre>
 
-    <pre><code>class DataClassTest {
+    <pre>
+<code class="filename">DataClassTest.kt</code> 
+<code>class DataClassTest {
     private val name = "Taro"
     private val age = 20
 
@@ -144,11 +158,14 @@ data class UserData(
 
     <p>
         importを省略したテストコードです。テスト結果はOKになるものです。
-        <br>通常のクラスは異なるインスタンスは「等しくない」と判定されます。
-        <br>対してデータクラスは異なるインスタンスでもプライマリコンストラクタのプロパティが等しければ「等しい」と判定されます。
-        <br>逆に言うと、プライマリコンストラクタに含まれないプロパティは異なっていても同値になります。公式ページ(<a
+    </p>
+    <p>
+        通常のクラスは異なるインスタンスは「等しくない」と判定されます。対してデータクラスは異なるインスタンスでもプライマリコンストラクタのプロパティが等しければ「等しい」と判定されます。
+        逆に言うと、プライマリコンストラクタに含まれないプロパティは異なっていても同値になります。公式ページ(<a
             href="https://kotlinlang.org/docs/data-classes.html#properties-declared-in-the-class-body">この辺</a>)に書いてあります。
-        <br>また、コンストラクタに含まれるプロパティの値を変更した場合、通常のクラスではハッシュ値は変わりませんが、データクラスの場合はハッシュ値が変わり等しいインスタンスと判定されなくなります。
+    </p>
+    <p>
+        また、コンストラクタに含まれるプロパティの値を変更した場合、通常のクラスではハッシュ値は変わりませんが、データクラスの場合はハッシュ値が変わり等しいインスタンスと判定されなくなります。
     </p>
 
 
@@ -157,32 +174,43 @@ data class UserData(
     </h3>
     <p>
         挙動に対して、特に説明することはありません。
-        <br>データクラス以外のクラスで、toString()をoverrideせずに呼び出した際に表示される物は以下の文字列です<a href="#ref">[3]</a>(<a
+    </p>
+    <p>
+        データクラス以外のクラスで、toString()をoverrideせずに呼び出した際に表示される物は以下の文字列です<a href="#ref">[3]</a>(<a
             href="https://docs.oracle.com/javase/jp/8/docs/api/java/lang/Object.html#:~:text=Cloneable-,toString,-public%C2%A0String">この辺</a>)。
 
     </p>
 
-    <pre><code>getClass().getName() + '@' + Integer.toHexString(hashCode())</code></pre>
+    <pre>
+        <code>getClass().getName() + '@' + Integer.toHexString(hashCode())</code></pre>
 
     <p>
         前半がクラス名であることは予想がついていましたが、後半はhash値の16進表示だったのですね、1つ賢くなりました。
         Kotlinで同じレベルのドキュメントを探したかったんですが、toString()のページ<a href="#ref">[4]</a>くらいしか見つけられませんでした、残念。
-        <br>なんにせよ、自動でオーバーライドして見やすい形で表示してくれるので助かります。
+    </p>
+    <p>
+        なんにせよ、自動でオーバーライドして見やすい形で表示してくれるので助かります。
     </p>
 
     <h3>componentN()</h3>
     <p>
-        これも挙動に対して特に説明することはありません。N番目の要素を利用するためのメソッドです。
-        <br>このcomponentNは分解宣言で利用されている様です<a href = "#ref">[5]</a>。
-        <br>ただ、スコープ関数のapplyでアクセスした方が順番を気にしなくていいのでよいのでは? と個人的には思います。Kotlinはjavaと違い名前付き引数を使えるので引数の順番を意識しなくてよいというのがメリットの1つではあるので。
+        これも挙動に対して特に説明することはありません。N番目の要素を利用するためのメソッドです。このcomponentNは分解宣言で利用されている様です<a href="#ref">[5]</a>。
+    </p>
+    <p>
+        ただ、スコープ関数のapplyでアクセスした方が順番を気にしなくていいのでよいのでは?
+        と個人的には思います。Kotlinはjavaと違い名前付き引数を使えるので引数の順番を意識しなくてよいというのがメリットの1つではあるので。
     </p>
 
     <h3>copy()</h3>
     <p>
-        一部の値だけを変更したいときに利用する関数です。公式ページ<a href="#ref">[1]</a>(<a href="https://kotlinlang.org/docs/data-classes.html#copying">この辺</a>)。自身のプライマリコンストラクタと同じ引数を取り、自身が持っているプロパティをデフォルト引数として利用しています。
-        <br>内容を確認するまで確証はなかったのですが、コンストラクタをきちんと呼び出している様です。
-        <br>varを利用しているならcopyを利用せずに値を変更できます。上記のtestコードでもcopyを利用せずに値を変更しています。
-        <br>ただ、stateFlowを利用して画面に描画するならcopyを利用した方が便利です。
+        一部の値だけを変更したいときに利用する関数です。公式ページ<a href="#ref">[1]</a>(<a
+            href="https://kotlinlang.org/docs/data-classes.html#copying">この辺</a>)。自身のプライマリコンストラクタと同じ引数を取り、自身が持っているプロパティをデフォルト引数として利用しています。
+    </p>
+    <p>
+        内容を確認するまで確証はなかったのですが、コンストラクタをきちんと呼び出している様です。
+    </p>
+    <p>
+        varを利用しているならcopyを利用せずに値を変更できます。上記のtestコードでもcopyを利用せずに値を変更しています。ただ、stateFlowを利用して画面に描画するならcopyを利用した方が便利です。
     </p>
 
     <h2>
@@ -190,9 +218,15 @@ data class UserData(
     </h2>
     <p>
         以上、データクラスについて調べてみました。
-        <br>uiSateとしてdata class を利用する方法も割と主流っぽい<a href="#ref">[6][7][8]</a>ので合わせて調べたいですね。ここに書くには少しdata class から遠いと思いました。
-        <br>copy内部でも少し触れてますが、stateFlowついても整理したいと思います。もともと冒頭にも書いた通り、stateFlowも使っているので。
-        <br>とまぁ、他にやりたいことも見つかったので、今回はこの辺でお終いです。ではまた。
+    </p>
+    <p>
+        uiSateとしてdata class を利用する方法も割と主流っぽい<a href="#ref">[6][7][8]</a>ので合わせて調べたいですね。ここに書くには少しdata class から遠いと思いました。
+    </p>
+    <p>
+        copy内部でも少し触れてますが、stateFlowついても整理したいと思います。もともと冒頭にも書いた通り、stateFlowも使っているので。
+    </p>
+    <p>
+        とまぁ、他にやりたいことも見つかったので、今回はこの辺でお終いです。ではまた。
     </p>
 
     <h2 id="ref">
@@ -200,53 +234,53 @@ data class UserData(
     </h2>
 
     <ol>
-        <li>『Data classes』Kotlin docs 
+        <li>『Data classes』Kotlin docs
             <br><a href="https://kotlinlang.org/docs/data-classes.html">
                 https://kotlinlang.org/docs/data-classes.html
             </a>
             <br>(2025/01/29)
         </li>
-        <li>『Javaを陰から支えるhashCodeとは？hashCodeの仕組みと実装方法』 ENGINEER.CLUB 
+        <li>『Javaを陰から支えるhashCodeとは？hashCodeの仕組みと実装方法』 ENGINEER.CLUB
             <br><a href="https://www.bold.ne.jp/engineer-club/java-hashcode">
                 https://www.bold.ne.jp/engineer-club/java-hashcode
             </a>
             <br>(2025/01/28)
         </li>
-        <li>『JavaのtoStringメソッドとは？文字列に変換したい時のtoStringの使い方【valueOfとの違いも解説】』 ENGINEER.CLUB 
+        <li>『JavaのtoStringメソッドとは？文字列に変換したい時のtoStringの使い方【valueOfとの違いも解説】』 ENGINEER.CLUB
             <br><a href="https://www.bold.ne.jp/engineer-club/java-tostring">
                 https://www.bold.ne.jp/engineer-club/java-tostring
             </a>
             <br>(2025/01/28)
         </li>
-        <li>『toString』 Kotlin docs 
+        <li>『toString』 Kotlin docs
             <br><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/to-string.html">
                 https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-any/to-string.html
             </a>
             <br>(2025/01/29)
         </li>
         <li>
-            『Destructuring declarations』 Kotlin docs 
+            『Destructuring declarations』 Kotlin docs
             <br><a href="https://kotlinlang.org/docs/destructuring-declarations.html">
                 https://kotlinlang.org/docs/destructuring-declarations.html
             </a>
             <br>(2025/01/29)
         </li>
         <li>
-            『UI 状態生成』 Android Developers 
+            『UI 状態生成』 Android Developers
             <br><a href="https://developer.android.com/topic/architecture/ui-layer/state-production?hl=ja">
                 https://developer.android.com/topic/architecture/ui-layer/state-production?hl=ja
             </a>
             <br>(2025/01/29)
         </li>
         <li>
-            『UIStateの基本とさまざまな工夫』Qiita 
+            『UIStateの基本とさまざまな工夫』Qiita
             <br><a href="https://qiita.com/mi_iroha/items/18403098b4ccefc003e6">
                 https://qiita.com/mi_iroha/items/18403098b4ccefc003e6
             </a>
             <br>(2025/01/29)
         </li>
         <li>
-            『UI状態をdata classで管理する時の大体のお決まりっぽいもの』 Qiita 
+            『UI状態をdata classで管理する時の大体のお決まりっぽいもの』 Qiita
             <br><a href="https://qiita.com/FalconFlat/items/b2c4ed3c2e2e00e97beb">
                 https://qiita.com/FalconFlat/items/b2c4ed3c2e2e00e97beb
             </a>
@@ -254,11 +288,15 @@ data class UserData(
         </li>
     </ol>
 
+    <div id="relatedList"></div>
+
     <script>
         $(document).ready(function () {
             var dir = "./../../.."
-            writeHeader(dir);
-            writeBreadcrumb(dir,"android")
+            articleHeaderFooter(
+                dir,
+                "android",
+            );
         });
     </script>
 </body>
