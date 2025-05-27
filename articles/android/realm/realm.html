@@ -47,11 +47,14 @@
     <p>
         英語で
     </p>
+
     <blockquote>kotlin multiplatform database recommend</blockquote>
+
     <p class="noindent">
         と調べても、一番上の質問板<a href="#ref">[3]</a>ではRealmがおすすめされています。だいぶおすすめっぽいです。
     </p>
-    <p>
+
+    <p class="top">
         Android公式のRoom<a href="#ref">[4]</a>も使ってみたかったのですが、ページトップに書いてあるとおりAndroidJetpackの一部とのことで、
         めちゃめちゃAndroidのなのでkmpで利用するには適さないと考えました。
     </p>
@@ -76,9 +79,7 @@
         動作はこんな感じ。
     </p>
 
-    <div class="box1">
-        <img class="normalImg" src="make-button.gif" alt="カウントアップボタンのgif">
-    </div>
+    <img class="normalImg" src="make-button.gif" alt="カウントアップボタンのgif">
 
     <h2>
         ライブラリ導入
@@ -88,10 +89,6 @@
     </p>
     <p>
         とりあえず依存関係の追加をおこないました。PRは<a href="https://github.com/sbkinoko/kmpTemplate/pull/5/files">こちら</a>です。
-    </p>
-
-    <p>
-        <br>
     </p>
 
     <pre>
@@ -208,8 +205,7 @@ class Counter : RealmObject {
     </p>
 
     <pre><code>    findLatest(counter)?.apply {
-            count = value
-        }
+        count = value
     }</code></pre>
 
     <p>
@@ -242,9 +238,8 @@ class Counter : RealmObject {
     <p>
         全体の差分は<a href="https://github.com/sbkinoko/kmpTemplate/pull/7/files">こちら</a>です
     </p>
-    <div class="box1">
-        <img class="normalImg" src="use-db.gif" alt="DBを使って保存しているgif">
-    </div>
+
+    <img class="normalImg" src="use-db.gif" alt="DBを使って保存しているgif">
 
     <h2>
         今後
