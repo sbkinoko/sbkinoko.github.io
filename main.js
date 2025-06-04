@@ -49,9 +49,11 @@ function writeBreadcrumb(
                 case "wpf":
                     list = LIST
                         + ">" + WPF_LIST
+                    break
                 case "kyopro":
                     list = LIST
                         + ">" + KYOPRO_LIST
+                    break
             }
             list = list.replace(
                 /\{\$root\}/g,
