@@ -8,20 +8,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./../../../main.js"></script>
 </head>
-<!--
- &lt <
-    ただの箇条書き
-    <ol>
-        <li></li>
-    </ol>
-
-    数字箇条書き
-    <ol>
-        <li></li>
-    </ol>
-
-    <a href=""></a>
- -->
 
 <body>
 
@@ -156,7 +142,7 @@
     </h2>
     <ol>
         <li>
-            『方法: グリッド要素を作成する』 Microsoft Learn 
+            『方法: グリッド要素を作成する』 Microsoft Learn
             <br><a
                 href="https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/controls/how-to-create-a-grid-element?view=netframeworkdesktop-4.8">
                 https://learn.microsoft.com/ja-jp/dotnet/desktop/wpf/controls/how-to-create-a-grid-element?view=netframeworkdesktop-4.8
@@ -164,7 +150,7 @@
             <br>(2025/01/29)
         </li>
         <li>
-            『チュートリアル: C# でシンプルな WPF アプリケーションを作成する』 Microsoft Learn 
+            『チュートリアル: C# でシンプルな WPF アプリケーションを作成する』 Microsoft Learn
             <br><a
                 href="https://learn.microsoft.com/ja-jp/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022#add-the-button-control">
                 https://learn.microsoft.com/ja-jp/visualstudio/get-started/csharp/tutorial-wpf?view=vs-2022#add-the-button-control
@@ -172,14 +158,14 @@
             <br>(2025/01/29)
         </li>
         <li>
-            『【Tips】「ファイルを開く」ダイアログでファイルのフルパスを取得したい【OpenFileDialog】』Qiita 
+            『【Tips】「ファイルを開く」ダイアログでファイルのフルパスを取得したい【OpenFileDialog】』Qiita
             <br> <a href="https://qiita.com/ryojio2k/items/d6b1c39ca360373d9025">
                 https://qiita.com/ryojio2k/items/d6b1c39ca360373d9025
             </a>
             <br>(2025/01/29)
         </li>
         <li>
-            『[WPF] Imageコントロールで画像を表示する』 pionet 
+            『[WPF] Imageコントロールで画像を表示する』 pionet
             <br><a href="http://blog.pionet.co.jp/experience/archives/2111">
                 http://blog.pionet.co.jp/experience/archives/2111
             </a>
@@ -187,12 +173,15 @@
         </li>
     </ol>
 
+    <div id="relatedList"></div>
 
     <script>
         $(document).ready(function () {
-            var dir = "../../.."
-            writeHeader(dir);
-            writeWpfList(dir)
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "wpf",
+            );
         });
     </script>
 </body>
