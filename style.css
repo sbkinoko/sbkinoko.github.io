@@ -67,15 +67,19 @@ table.fixWidth {
     table-layout: fixed;
 }
 
+div {
+    margin: 10px;
+}
+
 div.scrollx {
     overflow-x: scroll;
 }
 
-img{
+img {
     margin: 10px;
 }
 
-img.normalImg{
+img.normalImg {
     width: 300px;
 }
 
@@ -132,7 +136,7 @@ code {
 }
 
 code.filename {
-    color: #000000; 
+    color: #000000;
     padding: 0.25em;
     padding-left: 1em;
     padding-right: 1em;
