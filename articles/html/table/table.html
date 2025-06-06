@@ -4,19 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>htmlの表の幅を調整したい</title>
-    <link rel="styleSheet" href="./../../style.css" />
+    <link rel="styleSheet" href="./../../../style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="./../../main.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
 </head>
 
 <body>
     <div id="header"></div>
-
-    <div>
-        <a href="https://sbkinoko.github.io/home/articles.html">書いた記事一覧</a>
-        >
-        <a href="https://sbkinoko.github.io/html_css/list.html">HTML/CSS</a>
-    </div>
+    <div id="breadcrumb"></div>
 
     <table class="noBorder">
         <tr>
@@ -25,7 +20,7 @@
         </tr>
         <tr>
             <td>最終更新日</td>
-            <td>2024/12/09</td>
+            <td>2025/06/06</td>
         </tr>
     </table>
 
@@ -183,12 +178,13 @@ table.img {
                 https://csshtml.work/table-center/#CSSmarginauto
             </a>
         </li>
-
     </ol>
+
+    <div id="relatedList"></div>
 
     <script>
         $(document).ready(function () {
-            var dir = "../../"
+            var dir = "./../../../"
             writeHeader(dir);
         });
     </script>
