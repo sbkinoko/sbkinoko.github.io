@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>要素の分割と共通化</title>
-    <link rel="styleSheet" href="./../../style.css" />
+    <link rel="styleSheet" href="./../../../style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="./../../main.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
 </head>
 <!--
  &lt <
@@ -17,16 +17,17 @@
 
 <body>
     <div id="header"></div>
-
-    <div>
-        <a href="https://sbkinoko.github.io/home/articles.html">書いた記事一覧</a>
-        >
-        <a href="https://sbkinoko.github.io/html_css/list.html">HTML/CSS</a>
-    </div>
+    <div id="breadcrumb"></div>
 
     <table class="noBorder">
-        <tr><td>作成日</td><td>2024/12/08</td></tr>
-        <tr><td>最終更新日</td><td>2024/12/08</td></tr>
+        <tr>
+            <td>作成日</td>
+            <td>2024/12/08</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/06/06</td>
+        </tr>
     </table>
 
     <h1>
@@ -107,13 +108,14 @@
 
     <p>
         openTagに&lth2>、closeTagに&lt/h2>を入れることで、間に入っている「html/css」をh2にできます。ほかのタグを入れれば他の要素を付与できます。
-    </br>全体処理をざっくり補足すると、関数の呼び出しもとにあるidをnameにした要素を、pathにあるnameのhtmlファイルで置換する処理です。nameを2回使っているのはさぼりたかったからです。ファイル名とフォルダ名を揃えて運用してます。
+        </br>全体処理をざっくり補足すると、関数の呼び出しもとにあるidをnameにした要素を、pathにあるnameのhtmlファイルで置換する処理です。nameを2回使っているのはさぼりたかったからです。ファイル名とフォルダ名を揃えて運用してます。
     </p>
 
     <h2>見出しにリンクを付与</h2>
     <p>
         せっかくページを分割して、そのうえタグを自由に設定できるようにしたのです。見出しをクリックしたらそのジャンルのページに飛べるようにしたいと思います。
-        <br>そのままaタグを入れると見出しなのに一度ページを開いていると移動済みの色になってしまいます。見出しの色が変わっているのは不格好なので、専用の設定をしたクラスを用意して見た目の修正を行います。アクセシビリティのもろもろを考えると下線があったほうが良いと思いますが、見出しに下線がついているのは気になるので今回はなしです<a href="#ref">[2]</a>。
+        <br>そのままaタグを入れると見出しなのに一度ページを開いていると移動済みの色になってしまいます。見出しの色が変わっているのは不格好なので、専用の設定をしたクラスを用意して見た目の修正を行います。アクセシビリティのもろもろを考えると下線があったほうが良いと思いますが、見出しに下線がついているのは気になるので今回はなしです<a
+            href="#ref">[2]</a>。
     </p>
 
     <pre><code>a.linkedH,a:visited.linkedH a:active.linkedH,a:link.linkedH{
@@ -136,6 +138,7 @@ a:hover.linkedH{
         共通要素を抽出して再利用しつつ、微妙に変更を加える方法と、リンクの見た目のいじり方をまとめました。
         <br>今後はパンくずリストを動的に作成したり、ページ下部にも同ジャンルの記事リストを載せたりしていきたいです。と、今後の目標も決まったところで今回はおしまいです。
     </p>
+    
     <h2 id="ref">参考</h2>
     <ul>
         <li>
@@ -162,13 +165,17 @@ a:hover.linkedH{
                 https://magazine.techacademy.jp/magazine/21233#ta-toc-3
             </a>
         </li>
-
     </ul>
+
+    <div id="relatedList"></div>
 
     <script>
         $(document).ready(function () {
-            var dir = "../../"
-            writeHeader(dir);
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "html",
+            );
         });
     </script>
 
