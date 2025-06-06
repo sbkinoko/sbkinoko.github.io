@@ -30,59 +30,100 @@
         </tr>
     </table>
 
-    <h1>
-        要素の分割と共通化
-    </h1>
+    <div>
+        <h1>
+            要素の分割と共通化
+        </h1>
 
-    <h2>
-        やりたいこと
-    </h2>
+        <div>
+            <h2>
+                やりたいこと
+            </h2>
 
-    <p>
-        記事一覧に全部の記事がある状態。ジャンルごとのページを作りたいのでパーツとしてくくりだしたい。
-        <br>そのままhtmlで全部書いてしまうと、ページを増やすたびに全体一覧とジャンルごとの一覧を更新しないといけなくなってしまいます。
-        <br>そんなことはやってられないので、いい感じに共通要素として抽出してあげます。
-    </p>
+            <div>
+                <p>
+                    記事一覧に全部の記事がある状態。ジャンルごとのページを作りたいのでパーツとしてくくりだしたい。
+                </p>
+                <p>
+                    そのままhtmlで全部書いてしまうと、ページを増やすたびに全体一覧とジャンルごとの一覧を更新しないといけなくなってしまいます。
+                </p>
+                <p>
+                    そんなことはやってられないので、いい感じに共通要素として抽出してあげます。
+                </p>
+            </div>
 
-    <h2>
-        作業時の差分
-    </h2>
-    <p>
-        PRは<a
-            href="https://github.com/sbkinoko/sbkinoko.github.io/pull/21/files">こちら</a>です。cssのクラスセレクタを理解していなかったせいでコミットはかなり大変なことになっています。
-        <br>また、移動していないときのリンクの色を間違っていたので<a href="https://github.com/sbkinoko/sbkinoko.github.io/pull/27">別途修正</a>しています。
-    </p>
+        </div>
 
-    <h2>
-        パーツのくくりだし
-    </h2>
-    <p>
-        とりあえず以下のパーツでくくりだしました。
-    </p>
-    <pre><code> 見出し
+        <div>
+            <h2>
+                作業時の差分
+            </h2>
+            <div>
+                <p>
+                    PRは<a
+                        href="https://github.com/sbkinoko/sbkinoko.github.io/pull/21/files">こちら</a>です。cssのクラスセレクタを理解していなかったせいでコミットはかなり大変なことになっています。
+                </p>
+                <p>
+                    また、移動していないときのリンクの色を間違っていたので<a
+                        href="https://github.com/sbkinoko/sbkinoko.github.io/pull/27">別途修正</a>しています。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                パーツのくくりだし
+            </h2>
+            <div>
+                <p>
+                    とりあえず以下のパーツでくくりだしました。
+                </p>
+            </div>
+
+            <pre><code> 見出し
  ・リンク
  ・リンク</code></pre>
+        </div>
 
-    <h2>見出しのタグ変更</h2>
-    <p>
-        HTML/CSSのページをくくり出したのでこれを例に話を進めます。
-        <br>階層が変わるので、
-        <br>・全体の一覧の場合は見出しはh3
-        <br>・ジャンル別の見出しはh2
-        <br>にしておきたいです。
-        <br>となるとやるべきことは、外からタグを変更できるようにしつつパーツを作ることです。
-        <br>今回は以下の形で実装しました。箇条書き部分は特別なことはしてないので省略します。
-    </p>
+        <div>
+            <h2>見出しのタグ変更</h2>
+            <div>
+                <p>
+                    HTML/CSSのページをくくり出したのでこれを例に話を進めます。
+                </p>
+            </div>
+            <div>
+                <p>
+                    階層が変わるので、
+                </p>
+                <p>
+                    ・全体の一覧の場合は見出しはh3
+                </p>
+                <p>
+                    ・ジャンル別の見出しはh2
+                </p>
+                <p class="noindent">
+                    にしておきたいです。
+                </p>
+            </div>
+            <div>
+                <p>
+                    となるとやるべきことは、外からタグを変更できるようにしつつパーツを作ることです。
+                </p>
+                <p>
+                    今回は以下の形で実装しました。箇条書き部分は特別なことはしてないので省略します。
+                </p>
+            </div>
 
-    <pre><code>{openTag}
+            <pre><code>{openTag}
     html/css
 {closeTag}</code></pre>
 
-    <p>
-        <br>ヘッダーを共通化するときに利用した方法<a href="#ref">[1]</a>を参考に、replaceを利用して差し替えるようにしました。
-    </p>
+            <p>
+                ヘッダーを共通化するときに利用した方法<a href="#ref">[1]</a>を参考に、replaceを利用して差し替えるようにしました。
+            </p>
 
-    <pre><code>function writeList(
+            <pre><code>function writeList(
     name,
     openTag,
     closeTag,
@@ -106,19 +147,33 @@
     })
 }</code></pre>
 
-    <p>
-        openTagに&lth2>、closeTagに&lt/h2>を入れることで、間に入っている「html/css」をh2にできます。ほかのタグを入れれば他の要素を付与できます。
-        </br>全体処理をざっくり補足すると、関数の呼び出しもとにあるidをnameにした要素を、pathにあるnameのhtmlファイルで置換する処理です。nameを2回使っているのはさぼりたかったからです。ファイル名とフォルダ名を揃えて運用してます。
-    </p>
+            <div>
+                <p>
+                    openTagに&lth2>、closeTagに&lt/h2>を入れることで、間に入っている「html/css」をh2にできます。ほかのタグを入れれば他の要素を付与できます。
+                </p>
+            </div>
+            <div>
+                <p>
+                    全体処理をざっくり補足すると、関数の呼び出しもとにあるidをnameにした要素を、pathにあるnameのhtmlファイルで置換する処理です。nameを2回使っているのはさぼりたかったからです。ファイル名とフォルダ名を揃えて運用してます。
+                </p>
+            </div>
+        </div>
 
-    <h2>見出しにリンクを付与</h2>
-    <p>
-        せっかくページを分割して、そのうえタグを自由に設定できるようにしたのです。見出しをクリックしたらそのジャンルのページに飛べるようにしたいと思います。
-        <br>そのままaタグを入れると見出しなのに一度ページを開いていると移動済みの色になってしまいます。見出しの色が変わっているのは不格好なので、専用の設定をしたクラスを用意して見た目の修正を行います。アクセシビリティのもろもろを考えると下線があったほうが良いと思いますが、見出しに下線がついているのは気になるので今回はなしです<a
-            href="#ref">[2]</a>。
-    </p>
+        <div>
+            <h2>見出しにリンクを付与</h2>
+            <div>
+                <p>
+                    せっかくページを分割して、そのうえタグを自由に設定できるようにしたのです。見出しをクリックしたらそのジャンルのページに飛べるようにしたいと思います。
+                </p>
+                <p>
+                    そのままaタグを入れると見出しなのに一度ページを開いていると移動済みの色になってしまいます。見出しの色が変わっているのは不格好なので、専用の設定をしたクラスを用意して見た目の修正を行います。
+                </p>
+                <p>
+                    アクセシビリティのもろもろを考えると下線があったほうが良いと思いますが、見出しに下線がついているのは気になるので今回はなしです<a href="#ref">[2]</a>。
+                </p>
+            </div>
 
-    <pre><code>a.linkedH,a:visited.linkedH a:active.linkedH,a:link.linkedH{
+            <pre><code>a.linkedH,a:visited.linkedH a:active.linkedH,a:link.linkedH{
     color: #000000;
     text-decoration:none;
 }
@@ -127,47 +182,58 @@ a:hover.linkedH{
     color: white;
 }</code></pre>
 
-    <p>
-        クラスセレクタ<a
-            href="#id">[3]</a>を利用して、aタグでのみ利用できるlinkedHというスタイルを作成しました。見た目を固定してしまうと、クリックで移動できることが伝わりにくいと思ったので、カーソルを合わせたときに見た目が変わるようにしました<a
-            href="#id">[4]</a>。
-    </p>
+            <p>
+                クラスセレクタ<a
+                    href="#id">[3]</a>を利用して、aタグでのみ利用できるlinkedHというスタイルを作成しました。見た目を固定してしまうと、クリックで移動できることが伝わりにくいと思ったので、カーソルを合わせたときに見た目が変わるようにしました<a
+                    href="#id">[4]</a>。
+            </p>
+        </div>
 
-    <h2>まとめ</h2>
-    <p>
-        共通要素を抽出して再利用しつつ、微妙に変更を加える方法と、リンクの見た目のいじり方をまとめました。
-        <br>今後はパンくずリストを動的に作成したり、ページ下部にも同ジャンルの記事リストを載せたりしていきたいです。と、今後の目標も決まったところで今回はおしまいです。
-    </p>
-    
-    <h2 id="ref">参考</h2>
-    <ul>
-        <li>
-            JavaScriptを使ってヘッダーやフッターなどの共通要素を呼び出す方法 2024/12/08
-            <br><a href="https://webmoyou.com/web/298/">
-                https://webmoyou.com/web/298/
-            </a>
-        </li>
-        <li>
-            リンクのアンダーラインを消す方法 2024/12/08
-            <br><a href="https://toretama.jp/link-underline-none.html">
-                https://toretama.jp/link-underline-none.html
-            </a>
-        </li>
-        <li>
-            CSSセレクタとは？よく使うセレクタやタグの指定方法をわかりやすく解説！ 2024/12/08
-            <br><a href="https://zero-plus.io/media/css-selector-specify/">
-                https://zero-plus.io/media/css-selector-specify/
-            </a>
-        </li>
-        <li>
-            CSSのリンクの色を変えない方法を現役エンジニアが解説【初心者向け】 2024/12/08
-            <br><a href="https://magazine.techacademy.jp/magazine/21233#ta-toc-3">
-                https://magazine.techacademy.jp/magazine/21233#ta-toc-3
-            </a>
-        </li>
-    </ul>
+        <div>
+            <h2>まとめ</h2>
+            <div>
+                <p>
+                    共通要素を抽出して再利用しつつ、微妙に変更を加える方法と、リンクの見た目のいじり方をまとめました。
+                </p>
+                <p>
+                    今後はパンくずリストを動的に作成したり、ページ下部にも同ジャンルの記事リストを載せたりしていきたいです。と、今後の目標も決まったところで今回はおしまいです。
+                </p>
+            </div>
+        </div>
 
-    <div id="relatedList"></div>
+        <div>
+            <h2 id="ref">参考</h2>
+            <ul>
+                <li>
+                    JavaScriptを使ってヘッダーやフッターなどの共通要素を呼び出す方法 2024/12/08
+                    <br><a href="https://webmoyou.com/web/298/">
+                        https://webmoyou.com/web/298/
+                    </a>
+                </li>
+                <li>
+                    リンクのアンダーラインを消す方法 2024/12/08
+                    <br><a href="https://toretama.jp/link-underline-none.html">
+                        https://toretama.jp/link-underline-none.html
+                    </a>
+                </li>
+                <li>
+                    CSSセレクタとは？よく使うセレクタやタグの指定方法をわかりやすく解説！ 2024/12/08
+                    <br><a href="https://zero-plus.io/media/css-selector-specify/">
+                        https://zero-plus.io/media/css-selector-specify/
+                    </a>
+                </li>
+                <li>
+                    CSSのリンクの色を変えない方法を現役エンジニアが解説【初心者向け】 2024/12/08
+                    <br><a href="https://magazine.techacademy.jp/magazine/21233#ta-toc-3">
+                        https://magazine.techacademy.jp/magazine/21233#ta-toc-3
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div id="relatedList"></div>
+
+    </div>
 
     <script>
         $(document).ready(function () {
