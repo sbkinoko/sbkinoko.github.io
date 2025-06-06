@@ -1,5 +1,5 @@
 const CONTENT = "/content"
-const HTML_CSS = "/html_css"
+const HTML_CSS = "/articles/html"
 const ANDROID = "/articles/android"
 const KyoPro = "/articles/kyopro"
 const WPF = "/articles/wpf"
