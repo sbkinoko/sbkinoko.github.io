@@ -164,7 +164,7 @@ pre {
     margin: 2em 0;
     font-weight: bold;
     border: solid 3px #000000;
-    width: 60%;
+    width: fit-content;
 }
 
 .box1 p {
