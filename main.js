@@ -165,7 +165,7 @@ function writeIllustList(
     )
 }
 
-function writeIllustList(
+function writeOtherList(
     rootDir,
     openTag,
     closeTag
