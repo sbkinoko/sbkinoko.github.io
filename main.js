@@ -8,6 +8,7 @@ const LIST = "<a href=\"{$root}/home/articles.html\">記事一覧</a>"
 const ANDROID_LIST = "<a href=\"{$root}/articles/android/list.html\">Android/Kotlin</a>"
 const WPF_LIST = "<a href=\"{$root}/articles/wpf/list.html\">WPF</a>"
 const KYOPRO_LIST = "<a href=\"{$root}/articles/kyopro/list.html\">競プロ</a>"
+const HTML_LIST = "<a href=\"{$root}/articles/html/list.html\">HTML/CSS</a>"
 
 function articleHeaderFooter(
     root,
@@ -53,6 +54,10 @@ function writeBreadcrumb(
                 case "kyopro":
                     list = LIST
                         + ">" + KYOPRO_LIST
+                    break
+                case "html":
+                    list = LIST
+                        + ">" + HTML_LIST
                     break
             }
             list = list.replace(

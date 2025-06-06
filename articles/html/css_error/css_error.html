@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSSのエラー</title>
+    <link rel="stylesheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <div>
+        <table class="noBorder">
+            <tr>
+                <td>作成日</td>
+                <td>2024/11/02</td>
+            </tr>
+            <tr>
+                <td>最終更新日</td>
+                <td>2025/06/06</td>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h1>
+            CSSを読み込めないエラーが起きる
+        </h1>
+
+        <div>
+            <h2>
+                問題の内容
+            </h2>
+
+            <div class="box1">
+                <img class="normalImg" src="error-icon.png">
+            </div>
+
+            <pre><code>This page failed to load a stylesheet from a URL.
+
+1 request
+
+ style.css
+1 source
+css_error.html:0</code></pre>
+
+            <pre><code>GET https://sbkinoko.github.io/html_css/css_error/style.css net::ERR_ABORTED 404 (Not Found)</code></pre>
+
+            <div>
+                <p>
+                    0行目でエラーが起きてます。
+                    エラーが起きているときのコードとページのみためはこちらです。
+                </p>
+            </div>
+
+            <pre><code>&lt!DOCTYPE html>
+&lthtml lang="jp">
+
+&lthead>
+    &ltmeta charset="UTF-8">
+    &lttitle>CSSのエラー&lt/title>
+    &ltlink rel="styleSheet" href="./../../style.css" />
+    &ltscript src="https://code.jquery.com/jquery-3.3.1.min.js">&lt/script>
+    &ltscript type="text/javascript" src="./../../main.js">&lt/script>
+&lt/head>
+
+
+&ltbody>
+    &ltdiv id="header">&lt/div>
+    &lth1>
+        CSSを読み込めないエラーが起きる
+    &lt/h1>
+
+    &ltscript>
+        $(document).ready(function () {
+            var dir = "../../"
+            writeHeader(dir);
+        });
+    &lt/script>
+ &lt/body>
+
+ &lt/html></code></pre>
+
+            <div class="box1">
+                <img width="100%" src="page.png">
+            </div>
+
+        </div>
+
+        <div>
+            <h2>
+                問題の対応
+            </h2>
+
+            <div>
+                <p>
+                    「cssを読み込めない」というエラーが発生しているはずなのに、ページには色がついています。
+                </p>
+                <p>エラーが起きているcssは以下のファイルです。
+                </p>
+            </div>
+
+            <code>https://sbkinoko.github.io/html_css/css_error/style.css</code>
+
+            <div>
+                <p>
+                    指定した覚えもなければ、作成もしていないです。そんなもんエラーがでてもしょうがないですね。
+                </p>
+            </div>
+
+
+            <div>
+                <p>
+                    開発者ツールでnetworkを確認すると、headerで指定しているcss・jsファイルはどちらも存在しています。
+                </p>
+                <p>
+                    やはり知らないところで勝手に指定されているcss(css_error/style.css)が悪さをしています。
+                </p>
+            </div>
+
+            <div class="box1">
+                <img width="100%" src="network.png">
+            </div>
+
+            <lu>
+                <li>
+                    他のページでも同様の問題が起こっていること
+                </li>
+                <li>
+                    root直下に置いていて同じフォルダにcssがあるtopページでは問題が起こってないこと
+                </li>
+            </lu>
+
+            <div>
+                <p>
+                    から、勝手に同じフォルダにあるcssを指定する問題があると考えます。
+                </p>
+                <p>
+                    ではなぜ、同フォルダのcssを探しに行ってしまってたのでしょうか？
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    答えは単純で、同フォルダのcssを要求している箇所があったからでした。
+                </p>
+                <p>
+                    writeHeaderの中身と読み込んでいるheaderの中身は以下の通りです。
+                </p>
+            </div>
+
+            <pre><code>function writeHeader(rootDir) {
+    $.ajax({
+        url: rootDir + "header.html", 
+        cache: false, 
+        async: true, 
+        success: function(html){
+            html = html.replace(/\{\$root\}/g, rootDir);
+            $("#header").html(html)
+        }
+    });
+}</code></pre>
+
+            <pre><code>&lthead>
+    &ltlink rel="styleSheet" href="style.css" />
+&lt/head>
+    
+&ltheader class="header_boxed">
+    &lth1>キノコの仕事部屋&lt/h1>
+    &ltnav>
+        &ltul>
+            &ltli>&lta href="{$root}index.html">top&lt/a>&lt/li>
+            &ltli>&lta href="{$root}home/about.html">about&lt/a>&lt/li>
+            &ltli>&lta href="{$root}home/articles.html">記事一覧&lt/a>&lt/li>
+            &ltli>&lta href="{$root}home/want.html">やりたいこと&lt/a>&lt/li>
+            &ltli>&lta href="{$root}home/habitat.html">生息地&lt/a>&lt/li>
+        &lt/ul>
+    &lt/nav>
+&lt/header>
+</code></pre>
+
+            <div>
+                <p>
+                    ヘッダーにアクセスしているファイルから見たパスにする必要があるので、他のページへのリンクと同じように、呼び出し元のパスを受け取れるようにします。
+                </p>
+            </div>
+
+            <p>
+                before
+            </p>
+
+            <pre><code>&lthead>
+    &ltlink rel="styleSheet" href="style.css" />
+&lt/head></code></pre>
+
+            <p>after</p>
+
+            <pre><code>&lthead>
+        &ltlink rel="styleSheet" href="{$root}style.css" />
+&lt/head></code></pre>
+
+            <div>
+                <p>
+                    エラーが起こらなくなりました。やったね。
+                </p>
+            </div>
+
+            <div class="box1">
+                <img width="100%" src="after.png">
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                追加で考える
+            </h2>
+
+            <div>
+                <p>
+                    エラーが起きていてもうまく表示できていた理由について考察です。
+                </p>
+                <p>
+                    現状どこでも同じcssを利用しています。headerで指定しているcssが読み取れなくても、呼び出し元(今でいうとこのページのstylesheet)で同じcssを用意できています。なので問題なく指定したスタイルで表示できていたと考えています。
+                </p>
+                <p>
+                    となると、headerで指定しなくてもいいですね。むしろ指定しないほうが健全なので、削除しましょう。
+                </p>
+            </div>
+
+        </div>
+
+        <div>
+            <h2>
+                まとめ
+            </h2>
+            <p>
+                0行目でエラーになったときは困りましたが、順々に要素をたどっていけばなんとかなるもんですね。
+                ではまた。
+            </p>
+        </div>
+
+        <div id="relatedList"></div>
+
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "html",
+            );
+        });
+    </script>
+</body>
+
+</html>
