@@ -3,12 +3,14 @@ const HTML_CSS = "/articles/html"
 const ANDROID = "/articles/android"
 const KyoPro = "/articles/kyopro"
 const WPF = "/articles/wpf"
+const ILLUST = "/articles/illust"
 
 const LIST = "<a href=\"{$root}/home/articles.html\">記事一覧</a>"
 const ANDROID_LIST = "<a href=\"{$root}/articles/android/list.html\">Android/Kotlin</a>"
 const WPF_LIST = "<a href=\"{$root}/articles/wpf/list.html\">WPF</a>"
 const KYOPRO_LIST = "<a href=\"{$root}/articles/kyopro/list.html\">競プロ</a>"
 const HTML_LIST = "<a href=\"{$root}/articles/html/list.html\">HTML/CSS</a>"
+const ILLUST_LIST = "<a href=\"{$root}/articles/illust/list.html\">イラスト</a>"
 
 function articleHeaderFooter(
     root,
@@ -58,6 +60,9 @@ function writeBreadcrumb(
                 case "html":
                     list = LIST
                         + ">" + HTML_LIST
+                    break
+                case "illust":
+                    list = LIST + " > " + ILLUST_LIST
                     break
             }
             list = list.replace(
@@ -139,6 +144,19 @@ function writeKyoProList(
         openTag,
         closeTag,
         rootDir + KyoPro
+    )
+}
+
+function writeIllustList(
+    rootDir,
+    openTag,
+    closeTag
+) {
+    writeList(
+        "illustList",
+        openTag,
+        closeTag,
+        rootDir + ILLUST,
     )
 }
 

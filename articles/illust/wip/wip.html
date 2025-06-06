@@ -17,6 +17,8 @@
 
 <body>
     <div id="header"></div>
+    <div id="breadcrumb"></div>
+
     <h1>
         書きたいやつ
     </h1>
@@ -48,6 +50,10 @@
         $(document).ready(function () {
             var dir = "./../../../"
             writeHeader(dir);
+            writeBreadcrumb(
+                dir,
+                "genre"
+            )
         });
     </script>
 </body>
