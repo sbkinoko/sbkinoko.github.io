@@ -24,39 +24,50 @@
         </tr>
     </table>
 
-    <h1>
-        htmlの表の幅を調整したい
-    </h1>
+    <div>
+        <h1>
+            htmlの表の幅を調整したい
+        </h1>
 
-    <h2>
-        やりたいこと
-    </h2>
-    <p>
-        幅を指定しない状態だと見づらいものになりました。
-        <br>いい感じに調整したいです。
-    </p>
+        <div>
+            <h2>
+                やりたいこと
+            </h2>
+            <div>
+                <p>
+                    幅を指定しない状態だと見づらいものになりました。
+                    いい感じに調整したいです。
+                </p>
+            </div>
 
-    <table>
-        <tr>
-            <th>aaa</th>
-            <th>bbb</th>
-            <th>ccc</th>
-        </tr>
-        <tr>
-            <td>ddd</td>
-            <td>eee</td>
-            <td><img src="sample.png" width="100%"></td>
-        </tr>
-    </table>
+            <table>
+                <tr>
+                    <th>aaa</th>
+                    <th>bbb</th>
+                    <th>ccc</th>
+                </tr>
+                <tr>
+                    <td>ddd</td>
+                    <td>eee</td>
+                    <td><img src="sample.png" width="100%"></td>
+                </tr>
+            </table>
 
-    <h2>
-        画面の端から端まで表示
-    </h2>
-    <p>
-        thのパラメータ設定をこちらのページ<a href="https://sbkinoko.github.io/html_css/table/table.html#ref">[1]</a>を参考に実装しました。
-    </p>
+        </div>
 
-    <pre><code>table.fixWidth{
+        <div>
+            <h2>
+                画面の端から端まで表示
+            </h2>
+
+            <div>
+                <p>
+                    thのパラメータ設定をこちらのページ<a
+                        href="https://sbkinoko.github.io/html_css/table/table.html#ref">[1]</a>を参考に実装しました。
+                </p>
+            </div>
+
+            <pre><code>table.fixWidth{
     width: 100%;
     table-layout: fixed;
 }
@@ -67,7 +78,7 @@ th.width40{
     width: 40%;
 }</code></pre>
 
-    <pre><code>&lt;table class="fixWidth">
+            <pre><code>&lt;table class="fixWidth">
     &lt;tr>
         &lt;th class="width20">20%&lt;/th>
         &lt;th class="width40">40%&lt;/th>
@@ -80,37 +91,48 @@ th.width40{
     &lt;/tr>
 &lt;/table></code></pre>
 
-    <P>
-        styleはcssで定義しました。<br>なのでstyleタグは省いてます。
-    </P>
+            <div>
+                <P>
+                    styleはcssで定義しました。なのでstyleタグは省いてます。
+                </P>
+            </div>
 
-    <table class="fixWidth">
-        <tr>
-            <th class="width20">20%</th>
-            <th class="width40">40%</th>
-            <th class="width40">40%</th>
-        </tr>
-        <tr>
-            <td>20%</td>
-            <td>40%</td>
-            <td><img src="sample.png" width="100%"></td>
-        </tr>
-    </table>
+            <table class="fixWidth">
+                <tr>
+                    <th class="width20">20%</th>
+                    <th class="width40">40%</th>
+                    <th class="width40">40%</th>
+                </tr>
+                <tr>
+                    <td>20%</td>
+                    <td>40%</td>
+                    <td><img src="sample.png" width="100%"></td>
+                </tr>
+            </table>
 
-    <p>
-        というわけでやりたいことができました。ズームしても画面幅いっぱいに表示されます。
-    </p>
+            <div>
+                <p>
+                    というわけでやりたいことができました。ズームしても画面幅いっぱいに表示されます。
+                </p>
+            </div>
 
-    <h2>
-        画像はズームしたい
-    </h2>
-    <p>
-        画像を入れている状態で画面を拡大したときは、画像も拡大したいので別の方法も探します。
-        <br>横幅を指定して、スクロールするようにすればよさそうです<a href="#ref">[2]</a>。
-        <br>ついでに中央ぞろえにしました<a href="#ref">[3]</a>
-    </p>
+        </div>
 
-    <pre><code>div.scrollx {
+        <div>
+            <h2>
+                画像はズームしたい
+            </h2>
+            <p>
+                画像を入れている状態で画面を拡大したときは、画像も拡大したいので別の方法も探します。
+            </p>
+            <p>
+                横幅を指定して、スクロールするようにすればよさそうです<a href="#ref">[2]</a>。
+            </p>
+            <p>
+                ついでに中央ぞろえにしました<a href="#ref">[3]</a>
+            </p>
+
+            <pre><code>div.scrollx {
     overflow-x: scroll;
     align-items: center;
 }
@@ -122,65 +144,75 @@ table.img {
     margin-right: auto;
 }</code></pre>
 
-    <pre><code>&lt;div class="scrollX">
+            <pre><code>&lt;div class="scrollX">
     &lt;table class="img">
         ~省略~
     &lt;/table>
 &lt;/div></code></pre>
 
-    <p>
-        ということで、作った表は以下の通りです
-    </p>
+            <p>
+                ということで、作った表は以下の通りです
+            </p>
 
-    <h2>
-        他にやりたいこと
-    </h2>
+            <div class="scrollX">
+                <table class="img">
+                    <tr>
+                        <th class="width20">20%</th>
+                        <th class="width40">40%</th>
+                        <th class="width40">40%</th>
+                    </tr>
+                    <tr>
+                        <td>20%</td>
+                        <td>40%</td>
+                        <td><img src="sample.png" width="100%"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
 
-    <p>
-        スクロールが発生した時は表を真ん中に置くようにしたいですね、作れたら更新します。
-        <br>ではまた。
-    </p>
+        <div>
+            <h2>
+                他にやりたいこと
+            </h2>
 
-    <div class="scrollX">
-        <table class="img">
-            <tr>
-                <th class="width20">20%</th>
-                <th class="width40">40%</th>
-                <th class="width40">40%</th>
-            </tr>
-            <tr>
-                <td>20%</td>
-                <td>40%</td>
-                <td><img src="sample.png" width="100%"></td>
-            </tr>
-        </table>
+            <div>
+                <p>
+                    スクロールが発生した時は表を真ん中に置くようにしたいですね、作れたら更新します。
+                </p>
+                <p>
+                    ではまた。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2 id="ref">
+                参考
+            </h2>
+
+            <ol>
+                <li>『CSS: table（テーブル）の列幅の割合を指定する』 2024/12/09
+                    <br><a href="https://step-learn.com/article/html-css/031-table-width-percent.html">
+                        https://step-learn.com/article/html-css/031-table-width-percent.html
+                    </a>
+                </li>
+                <li>
+                    『【HTML/CSS】横スクロールできる表（テーブル）の作り方』 2024/12/09
+                    <br><a href="https://tomiwa-tech.co.jp/blog/scrollable-table/">
+                        https://tomiwa-tech.co.jp/blog/scrollable-table/
+                    </a>
+                </li>
+                <li>
+                    『html･CSSで表テーブル(table)を中央寄せ(center)にする方法』 2024/12/09
+                    <br><a href="https://csshtml.work/table-center/#CSSmarginauto">
+                        https://csshtml.work/table-center/#CSSmarginauto
+                    </a>
+                </li>
+            </ol>
+        </div>
+
+        <div id="relatedList"></div>
     </div>
-
-    <h1 id="ref">
-        参考
-    </h1>
-
-    <ol>
-        <li>『CSS: table（テーブル）の列幅の割合を指定する』 2024/12/09
-            <br><a href="https://step-learn.com/article/html-css/031-table-width-percent.html">
-                https://step-learn.com/article/html-css/031-table-width-percent.html
-            </a>
-        </li>
-        <li>
-            『【HTML/CSS】横スクロールできる表（テーブル）の作り方』 2024/12/09
-            <br><a href="https://tomiwa-tech.co.jp/blog/scrollable-table/">
-                https://tomiwa-tech.co.jp/blog/scrollable-table/
-            </a>
-        </li>
-        <li>
-            『html･CSSで表テーブル(table)を中央寄せ(center)にする方法』 2024/12/09
-            <br><a href="https://csshtml.work/table-center/#CSSmarginauto">
-                https://csshtml.work/table-center/#CSSmarginauto
-            </a>
-        </li>
-    </ol>
-
-    <div id="relatedList"></div>
 
     <script>
         $(document).ready(function () {
