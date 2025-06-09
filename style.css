@@ -11,6 +11,17 @@ h1 {
     margin-bottom: 20px;
 }
 
+.text_right {
+    text-align: right;
+    margin: 5;
+}
+
+.center {
+    margin: auto;
+    justify-content: center;
+    display: flex;
+}
+
 a.linkedH,
 a:visited.linkedH a:active.linkedH,
 a:link.linkedH {
