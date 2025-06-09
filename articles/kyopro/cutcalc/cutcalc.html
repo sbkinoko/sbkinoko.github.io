@@ -1083,78 +1083,250 @@ int main()
             <h2>
                 051 - Typical Shop（★5）
             </h2>
-        </div>
+            <div>
+                <p>
+                    問題は<a href="https://atcoder.jp/contests/typical90/tasks/typical90_ay">こちら</a>。
+                </p>
+            </div>
+            <div>
+                <!-- <details> -->
+                <summary>
+                    計算量考察
+                </summary>
+                <div>
+                    <div>
+                        <p>
+                            提出コードは<a href="https://atcoder.jp/contests/typical90/submissions/64956349">こちら</a>。
+                        </p>
+                    </div>
 
-        <!-- 063 -->
-        <div>
-            <h2>
-                063 - Monochromatic Subgrid（★4）
-            </h2>
-        </div>
+                    <div>
+                        <p>
+                            全ての商品を買うか買わないかの2値で管理すると、2^Nとなります。そのうち買うを選んだ物がK個のパターン数を数え上げれば答えが出せます。
+                        </p>
+                        <p>
+                            今回Nの最大値は40なので、2^10≒1000より、2^40≒1000^4=10^12となり、TLEです。
+                        </p>
+                    </div>
 
-        <!-- まとめ -->
-        <div>
-            <h2>
-                まとめ
-            </h2>
+                    <div>
+                        <p>
+                            これはK個選択していない場合も全部数えてしまっていて、大幅に余計なパターンを見ているからです。
+                        </p>
+                        <p>
+                            i個目の商品までみて、j個選んでいた場合、残りの商品の個数はN-i個です。選ぶ必要がある商品の数はK-j個なので、N-i = K -
+                            jになった段階で、全ての商品を選ぶ必要があるとして、パターン数を加算して探索を打ち切ります。金額が設定を超えた場合も打ち切って上げると早くなりますね。
+                        </p>
+                    </div>
 
-            <p>
+                    <div>
+                        <p>
+                            N個の要素からK個を選択する方法は
+                            <math>
+                                <mmultiscripts>
+                                    <mi>C</mi>
+                                    <mi>K</mi>
+                                    <mi></mi>
+                                    <mprescripts />
+                                    <mi>N</mi>
+                                    <mi></mi>
+                                </mmultiscripts>
+                            </math>
+                            です。
+                        </p>
+                        <p>
+                            N=40・K=20の時が最大で、137,846,528,820≒10^11となります。まぁ相変わらずTLEです。
+                        </p>
+                    </div>
 
-            </p>
-        </div>
+                    <div>
+                        <p>
+                            さらなる高速化を狙います。
+                        </p>
+                        <p>
+                            まず最初に、商品を高い順に並べ替えます。
+                        </p>
+                        <p>
+                            そして先ほどと同様に商品を買うか買わないかを選びながらdfsを行います。
+                        </p>
+                        <p>
+                            i個目の商品まででj個の商品を選択していた場合、追加で選ぶ必要がある商品の数はK - j個です。ここまではさっきと同じです。ここまでの金額の合計を
+                            <math>
+                                <msub>
+                                    <mi>S</mi>
+                                    <mn>1</mn>
+                                </msub>
+                            </math>
+                            としておきましょう。
+                        </p>
+                        <p>
+                            残っている商品のうち、高い方からK - j個商品を選択してみます。このときの金額を<math>
+                                <msub>
+                                    <mi>S</mi>
+                                    <mn>2</mn>
+                                </msub>
+                            </math>
+                            とします。
+                        </p>
+                        <p>
+                            この
+                            <math>
+                                <msub>
+                                    <mi>S</mi>
+                                    <mn>1</mn>
+                                </msub>
+                                <mo>&plus;</mo>
+                                <msub>
+                                    <mi>S</mi>
+                                    <mn>2</mn>
+                                </msub>
+                            </math>
+                            がP以下ならば、i+1以降の商品はどのように選んでもよいことになります。
+                        </p>
+                        <p>
+                            N-i個の要素からK-j個の要素を選ぶ問題に帰結できるので、
+                            <math>
+                                <mmultiscripts>
+                                    <mi>C</mi>
+                                    <mi>K-j</mi>
+                                    <mi></mi>
+                                    <mprescripts />
+                                    <mi>N-i</mi>
+                                    <mi></mi>
+                                </mmultiscripts>
+                            </math>
+                            を計算するだけで済みます。
+                        </p>
+                        <p>
+                            探索しないで数を出せるので、計算量が落とせます。
+                        </p>
+                        <p>
+                            前半の35個からP以下の値段の組み合わせを作って、最後の5個から2個を自由に選べるとすると、これだけで
+                            <math>
+                                <mmultiscripts>
+                                    <mi>C</mi>
+                                    <mi>2</mi>
+                                    <mi></mi>
+                                    <mprescripts />
+                                    <mi>5</mi>
+                                    <mi></mi>
+                                </mmultiscripts>
+                                <mo>=</mo>
+                                <mn>10</mn>
+                            </math>
+                            となり、10倍の高速化が図れます。
+                        </p>
+                        <p>
+                            最後の10個から5個選べるとしたら252倍の高速化です。
+                        </p>
+                        <p>
+                            高い方から20個選んでも条件を満たしていた場合、一度の探索で答えを出せるので爆速です。
+                        </p>
+                    </div>
 
-        <a href="#ref">[]</a>
+                    <div>
+                        <p>
+                            手前からi個の商品を見て、j個選んだ時点で予算オーバー、または、手前からi個見て、j個選んで、残りのN-i個からK-j個をどう選んでも予算に収まる場合に枝刈りが行われます。
+                        </p>
+                        <p>
+                            探索を打ち切るパターンが、これ以降は絶対に条件を満たす/満たさないの2パターンあるのが面白いですね。
+                        </p>
+                    </div>
 
-        <!-- ref -->
-        <div>
-            <h2 id="ref">
-                参考
-            </h2>
-            <ol>
-                <li>『総積の記号Π（パイ）の意味と性質』 高校数学の美しい物語 (2025/05/15)
-                    <br><a href="https://manabitimes.jp/math/2802">
-                        https://manabitimes.jp/math/2802
-                    </a>
-                </li>
-                <li>典型32ユーザー解説 Atcoder (2025/05/15)
-                    <br><a href="https://atcoder.jp/contests/typical90/editorial/10181">
-                        https://atcoder.jp/contests/typical90/editorial/10181
-                    </a>
-                </li>
-                <li>『【競プロ典型 90 問】032 - AtCoder Ekiden で bitDP を学ぶ』 Qiita (2025/05/15)
-                    <br><a href="https://qiita.com/satomshr/items/1e75f5c5ee053de8d494">
-                        https://qiita.com/satomshr/items/1e75f5c5ee053de8d494
-                    </a>
-                </li>
-                <li>『』 ページ名 ()
-                    <br><a href="">
+                    <div>
+                        <p>
+                            ざっくり結論としては
+                            <math>
+                                <mmultiscripts>
+                                    <mi>C</mi>
+                                    <mi>K-j</mi>
+                                    <mi></mi>
+                                    <mprescripts />
+                                    <mi>N-i</mi>
+                                    <mi></mi>
+                                </mmultiscripts>
+                            </math>
+                            の高速化です。
+                        </p>
+                        <p>
+                            厳密に考えると複雑すぎるのでこの辺でおしまいです。
+                        </p>
+                    </div>
+                </div>
+                <!-- </details> -->
+            </div>
 
-                    </a>
-                </li>
-                <!-- <li>『』 ページ名 ()
+
+            <!-- 063 -->
+            <div>
+                <h2>
+                    063 - Monochromatic Subgrid（★4）
+                </h2>
+            </div>
+
+            <!-- まとめ -->
+            <div>
+                <h2>
+                    まとめ
+                </h2>
+
+                <p>
+
+                </p>
+            </div>
+
+            <a href="#ref">[]</a>
+
+            <!-- ref -->
+            <div>
+                <h2 id="ref">
+                    参考
+                </h2>
+                <ol>
+                    <li>『総積の記号Π（パイ）の意味と性質』 高校数学の美しい物語 (2025/05/15)
+                        <br><a href="https://manabitimes.jp/math/2802">
+                            https://manabitimes.jp/math/2802
+                        </a>
+                    </li>
+                    <li>典型32ユーザー解説 Atcoder (2025/05/15)
+                        <br><a href="https://atcoder.jp/contests/typical90/editorial/10181">
+                            https://atcoder.jp/contests/typical90/editorial/10181
+                        </a>
+                    </li>
+                    <li>『【競プロ典型 90 問】032 - AtCoder Ekiden で bitDP を学ぶ』 Qiita (2025/05/15)
+                        <br><a href="https://qiita.com/satomshr/items/1e75f5c5ee053de8d494">
+                            https://qiita.com/satomshr/items/1e75f5c5ee053de8d494
+                        </a>
+                    </li>
+                    <li>『』 ページ名 ()
+                        <br><a href="">
+
+                        </a>
+                    </li>
+                    <!-- <li>『』 ページ名 ()
             <br><a href="">
 
             </a>
         </li> -->
-            </ol>
+                </ol>
+            </div>
+
+            <div id="kyoproList"></div>
         </div>
 
-        <div id="kyoproList"></div>
-    </div>
+        <script>
+            $(document).ready(function () {
+                var dir = "../../../"
+                writeHeader(dir);
+                writeBreadcrumb(dir, "kyopro")
 
-    <script>
-        $(document).ready(function () {
-            var dir = "../../../"
-            writeHeader(dir);
-            writeBreadcrumb(dir, "kyopro")
-
-            writeKyoProList(
-                dir,
-                "<h2><a class=\"linkedH\" href=\"./../list.html\">",
-                "</a></h2>",
-            );
-        });
-    </script>
+                writeKyoProList(
+                    dir,
+                    "<h2><a class=\"linkedH\" href=\"./../list.html\">",
+                    "</a></h2>",
+                );
+            });
+        </script>
 </body>
 
 </html>
