@@ -1269,84 +1269,84 @@ int main()
                     問題は<a href="https://atcoder.jp/contests/typical90/tasks/typical90_bk">こちら</a>。
                 </p>
             </div>
-            <!-- <details> -->
-            <summary>
-                計算量考察
-            </summary>
-
-            <div>
+            <details>
+                <summary>
+                    計算量考察
+                </summary>
 
                 <div>
-                    <p>
-                        提出コードは<a href="https://atcoder.jp/contests/typical90/submissions/65344993">こちら</a>。
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        他と合わせるために計算量考察と言っていますが、枝刈りはしていません。bit全探索の代わりにdfsを用いているだけですね。
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        ただ、自作コードは38ms、主催者解のコードは52msと実行時間に差があるので理由を考えてみましょう。
-                    </p>
-                </div>
-                <div>
-                    <p>
-                        一番の違いは選択している列情報をサイズHで保持しているか、都度要素を追加するかです。配列サイズHを確保して、再起呼び出し実行した結果50msかかっているので間違いなさそうです(<a
-                            href="https://atcoder.jp/contests/typical90/submissions/66624639">こちら</a>)。
-                    </p>
-                    <p>
-                        配列サイズをHで保持していると毎回Hかかりますが、選択したものしか保持しないようにすれば平均の大きさは、
-
-                        <math>
-                            <mfrac>
-                                <mrow>
-                                    <munderover>
-                                        <mi>
-                                            &sum;
-                                        </mi>
-                                        <mrow>
-                                            <mi>n</mi>
-                                            <mo>=</mo>
-                                            <mn>0</mn>
-                                        </mrow>
-                                        <mi>H</mi>
-                                    </munderover>
-                                    <mi>n</mi>
-                                    <mmultiscripts>
-                                        <mi>C</mi>
-                                        <mi>n</mi>
-                                        <mi></mi>
-                                        <mprescripts />
-                                        <mi>H</mi>
-                                        <mi></mi>
-                                    </mmultiscripts>
-                                </mrow>
-                                <mrow>
-                                    <msup>
-                                        <mi>2</mi>
-                                        <mi>H</mi>
-                                    </msup>
-                                </mrow>
-                            </mfrac>
-                        </math>
-                        となります。これは計算すると
-                        <math>
-                            <mfrac>
-                                <mi>H</mi>
-                                <mn>2</mn>
-                            </mfrac>
-                        </math>
-                        になります。……厳密な証明はわかりませんが、計算するとこうなるっぽいです。数学的な証明もそのうちやりたいね。
-                    </p>
 
                     <div>
-                        <details>
-                            <summary>
-                                計算コード
-                            </summary>
-                            <pre><code>#include &lt;bits/stdc++.h>
+                        <p>
+                            提出コードは<a href="https://atcoder.jp/contests/typical90/submissions/65344993">こちら</a>。
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            他と合わせるために計算量考察と言っていますが、枝刈りはしていません。bit全探索の代わりにdfsを用いているだけですね。
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            ただ、自作コードは38ms、主催者解のコードは52msと実行時間に差があるので理由を考えてみましょう。
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            一番の違いは選択している列情報をサイズHで保持しているか、都度要素を追加するかです。配列サイズHを確保して、再起呼び出し実行した結果50msかかっているので間違いなさそうです(<a
+                                href="https://atcoder.jp/contests/typical90/submissions/66624639">こちら</a>)。
+                        </p>
+                        <p>
+                            配列サイズをHで保持していると毎回Hかかりますが、選択したものしか保持しないようにすれば平均の大きさは、
+
+                            <math>
+                                <mfrac>
+                                    <mrow>
+                                        <munderover>
+                                            <mi>
+                                                &sum;
+                                            </mi>
+                                            <mrow>
+                                                <mi>n</mi>
+                                                <mo>=</mo>
+                                                <mn>0</mn>
+                                            </mrow>
+                                            <mi>H</mi>
+                                        </munderover>
+                                        <mi>n</mi>
+                                        <mmultiscripts>
+                                            <mi>C</mi>
+                                            <mi>n</mi>
+                                            <mi></mi>
+                                            <mprescripts />
+                                            <mi>H</mi>
+                                            <mi></mi>
+                                        </mmultiscripts>
+                                    </mrow>
+                                    <mrow>
+                                        <msup>
+                                            <mi>2</mi>
+                                            <mi>H</mi>
+                                        </msup>
+                                    </mrow>
+                                </mfrac>
+                            </math>
+                            となります。これは計算すると
+                            <math>
+                                <mfrac>
+                                    <mi>H</mi>
+                                    <mn>2</mn>
+                                </mfrac>
+                            </math>
+                            になります。……厳密な証明はわかりませんが、計算するとこうなるっぽいです。数学的な証明もそのうちやりたいね。
+                        </p>
+
+                        <div>
+                            <details>
+                                <summary>
+                                    計算コード
+                                </summary>
+                                <pre><code>#include &lt;bits/stdc++.h>
 
 using namespace std;
 int main()
@@ -1366,28 +1366,28 @@ int main()
     cout &lt;&lt; (double)ans / (double)(1 &lt;&lt; H) &lt;&lt; endl;
     return 0;
 }                        </code></pre>
-                        </details>
-                    </div>
+                            </details>
+                        </div>
 
-                    <div>
-                        <p>
-                            列についてのループの大きさがざっくり半分になることがわかりました。
-                        </p>
-                        <p>
-                            半分まで落ちていないのは、配列の値を変更する操作と、配列の要素を削除する操作の分の差です。値を変えるだけなのと、要素を追加したり削除したりは前者の方が軽いですよね。あとは関数呼び出しの処理が多いことも影響がありそうです。
-                        </p>
-                    </div>
+                        <div>
+                            <p>
+                                列についてのループの大きさがざっくり半分になることがわかりました。
+                            </p>
+                            <p>
+                                半分まで落ちていないのは、配列の値を変更する操作と、配列の要素を削除する操作の分の差です。値を変えるだけなのと、要素を追加したり削除したりは前者の方が軽いですよね。あとは関数呼び出しの処理が多いことも影響がありそうです。
+                            </p>
+                        </div>
 
-                    <div>
-                        <details>
-                            <summary>実験例</summary>
-                            <div>
-                                <p>
-                                    前者が130ms程度、後者が2500ms程度です。
-                                    今回の問題はH=8なのでループ回数は高々256で、誤差ですね。
-                                </p>
-                            </div>
-                            <pre><code>#include &lt;bits/stdc++.h>
+                        <div>
+                            <details>
+                                <summary>実験例</summary>
+                                <div>
+                                    <p>
+                                        前者が130ms程度、後者が2500ms程度です。
+                                        今回の問題はH=8なのでループ回数は高々256で、誤差ですね。
+                                    </p>
+                                </div>
+                                <pre><code>#include &lt;bits/stdc++.h>
 
 #include &lt;chrono>
 #include &lt;ctime>
@@ -1431,17 +1431,17 @@ int main()
     return 0;
 }               
                             </code></pre>
-                        </details>
-                    </div>
+                            </details>
+                        </div>
 
-                    <div>
-                        <p>
-                            以上、実行時間の差について考えてみました。枝刈りとは違いますが、考えることがあって楽しかったです。
-                        </p>
+                        <div>
+                            <p>
+                                以上、実行時間の差について考えてみました。枝刈りとは違いますが、考えることがあって楽しかったです。
+                            </p>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <!-- </details> -->
+            </details>
         </div>
 
         <!-- まとめ -->
@@ -1450,12 +1450,16 @@ int main()
                 まとめ
             </h2>
 
-            <p>
+            <div>
+                <p>
+                    以上、dfsで解いた問題について振り返りました。
+                </p>
+                <p>
+                    意外と色んな問題で使える一方、全探索はやっぱり探索量が爆発するので使いどころには気を付けないとなりませんね。
+                </p>
+            </div>
 
-            </p>
         </div>
-
-        <a href="#ref">[]</a>
 
         <!-- ref -->
         <div>
