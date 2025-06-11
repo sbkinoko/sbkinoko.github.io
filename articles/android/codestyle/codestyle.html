@@ -31,25 +31,127 @@
             コードスタイルをいじる
         </h1>
 
-        <a href="#ref">[]</a>
-
-        <!-- 参考リスト -->
         <div>
-            <h2 id="ref">
-                参考
+            <h2>
+                背景
             </h2>
-            <ol>
-                <li>『』 ページ名 ()
-                    <br><a href="">
 
-                    </a>
-                </li>
-                <!-- <li>『』 ページ名 ()
-            <br><a href="">
+            <div>
+                <p>
+                    KotlinではTrailing Commaが許されていますが、逐一手動で打つのはめんどくさいので自動で入力されるようにします。
+                </p>
+            </div>
+        </div>
 
-            </a>
-        </li> -->
-            </ol>
+        <div>
+            <h2>
+                Trailing Commaとは
+            </h2>
+
+            <div>
+                <p>
+                    最後の行末のカンマのことです。そのあとの項があってもなくても入れられます。
+                </p>
+            </div>
+
+            <pre>
+<code class="filename">カンマなし</code>
+<code>fun a(
+    x: Int,
+    y: Int,
+    z: Int
+)
+</code></pre>
+
+            <pre>
+<code class="filename">カンマあり</code>
+<code>fun a(
+    x: Int,
+    y: Int,
+    z: Int,
+)
+</code></pre>
+
+            <div>
+                <p>
+                    カンマをつけておくと、項目を入れ替えたり、要素を追加したときの差分が増えにくくて嬉しいです。トレイリングカンマがないと、設定によっては補完してくれなくって、エラーになったりもしますね。
+                </p>
+            </div>
+
+            <div>
+                <img class="normalImg" src="comma_ex.png" />
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                自動でつける設定にする
+            </h2>
+
+            <div>
+                <p>
+                    さて、便利なトレイリングカンマですが、デフォルトの設定では自動でつけるようになっていません。手動で打ってもいいですが、非効率です。
+                </p>
+                <p>
+                    ということで、フォーマットをかけるときに入れる設定にしてしまいましょう。
+                </p>
+                <p>
+                    設定画面からEditor>CodeStyle>Kotlin>Otherでトレイリングカンマに関する項目を開きます。
+                    ここのチェックボックスにチェックを入れて上げてからフォーマット(【ctrl】 + 【alt】+ 【L】)をかけると、トレイリングカンマが追加されます。
+                </p>
+                <p>
+                    うまくいかない場合は再起動してみるとうまく行きます。
+                </p>
+            </div>
+
+            <img class="normalImg" src="setting.png">
+
+            <img class="normalImg" src="format.gif" />
+        </div>
+
+        <div>
+            <h2>
+                パラメータごとに改行を入れる
+            </h2>
+
+            <div>
+                <p>
+                    折角トレイリングカンマを追加できるように設定しても、パラメータ宣言を手動で改行しないといけないのでは不便です。
+                </p>
+            </div>
+
+            <img class="normalImg" src="gen.gif" />
+
+            <div>
+                <p>
+                    これも改行するように設定します。
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    先ほどのsetting画面で、otherではなくWrapping and Braces を選択し、Function declaration parameters を Wrap Alwaysにします。
+                </p>
+                <p>
+                    この状態でフォーマットをかけると全てのパラメータが改行され、トレイリングカンマを追加されます。
+                </p>
+            </div>
+
+            <img class="normalImg" src="setting2.png">
+
+            <img class="normalImg" src="format2.gif">
+        </div>
+
+        <div>
+            <h2>
+                まとめ
+            </h2>
+
+            <div>
+                <p>
+                    以上、トレイリングカンマを追加するのに便利そうな設定についてまとめました。
+                </p>
+            </div>
         </div>
 
         <!-- 同じジャンルの記事リスト -->
