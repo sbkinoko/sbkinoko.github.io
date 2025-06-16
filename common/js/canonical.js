@@ -10,8 +10,5 @@ function writeCanonical(
 
     var path = 'https://sbkinoko.github.io/articles/' + genre + "/" + name + "/" + name + ".html";
 
-    canonical.item(0).href = canonical.item(0).href.replace(
-        /\{\$canonicalLink\}/g,
-        path,
-    );
+    canonical.item(0).href = path;
 }
