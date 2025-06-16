@@ -8,8 +8,7 @@ function writeCanonical(
     var canonical = document.head.querySelectorAll('link[rel="canonical"]');
     console.log(canonical);
 
-    var path = 'https://sbkinoko.github.io/articles/' + genre + "/"
-        + name + "/" + name + ".html";
+    var path = 'https://sbkinoko.github.io/articles/' + genre + "/" + name + "/" + name + ".html";
 
     canonical.item(0).href = canonical.item(0).href.replace(
         /\{\$canonicalLink\}/g,
