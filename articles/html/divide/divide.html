@@ -5,15 +5,11 @@
     <meta charset="UTF-8">
     <title>要素の分割と共通化</title>
     <link rel="styleSheet" href="./../../../style.css" />
+    <link rel="canonical" href="{$canonicalLink}" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./../../../main.js"></script>
+    <script type="text/javascript" src="./../../../common/js/canonical.js"></script>
 </head>
-<!--
- &lt <
-    <ol>
-        <li></li>
-    </ol>
- -->
 
 <body>
     <div id="header"></div>
@@ -242,6 +238,10 @@ a:hover.linkedH{
                 dir,
                 "html",
             );
+            writeCanonical(
+                "html",
+                "divide",
+            )
         });
     </script>
 
