@@ -5,7 +5,7 @@ function writeCanonical(
     genre,
     name,
 ) {
-    var canonical = document.head.getElementsByTagName('link[rel="canonical"]');
+    var canonical = document.head.querySelectorAll('link[rel="canonical"]');
     console.log(canonical);
 
     var path = 'https://sbkinoko.github.io/articles/' + genre + "/"
