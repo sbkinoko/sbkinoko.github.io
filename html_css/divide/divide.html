@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>要素の分割と共通化</title>
+    <link rel="styleSheet" href="./../../style.css" />
+    <link rel="canonical" href="https://sbkinoko.github.io/articles/html/divide/divide.html" />
+    <meta http-equiv="refresh" content="3;URL='https://sbkinoko.github.io/articles/html/divide/divide.html'">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../main.js"></script>
+    <script type="text/javascript" src="./../common/js/canonical.js"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+
+    <div>
+        <p>
+            このページは移動済みです。3秒後にリダイレクトします。
+        </p>
+        <p>
+            行先は<a href="./../../articles/html/divide/divide.html">こちらです。</a>
+        </p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../"
+            articleHeaderFooter(
+                dir,
+                "html",
+            );
+        });
+    </script>
+
+</body>
+
+</html>
