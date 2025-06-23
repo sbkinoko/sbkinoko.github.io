@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>枝刈りの計算量見積もり</title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+    <script type="text/javascript"
+        asyncsrc="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=MML_SVG"></script>
+</head>
+<!--
+ &lt <
+    <ol>
+        <li></li>
+    </ol>
+ -->
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2025/06/09</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/06/11</td>
+        </tr>
+    </table>
+
+    <div>
+        <h1>
+            枝刈りの計算量見積もり
+        </h1>
+
+        <!-- 背景 -->
+        <div>
+            <h2>
+                背景
+            </h2>
+
+            <div>
+                <p>
+                    <a href="https://atcoder.jp/contests/typical90">
+                        競プロ典型90問
+                    </a>
+                    を解いている中で、枝刈りDFSで解ける問題がちらほらあったので、実際の計算量の見積もりをしてみようと思いました。
+                    DFS/枝刈りについて整理した記事は
+                    <a href="./../dfs/dfs.html">
+                        こちら
+                    </a>
+                    です。
+                </p>
+            </div>
+        </div>
+
+        <!-- 内容 -->
+        <div>
+            <h2>
+                内容
+            </h2>
+
+            <p>
+                自身の提出でdfsを含みACを取っているもの、かつ主催者解説でDFSが取り上げられていないものを振り返ります。
+            </p>
+            <p>
+                基本的に脳筋解法になります。全探索しようとしてるししょうがないね。
+            </p>
+        </div>
+
+        <!-- 032 -->
+        <div>
+            <h2>
+                032 - AtCoder Ekiden（★3）
+            </h2>
+            <div>
+                <p>
+                    問題は
+                    <a href="https://atcoder.jp/contests/typical90/tasks/typical90_af">
+                        こちら
+                    </a>
+                    。
+                </p>
+            </div>
+
+            <div>
+                <details>
+                    <summary>
+                        計算量考察
+                    </summary>
+
+                    <div>
+                        <p>
+                            提出コードは<a href="https://atcoder.jp/contests/typical90/submissions/64123310">
+                                こちら
+                            </a>。
+                        </p>
+                        <p>
+                            今作るならまだ走ってないランナーを管理してDFSしますね。N人のランナー見て走ったかどうか管理するのは効率が悪い気がします。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            さて、本題に入って計算量の見積もりです。
+                        </p>
+                        <p>
+                            雑に全探索する場合、襷渡しをするとき全てのランナーについて見るので、O(N^N)になってしまいます。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            ここから、走ったランナーに襷を渡すパターンを刈ります。
+                        </p>
+                        <p>
+                            今までに走ったランナーがk人だった場合、襷を渡せる残りのランナーはN-k人になります。kが0~N-1の範囲で動き、そのパターン数をかければよいので、
+                        </p>
+                    </div>
+
+                    <div class="center">
+                        <math>
+                            <munderover>
+                                <mi>
+                                    &prod;
+                                </mi>
+                                <mrow>
+                                    <mi>k</mi>
+                                    <mo>=</mo>
+                                    <mn>0</mn>
+                                </mrow>
+                                <mi>N-1</mi>
+                            </munderover>
+                            <mo>(</mo>
+                            <mrow>
+                                <mi>N</mi>
+                                <mo>-</mo>
+                                <mi>k</mi>
+                            </mrow>
+                            <mo>)</mo>
+                            <mo>=</mo>
+                            <munderover>
+                                <mi>
+                                    &prod;
+                                </mi>
+                                <mrow>
+                                    <mi>k</mi>
+                                    <mo>=</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                                <mi>N</mi>
+                            </munderover>
+                            <mrow>
+                                <mi>k</mi>
+                            </mrow>
+                            <mo>=</mo>
+                            <mi>
+                                N!
+                            </mi>
+                        </math>
+                    </div>
+
+                    <div>
+                        <p class="noindent">
+                            となり、N!通りとなります。N^Nと比べると大分探索範囲が減りました。N!通りの探索は想定解法と同じ探索量です。
+                        </p>
+                        <p>
+                            &prod;は総積記号です。ギリシャ文字&pi;の大文字でProductから来ています<a href="#ref">[1]</a>。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            今回の設定では襷を渡せない人の組み合わせがM組存在します。これを含めた計算量の見積もりをしてみましょう。
+                        </p>
+                        <p>
+                            1人当たり
+                            <math>
+                                <mfrac>
+                                    <mrow>
+                                        <mn>2</mn>
+                                        <mi>M</mi>
+                                    </mrow>
+                                    <mi>N</mi>
+                                </mfrac>
+                            </math>
+                            人に渡せないことになります。
+                        </p>
+                        <p>
+                            M組のペアに登場する人数が2M人いて、それをN人に分配して平均を出しています。
+                        </p>
+                        <p>
+                            1人目から2人目に襷を渡せない確率は残り人数がN-1人なので、
+                            <math>
+                                <mfrac>
+                                    <mrow>
+                                        <mn>2</mn>
+                                        <mi>M</mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mi>N</mi>
+                                        <mo>(</mo>
+                                        <mi>N</mi>
+                                        <mo>&minus;</mo>
+                                        <mn>1</mn>
+                                        <mo>)</mo>
+                                    </mrow>
+                                </mfrac>
+                            </math>
+                            です。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            簡単化のために、この確率で残りの襷も渡せると考えましょう。襷渡しはN-1回行われるのでの確率をN-1回乗じればよいです。
+                        </p>
+                        <p>
+                            よって見積もった探索量は、
+                        </p>
+                    </div>
+
+                    <div class="center">
+                        <math>
+                            <msup>
+                                <mrow>
+                                    <mo>(</mo>
+                                    <mn>1</mn>
+                                    <mo>&minus;</mo>
+                                    <mfrac>
+                                        <mrow>
+                                            <mn>2</mn>
+                                            <mi>M</mi>
+                                        </mrow>
+                                        <mrow>
+                                            <mi>N</mi>
+                                            <mo>&it;</mo>
+                                            <mo>(</mo>
+                                            <mi>N</mi>
+                                            <mo>&minus;</mo>
+                                            <mn>1</mn>
+                                            <mo>)</mo>
+                                        </mrow>
+                                    </mfrac>
+                                    <mo>)</mo>
+                                </mrow>
+                                <mrow>
+                                    <mi>N</mi>
+                                    <mo>&minus;</mo>
+                                    <mn>1</mn>
+                                </mrow>
+                            </msup>
+                            <mi>N</mi>
+                            <mo>!</mo>
+                            <mo>&it;</mo>
+                        </math>
+                    </div>
+
+                    <div>
+                        <p class="noindent">
+                            となります。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            Mが大きくなればなるほど渡せない組み合わせが増えて探索量が減る形になってるのであってそうです。
+                        </p>
+                        <p>
+                            平均人数で見て組み立てたので実際の探索量は違います。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            あとは途中まで走った時点で最速タイムより遅かった場合、その組み合わせは最後まで見る必要がないのでもう少しだけ削れますね。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            振り返りのついでに追加課題のM&lt;=18の場合について考えます。
+                        </p>
+                        <p>
+                            残念ながら先ほどのコードでは、N=18にしたときに探索範囲がとんでもないことになってしまうのでTLEです。Mが最大値の半数としても、log(18!)-18log(2)≒10となり10の10乗以上の探索範囲が出てきます。
+                        </p>
+                        <p>
+                            全員の全区間のタイムが950以上だとするとスコアによる枝刈りも全然できないのでまったく歯が立ちません。最後の1人まで見ないとスコアの比較ができないからです。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            ユーザー解説によるとbitDPでO(N^2* 2^N)解けるらしいです <a href="#ref">[2]</a>。N=20としても大体400 *
+                            (10^3)^2なのでN&lt=18なら充分解けますね、すごい。Mに依存しないというのもいいですね。
+                        </p>
+                        <p>
+                            <a href="https://qiita.com/satomshr/items/1e75f5c5ee053de8d494">
+                                こちらの記事
+                            </a>
+                            のコードがコメントも豊富でわかりやすかったので紹介しておきます<a href="#ref">[3]</a>。
+                        </p>
+                    </div>
+
+                </details>
+            </div>
+        </div>
+
+        <!-- 045 -->
+        <div>
+            <h2>
+                045 - Simple Grouping（★6）
+            </h2>
+            <div>
+                <p>
+                    問題は<a href="https://atcoder.jp/contests/typical90/tasks/typical90_as">こちら</a>。
+                </p>
+            </div>
+
+            <div>
+                <details>
+                    <summary>
+                        計算量考察
+                    </summary>
+
+                    <div>
+                        <p>
+                            提出コードは<a href="https://atcoder.jp/contests/typical90/submissions/64680756">こちら</a>。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            雑に全探索を考えると、N個の点をK個のグループに分ければいいので、K^Nです。この全ての場合分けに対して距離を見れば題意を満たせます。
+                        </p>
+                        <p>
+                            しかしK&lt;N&le;15なので、最大14^15となり当然TLEです。ここから枝刈りを行います。
+                        </p>
+
+                    </div>
+
+                    <div>
+                        <p>
+                            まずK個のグループに分ける行為ですが、都度K個のグループを見る必要はありません。1つ目の点は必ず自身のみのグループだけに属し、2つ目の点は1つ目の点と同居させるか、別居させるかの2通りしかありません。2つの点が1つ目の点と別居していた場合、3つ目の点の入れ先は3パターンになります。
+                        </p>
+                        <p>
+                            これを踏まえて最後の15個目の点まで計算するとどれだけ多くても15!通りですみます。14^15から大分落とせました。……でもまだまだTLEです。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            この問題で大事なのはK個のグループを作る必要があるということです。先ほどの見積もりではK個のグループが作れない点の分け方、例えば全ての点がグループ1に入っているパターンが生まれてしまいます。これを弾きましょう。
+                        </p>
+
+                        <p>
+                            15個の点を14個のグループに分けるには、あるグループに3個以上の点が入ってはいけません。この状態になってしまうと、12個の点を13個のグループに分けなくてはなりませんからね。これは不可能です。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            それ以降の点をどう割り振っても条件を満たさない場合に探索を打ち切ることで探索量を大幅に落とせます。こうすることで条件を満たすグループ分けだけを確認することができます。提出コードの63行目がこれに当たります。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            ここまでが枝刈りでいけそうという話で、 ここからは実際のパターン数の計算を行います。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            K=14 N=15の場合、同居する点1組を決めれば他は自動的に決まるので、15C2で105通りです。全探索できる範囲です。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            N=15 K=12で考えましょう。
+                            この場合同居させる必要がある点は3個です。グループ分けのパターンは以下の3通りです。
+                        </p>
+
+                        <ul>
+                            <li>
+                                2個同居が3グループ
+                            </li>
+                            <li>
+                                2個同居が1グループ+3個同居が1グループ
+                            </li>
+                            <li>
+                                4個同居が1グループ
+                            </li>
+                        </ul>
+
+                        <p>
+                            1つ目は15C2*13C2*11C2/6です。2個とる操作を3回行うのでCが3つです。3個のものを並べる方法が3!なので6で割るとよいはずです。12,34,56と取り出したパターンの並び替えは6通りありますからね(例えば34,12,56)。これは75,075通りです。
+                        </p>
+                        <p>
+                            2つ目は15C2*13C3です。2個選んだ後に3個選びます。これは並び変えが発生せず、30,030通りです。逆でも計算結果は同じです。結局15P5/2!/3!なので。
+                        </p>
+                        <p>
+                            3つ目は15C4なので1,365通りです。
+                        </p>
+
+                        <p>
+                            当初の雑の全探索では13^15通りですが、分配が成功するパターンだけ見ると大体10^5ですみます。充分高速です。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            見積もりの簡略化に挑戦してみます。
+                        </p>
+                        <p>
+                            KとNの差が3なので、別の点と同居させるべき点が3個あります。この3個の点を15個から取り出す方法は15C3で455通りです。
+                        </p>
+                        <p>
+                            選択した点を分ける方法は以下の3通りです。
+                        </p>
+                    </div>
+
+                    <div>
+                        <ul>
+                            <li>
+                                3個のグループ
+                            </li>
+                            <li>
+                                2個のグループ
+                            </li>
+                            <li>
+                                1個のグループ
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <p>
+                            3個のグループに分ける方法はただ1通りです。
+                        </p>
+                        <p>
+                            123の点を最初に取り出していたとき、残りの4~15の点と組ませることができます。組ませる残りの点を順番を気にして取り出すと12P3=1320通りになります。
+                        </p>
+                        <p>
+                            後者をPにする理由は123を最初に3個取り出していたときに、(1,11)(2,12)(3,10)をそれぞれペアにした場合と、(1,12)(2,11)(3,10)をペアにしたときを区別したいからです。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            2個のグループに分ける方法は、全てのグループに前もって1個入れておいて残り1個をどこかに入れればいいので、2C1で2通りです。
+                        </p>
+
+                        <p>
+                            この点のペアと組み合わせ残りの点の選び方は12P2で132通りです。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            1つのグループに分ける方法は当然1通り。残りの点からこのグループと組ませる点を1つ決めるのでただ12通りです。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            3個の点をピックして、残りの点を組ませる方法が上記の和なので、探索量は次の通りです。
+                        </p>
+                        <p>
+                            455*(1320+2*132+12)=726,180
+                        </p>
+                        <p>
+                            大分膨らみましたが、場合分けの数を減らせることと、上限として用いるのでまぁ目をつむりましょう。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            これでK=8の場合を考えます。重複させる点を選ぶ方法は15C7なので6,435通りです。
+                        </p>
+                    </div>
+
+                    <div class="center">
+                        <caption>K=8のときに作れるパターン数の雑見積もり</caption>
+                    </div>
+                    <div>
+                        <table class="center">
+                            <tr>
+                                <td>グループ数</td>
+                                <td>分ける点の数</td>
+                                <td>点の分け方数</td>
+                                <td>組ませる点</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>8P1</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>6</td>
+                                <td>7C1</td>
+                                <td>8P2</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>5</td>
+                                <td>7C2</td>
+                                <td>8P3</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>4</td>
+                                <td>7C3</td>
+                                <td>8P4</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>3</td>
+                                <td>7C4</td>
+                                <td>8P5</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>2</td>
+                                <td>7C5</td>
+                                <td>8P6</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>1</td>
+                                <td>7C6</td>
+                                <td>8P7</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <p>
+                            上記の和と積を取ると10の9乗を超えます。……ダメですね。上限の設定が甘かった様です。目をつむってはいけませんでした。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            これは順番を気にして取り出した結果、重複して数えている部分があるからです。「123を選んで456と組み合わせる場合」と、「124と選んで356と組み合わせる場合」で(1,5)(2,6)(3,4)と(1,5)(2,6)(4,3)が重複します。
+                        </p>
+
+                        <p>
+                            K=12のときに丁寧に導出した式と、雑にCに落とした式を比較してみます。これは複数要素が入ったグループ数が3個の場合のパターン数を示します。
+                        </p>
+                    </div>
+
+                    <div>
+                        <ul>
+                            <li>
+                                15C2*13C2*11C2/6=45,045
+                            </li>
+                            <li>
+                                15C3*12P3=600,600
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div>
+
+                        <p>
+                            実に15倍近く余計に数えています。こりゃ使い物になりませんね。
+                        </p>
+
+                        <p>
+                            雑な上限はあんまり意味がないことがわかったので、諦めて列挙します。急がば回れでした。
+                        </p>
+                    </div>
+
+                    <div class="center">
+                        <caption>K=15のときに作れるパターン数</caption>
+                    </div>
+                    <div class="center">
+                        <table class="center">
+                            <tr>
+                                <td>グループサイズ</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>6</td>
+                                <td>7</td>
+                                <td>8</td>
+                                <td>9</td>
+                                <td>パターン数</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="21">各グループの数</td>
+                                <td>6</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td class="text_right">5,005</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td class="text_right">135,135</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">360,360</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">630,630</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">378,378</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">1,351,350</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">6,306,300</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">9,459,450</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">6,306,300</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">7,882,875</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">6,306,300</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">37,837,800</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">23,648,625</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">63,063,000</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">7,007,000</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>4</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">14,189,175</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>1</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">94,594,500</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>2</td>
+                                <td>3</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">63,063,000</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>5</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">14,189,175</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>4</td>
+                                <td>2</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">47,297,250</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>6</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td class="text_right">4,729,725</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <p>
+                            (4,0,2,0,1,0,0,0,0)の行はサイズ1のグループが4つ、サイズ3のグループが2つ、サイズ5のグループが1つあることを示します。この列のパターン数は
+                            <math>
+                                <mfrac>
+                                    <mi>15!</mi>
+                                    <mrow>
+                                        <mi>4!*(3!*3!*2!)*5!</mi>
+                                    </mrow>
+                                </mfrac>
+                            </math>
+                            となります。分母の真ん中の括弧は3個選ぶ組み合わせが2つあるので3!を2回、この3個のペアが重複する可能性があるので2!で割ります。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            これに基づいて総和を取ると408,741,333となりました。4×10^8なのでギリギリすぎます。よく通りましたね。……見積もり間違ってるのかな?
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            N=15に対してKを変更した場合の値は次の表の通りです。
+                        </p>
+                    </div>
+
+                    <div class="center">
+                        <caption>N=15のときに作れるパターン数</caption>
+                    </div>
+                    <div>
+                        <table class="center">
+                            <tr>
+                                <td>K</td>
+                                <td>パターン数</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td class="text_right">16,383</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td class="text_right">2,375,101</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td class="text_right">42,355,950</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td class="text_right">210,766,920</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td class="text_right">420,693,273</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td class="text_right">408,741,333</td>
+                            </tr>
+                            <tr>
+                                <td>8</td>
+                                <td class="text_right">216,627,840</td>
+                            </tr>
+                            <tr>
+                                <td>9</td>
+                                <td class="text_right">67,128,490</td>
+                            </tr>
+                            <tr>
+                                <td>10</td>
+                                <td class="text_right">12,662,650</td>
+                            </tr>
+                            <tr>
+                                <td>11</td>
+                                <td class="text_right">1,479,478</td>
+                            </tr>
+                            <tr>
+                                <td>12</td>
+                                <td class="text_right">106,470</td>
+                            </tr>
+                            <tr>
+                                <td>13</td>
+                                <td class="text_right">4,550</td>
+                            </tr>
+                            <tr>
+                                <td>14</td>
+                                <td class="text_right">105</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <p>
+                            K=6の時が最大になるんですね。7か8だろうと予想していたので意外でした。見積もりの精度上げる能力が欲しいですね。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            場合分けをするだけでこれだけ必要で、実際の提出コードは都度N個の点を見て距離を求めているのでこれのN倍以上かかります。
+                        </p>
+                        <p>
+                            ……TLEしてますね。handがないのでランダムしかなくて救われてます？この感じならN=15かつ5&le;K&le;8以外なら通せます。入力を見たい……。見積もりが間違っている可能性も捨てきれないので……。
+                        </p>
+                    </div>
+
+                    <div>
+                        <p>
+                            ある集合の最大距離を事前に計算しておけばO(1)
+                            で求まるので、適切に設計していれば間に合うとも言えそうです。事前計算は愚直に立っているビットを見ても2^N×N^2ですみますし。
+                        </p>
+                        <p>
+                            まぁ全探索ばっかりうまくなってもしょうがないので、想定解法の勉強をした方が意味があります。この問題はこの辺でおわりにします。
+                        </p>
+                    </div>
+
+                    <div>
+                        <details>
+                            <summary>
+                                見積もりに利用したコード
+                            </summary>
+
+                            <div>
+                                <p>
+                                    見積もりもDFSでやりました。DFS使いすぎ。
+                                </p>
+                                <p>
+                                    これがどこか間違ってるのかな……。
+                                </p>
+                                <pre><code>#include &lt;bits/stdc++.h>
+using namespace std;
+
+int N, K;
+vector&lt;int> digitNum;
+long long ans = 0;
+void dfs(
+    vector&lt;int> num,
+    int min,
+    int sum)
+{
+    if (N &lt; sum)
+    {
+        return;
+    }
+
+    if (num.size() == K)
+    {
+        if (sum != N)
+        {
+            return;
+        }
+
+        vector&lt;int> list(N - K + 1);
+        for (auto n : num)
+        {
+            list[n - 1]++;
+        }
+
+        cout &lt;&lt; "&lt;tr>";
+        long long tmp = 1;
+        for (int i = 1; i &lt;= N; i++)
+        {
+            tmp *= (long long)i;
+        }
+
+        for (int i = 0; i &lt; list.size(); i++)
+        {
+            int n = list[i];
+            cout &lt;&lt; "&lt;td>" &lt;&lt; n &lt;&lt; "&lt;/td>";
+
+            for (int j = 0; j &lt; n; j++)
+            {
+                for (int k = 1; k &lt;= i + 1; k++)
+                {
+                    tmp /= (long long)k;
+                }
+                tmp /= (long long)(j + 1);
+            }
+        }
+        cout &lt;&lt; "&lt;td>" &lt;&lt; tmp &lt;&lt; "&lt;/td>";
+        ans += tmp;
+        cout &lt;&lt; "&lt;/tr>" &lt;&lt; endl;
+        return;
+    }
+
+    for (int i = min; i &lt;= N - K + 1; i++)
+    {
+        auto v = num;
+        v.push_back(i);
+        dfs(
+            v,
+            i,
+            sum + i);
+    }
+}
+
+int main()
+{
+    // 入力
+    cin >> N >> K;
+
+    // N = 15;
+
+    // for (K = 2; K &lt;= 14; K++)
+    // {
+        ans = 0;
+        // 全探索
+        dfs(
+            vector&lt;int>(0),
+            1,
+            0);
+    //     cout &lt;&lt; "&lt;tr>";
+    //     cout &lt;&lt; "&lt;td>" &lt;&lt; K &lt;&lt; "&lt;/td>" &lt;&lt; "&lt;td>" &lt;&lt; ans &lt;&lt; "&lt;/td>";
+    //     cout &lt;&lt; "&lt;/tr>";
+    // }
+    cout &lt;&lt; ans &lt;&lt; endl;
+    return 0;
+}
+                    </code></pre>
+                            </div>
+                        </details>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <!-- 051 -->
+        <div>
+            <h2>
+                051 - Typical Shop（★5）
+            </h2>
+            <div>
+                <p>
+                    問題は<a href="https://atcoder.jp/contests/typical90/tasks/typical90_ay">こちら</a>。
+                </p>
+            </div>
+
+            <div>
+                <details>
+                    <summary>
+                        計算量考察
+                    </summary>
+                    <div>
+                        <div>
+                            <p>
+                                提出コードは<a href="https://atcoder.jp/contests/typical90/submissions/64956349">こちら</a>。
+                            </p>
+                        </div>
+
+                        <div>
+                            <p>
+                                全ての商品を買うか買わないかの2値で管理すると、2^Nとなります。そのうち買うを選んだ物がK個のパターン数を数え上げれば答えが出せます。
+                            </p>
+                            <p>
+                                今回Nの最大値は40なので、2^10≒1000より、2^40≒1000^4=10^12となり、TLEです。
+                            </p>
+                        </div>
+
+                        <div>
+                            <p>
+                                これはK個選択していない場合も全部数えてしまっていて、大幅に余計なパターンを見ているからです。
+                            </p>
+                            <p>
+                                i個目の商品までみて、j個選んでいた場合、残りの商品の個数はN-i個です。選ぶ必要がある商品の数はK-j個なので、N-i = K -
+                                jになった段階で、全ての商品を選ぶ必要があるとして、パターン数を加算して探索を打ち切ります。金額が設定を超えた場合も打ち切って上げると早くなりますね。
+                            </p>
+                        </div>
+
+                        <div>
+                            <p>
+                                N個の要素からK個を選択する方法は
+                                <math>
+                                    <mmultiscripts>
+                                        <mi>C</mi>
+                                        <mi>K</mi>
+                                        <mi></mi>
+                                        <mprescripts />
+                                        <mi>N</mi>
+                                        <mi></mi>
+                                    </mmultiscripts>
+                                </math>
+                                です。
+                            </p>
+                            <p>
+                                N=40・K=20の時が最大で、137,846,528,820≒10^11となります。まぁ相変わらずTLEです。
+                            </p>
+                        </div>
+
+                        <div>
+                            <p>
+                                さらなる高速化を狙います。
+                            </p>
+                            <p>
+                                まず最初に、商品を高い順に並べ替えます。
+                            </p>
+                            <p>
+                                そして先ほどと同様に商品を買うか買わないかを選びながらdfsを行います。
+                            </p>
+                            <p>
+                                i個目の商品まででj個の商品を選択していた場合、追加で選ぶ必要がある商品の数はK - j個です。ここまではさっきと同じです。ここまでの金額の合計を
+                                <math>
+                                    <msub>
+                                        <mi>S</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                </math>
+                                としておきましょう。
+                            </p>
+                            <p>
+                                残っている商品のうち、高い方からK - j個商品を選択してみます。このときの金額を<math>
+                                    <msub>
+                                        <mi>S</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                </math>
+                                とします。
+                            </p>
+                            <p>
+                                この
+                                <math>
+                                    <msub>
+                                        <mi>S</mi>
+                                        <mn>1</mn>
+                                    </msub>
+                                    <mo>&plus;</mo>
+                                    <msub>
+                                        <mi>S</mi>
+                                        <mn>2</mn>
+                                    </msub>
+                                </math>
+                                がP以下ならば、i+1以降の商品はどのように選んでもよいことになります。
+                            </p>
+                            <p>
+                                N-i個の要素からK-j個の要素を選ぶ問題に帰結できるので、
+                                <math>
+                                    <mmultiscripts>
+                                        <mi>C</mi>
+                                        <mi>K-j</mi>
+                                        <mi></mi>
+                                        <mprescripts />
+                                        <mi>N-i</mi>
+                                        <mi></mi>
+                                    </mmultiscripts>
+                                </math>
+                                を計算するだけで済みます。
+                            </p>
+                            <p>
+                                探索しないで数を出せるので、計算量が落とせます。
+                            </p>
+                            <p>
+                                前半の35個からP以下の値段の組み合わせを作って、最後の5個から2個を自由に選べるとすると、これだけで
+                                <math>
+                                    <mmultiscripts>
+                                        <mi>C</mi>
+                                        <mi>2</mi>
+                                        <mi></mi>
+                                        <mprescripts />
+                                        <mi>5</mi>
+                                        <mi></mi>
+                                    </mmultiscripts>
+                                    <mo>=</mo>
+                                    <mn>10</mn>
+                                </math>
+                                となり、10倍の高速化が図れます。
+                            </p>
+                            <p>
+                                最後の10個から5個選べるとしたら252倍の高速化です。
+                            </p>
+                            <p>
+                                高い方から20個選んでも条件を満たしていた場合、一度の探索で答えを出せるので爆速です。
+                            </p>
+                        </div>
+
+                        <div>
+                            <p>
+                                手前からi個の商品を見て、j個選んだ時点で予算オーバー、または、手前からi個見て、j個選んで、残りのN-i個からK-j個をどう選んでも予算に収まる場合に枝刈りが行われます。
+                            </p>
+                            <p>
+                                探索を打ち切るパターンが、これ以降は絶対に条件を満たす/満たさないの2パターンあるのが面白いですね。
+                            </p>
+                        </div>
+
+                        <div>
+                            <p>
+                                ざっくり結論としては
+                                <math>
+                                    <mmultiscripts>
+                                        <mi>C</mi>
+                                        <mi>K-j</mi>
+                                        <mi></mi>
+                                        <mprescripts />
+                                        <mi>N-i</mi>
+                                        <mi></mi>
+                                    </mmultiscripts>
+                                </math>
+                                の高速化です。
+                            </p>
+                            <p>
+                                厳密に考えると複雑すぎるのでこの辺でおしまいです。
+                            </p>
+                        </div>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+
+        <!-- 063 -->
+        <div>
+            <h2>
+                063 - Monochromatic Subgrid（★4）
+            </h2>
+            <div>
+                <p>
+                    問題は<a href="https://atcoder.jp/contests/typical90/tasks/typical90_bk">こちら</a>。
+                </p>
+            </div>
+            <details>
+                <summary>
+                    計算量考察
+                </summary>
+
+                <div>
+
+                    <div>
+                        <p>
+                            提出コードは<a href="https://atcoder.jp/contests/typical90/submissions/65344993">こちら</a>。
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            他と合わせるために計算量考察と言っていますが、枝刈りはしていません。bit全探索の代わりにdfsを用いているだけですね。
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            ただ、自作コードは38ms、主催者解のコードは52msと実行時間に差があるので理由を考えてみましょう。
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            一番の違いは選択している列情報をサイズHで保持しているか、都度要素を追加するかです。配列サイズHを確保して、再起呼び出し実行した結果50msかかっているので間違いなさそうです(<a
+                                href="https://atcoder.jp/contests/typical90/submissions/66624639">こちら</a>)。
+                        </p>
+                        <p>
+                            配列サイズをHで保持していると毎回Hかかりますが、選択したものしか保持しないようにすれば平均の大きさは、
+
+                            <math>
+                                <mfrac>
+                                    <mrow>
+                                        <munderover>
+                                            <mi>
+                                                &sum;
+                                            </mi>
+                                            <mrow>
+                                                <mi>n</mi>
+                                                <mo>=</mo>
+                                                <mn>0</mn>
+                                            </mrow>
+                                            <mi>H</mi>
+                                        </munderover>
+                                        <mi>n</mi>
+                                        <mmultiscripts>
+                                            <mi>C</mi>
+                                            <mi>n</mi>
+                                            <mi></mi>
+                                            <mprescripts />
+                                            <mi>H</mi>
+                                            <mi></mi>
+                                        </mmultiscripts>
+                                    </mrow>
+                                    <mrow>
+                                        <msup>
+                                            <mi>2</mi>
+                                            <mi>H</mi>
+                                        </msup>
+                                    </mrow>
+                                </mfrac>
+                            </math>
+                            となります。これは計算すると
+                            <math>
+                                <mfrac>
+                                    <mi>H</mi>
+                                    <mn>2</mn>
+                                </mfrac>
+                            </math>
+                            になります。
+                        </p>
+                        <p>
+                            <math>
+                                <mi>k</mi>
+                                <mmultiscripts>
+                                    <mi>C</mi>
+                                    <mi>k</mi>
+                                    <mi></mi>
+                                    <mprescripts />
+                                    <mi>H</mi>
+                                    <mi></mi>
+                                </mmultiscripts>
+                            </math>
+                            と
+                             <math>
+                                <mi>(H-k)</mi>
+                                <mmultiscripts>
+                                    <mi>C</mi>
+                                    <mi>(H-k)</mi>
+                                    <mi></mi>
+                                    <mprescripts />
+                                    <mi>H</mi>
+                                    <mi></mi>
+                                </mmultiscripts>
+                            </math>
+                            の平均は 
+                             <math>
+                                <mfrac>
+                                    <mi>H</mi>
+                                    <mn>2</mn>
+                                </mfrac>
+                            </math>
+                            です。コンビネーションの部分の値が同じでなので。
+                        </p>
+
+                        <div>
+                            <details>
+                                <summary>
+                                    計算コード
+                                </summary>
+                                <pre><code>#include &lt;bits/stdc++.h>
+
+using namespace std;
+int main()
+{
+    int H = 16;
+
+    int cn = 1;
+    int ans = 0;
+    for (int i = 1; i &lt;= H; i++)
+    {
+        cn *= (H - i + 1);
+        cn /= i;
+        cout &lt;&lt; cn &lt;&lt; endl;
+        ans += cn * i;
+    }
+
+    cout &lt;&lt; (double)ans / (double)(1 &lt;&lt; H) &lt;&lt; endl;
+    return 0;
+}                        </code></pre>
+                            </details>
+                        </div>
+
+                        <div>
+                            <p>
+                                列についてのループの大きさがざっくり半分になることがわかりました。
+                            </p>
+                            <p>
+                                半分まで落ちていないのは、配列の値を変更する操作と、配列の要素を削除する操作の分の差です。値を変えるだけなのと、要素を追加したり削除したりは前者の方が軽いですよね。あとは関数呼び出しの処理が多いことも影響がありそうです。
+                            </p>
+                        </div>
+
+                        <div>
+                            <details>
+                                <summary>実験例</summary>
+                                <div>
+                                    <p>
+                                        前者が130ms程度、後者が2500ms程度です。
+                                        今回の問題はH=8なのでループ回数は高々256で、誤差ですね。
+                                    </p>
+                                </div>
+                                <pre><code>#include &lt;bits/stdc++.h>
+
+#include &lt;chrono>
+#include &lt;ctime>
+
+using namespace std;
+
+int main()
+{
+    {
+        vector&lt;int> a(1);
+        auto start = chrono::system_clock::now();
+        for (long long i = 0; i &lt;= 100000000; i++)
+        {
+            a[0] = 1;
+            a[0] = 0;
+        }
+        auto end = chrono::system_clock::now();
+        auto sduration = start.time_since_epoch();
+        auto smills = chrono::duration_cast&lt;chrono::milliseconds>(sduration).count();
+        auto eduration = end.time_since_epoch();
+        auto emills = chrono::duration_cast&lt;chrono::milliseconds>(eduration).count();
+        cout &lt;&lt; emills - smills &lt;&lt; endl;
+    }
+
+    {
+        vector&lt;int> a(1);
+        auto start = chrono::system_clock::now();
+        for (long long i = 0; i &lt;= 100000000; i++)
+        {
+            a.push_back(1);
+            a.erase(--(a.end()));
+        }
+        auto end = chrono::system_clock::now();
+        auto sduration = start.time_since_epoch();
+        auto smills = chrono::duration_cast&lt;chrono::milliseconds>(sduration).count();
+        auto eduration = end.time_since_epoch();
+        auto emills = chrono::duration_cast&lt;chrono::milliseconds>(eduration).count();
+
+        cout &lt;&lt; emills - smills &lt;&lt; endl;
+    }
+    return 0;
+}               
+                            </code></pre>
+                            </details>
+                        </div>
+
+                        <div>
+                            <p>
+                                以上、実行時間の差について考えてみました。枝刈りとは違いますが、考えることがあって楽しかったです。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </details>
+        </div>
+
+        <!-- まとめ -->
+        <div>
+            <h2>
+                まとめ
+            </h2>
+
+            <div>
+                <p>
+                    以上、dfsで解いた問題について振り返りました。
+                </p>
+                <p>
+                    意外と色んな問題で使える一方、全探索はやっぱり探索量が爆発するので使いどころには気を付けないとなりませんね。
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ref -->
+        <div>
+            <h2 id="ref">
+                参考
+            </h2>
+            <ol>
+                <li>『総積の記号Π（パイ）の意味と性質』 高校数学の美しい物語 (2025/05/15)
+                    <br><a href="https://manabitimes.jp/math/2802">
+                        https://manabitimes.jp/math/2802
+                    </a>
+                </li>
+                <li>典型32ユーザー解説 Atcoder (2025/05/15)
+                    <br><a href="https://atcoder.jp/contests/typical90/editorial/10181">
+                        https://atcoder.jp/contests/typical90/editorial/10181
+                    </a>
+                </li>
+                <li>『【競プロ典型 90 問】032 - AtCoder Ekiden で bitDP を学ぶ』 Qiita (2025/05/15)
+                    <br><a href="https://qiita.com/satomshr/items/1e75f5c5ee053de8d494">
+                        https://qiita.com/satomshr/items/1e75f5c5ee053de8d494
+                    </a>
+                </li>
+                <!-- <li>『』 ページ名 ()
+            <br><a href="">
+
+            </a>
+        </li> -->
+            </ol>
+        </div>
+
+        <div id="relatedList"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "kyopro",
+            );
+        });
+    </script>
+</body>
+
+</html>

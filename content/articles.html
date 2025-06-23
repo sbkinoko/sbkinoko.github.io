@@ -10,44 +10,16 @@
 
 <div id="kyoproList"></div>
 
-<ul>
-    <li>
-        <h3>YouTube</h3>
-    </li>
-    <ul>
-        <li>
-            <a href="https://sbkinoko.github.io/youtube/edit/edit.html">
-                YouTubeLiveの結果を編集すると新規として保存しか出ない
-            </a>
-        </li>
-    </ul>
+<div id="illustList"></div>
 
-    <li>
-        <h3>
-            イラスト関連
-        </h3>
-    </li>
-    <ul>
-        <li>
-            <a href="https://sbkinoko.github.io/illust/item/item.html">
-                小物の表示非表示を切り替える
-            </a>
-        </li>
-        <li>
-            <a href="https://sbkinoko.github.io/illust/wip/wip.html">
-                wip(書きたいやつ)
-            </a>
-        </li>
-    </ul>
-</ul>
-
+<div id="otherList"></div>
 
 <script>
     $(document).ready(function () {
         var rootDir = ".."
         writeHtmlList(
             rootDir,
-            "<h3><a class=\"linkedH\" href=\"https://sbkinoko.github.io/html_css/list.html\">",
+            "<h3><a class=\"linkedH\" href=\"./../articles/html/list.html\">",
             "</a></h3>",
         );
 
@@ -56,7 +28,7 @@
             "<h3><a class=\"linkedH\" href=\"./../articles/android/list.html\">",
             "</a></h3>",
         );
-        
+
         writeWpfList(
             rootDir,
             "<h3><a class=\"linkedH\" href=\"./../articles/wpf/list.html\">",
@@ -66,6 +38,18 @@
         writeKyoProList(
             rootDir,
             "<h3><a class=\"linkedH\" href=\"./../articles/kyopro/list.html\">",
+            "</a></h3>",
+        );
+
+        writeIllustList(
+            rootDir,
+            "<h3><a class=\"linkedH\" href=\"./../articles/illust/list.html\">",
+            "</a></h3>",
+        );
+
+        writeOtherList(
+            rootDir,
+            "<h3><a class=\"linkedH\" href=\"./../articles/other/list.html\">",
             "</a></h3>",
         );
 

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+</head>
+<!--
+ &lt <
+    <ol>
+        <li></li>
+    </ol>
+ -->
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <h1>
+        書きたいやつ
+    </h1>
+
+    <ol>
+        <li>
+            フォルダを開くショートカット
+            <br><a href="https://webtips.7narabe.net/adobe%20-%20photoshop/photoshop%E3%81%A7%E3%83%AC%E3%82%A4%E3%83%A4%E3%83%BC%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92%E5%85%A8%E3%81%A6%E9%96%8B%E3%81%8F%EF%BC%8F%E9%96%89%E3%81%98%E3%82%8B">
+                https://webtips.7narabe.net/adobe%20-%20photoshop/photoshop%E3%81%A7%E3%83%AC%E3%82%A4%E3%83%A4%E3%83%BC%E3%82%B0%E3%83%AB%E3%83%BC%E3%83%97%E3%82%92%E5%85%A8%E3%81%A6%E9%96%8B%E3%81%8F%EF%BC%8F%E9%96%89%E3%81%98%E3%82%8B
+            </a>
+        </li>
+
+        <li>
+            スクリプトの話
+            <br><a href="https://sites.google.com/cybernoids.jp/cubism2/editor/modeler/texture/psd">
+                https://sites.google.com/cybernoids.jp/cubism2/editor/modeler/texture/psd
+            </a>
+        </li>
+
+        <li>
+            公式のref
+            <br><a href="https://docs.live2d.com/cubism-editor-manual/script-download/">
+                https://docs.live2d.com/cubism-editor-manual/script-download/
+            </a>
+        </li>
+    </ol>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+            writeHeader(dir);
+            writeBreadcrumb(
+                dir,
+                "genre"
+            )
+        });
+    </script>
+</body>
+
+</html>
