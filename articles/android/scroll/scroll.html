@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>触れるスクロールバーを作る</title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+    <script type="text/javascript"
+        asyncsrc="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=MML_SVG"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td></td>
+        </tr>
+    </table>
+
+    <div>
+        <h1>
+            触れるスクロールバーを作る
+        </h1>
+
+        <a href="#ref">[]</a>
+
+        <!-- 参考リスト -->
+        <div>
+            <h2 id="ref">
+                参考
+            </h2>
+            <ol>
+                <li>『』 ページ名 ()
+                    <br><a href="">
+
+                    </a>
+                </li>
+                <!-- <li>『』 ページ名 ()
+            <br><a href="">
+
+            </a>
+        </li> -->
+            </ol>
+        </div>
+
+        <!-- 同じジャンルの記事リスト -->
+        <div id="relatedList"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "android",
+            );
+        });
+    </script>
+</body>
+
+</html>
