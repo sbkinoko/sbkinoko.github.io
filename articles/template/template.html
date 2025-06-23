@@ -7,17 +7,14 @@
     <link rel="styleSheet" href="./../../../style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./../../../main.js"></script>
+    <script type="text/javascript"
+        asyncsrc="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=MML_SVG"></script>
 </head>
-<!--
- &lt <
-    <ol>
-        <li></li>
-    </ol>
- -->
 
 <body>
     <div id="header"></div>
     <div id="breadcrumb"></div>
+
     <table class="noBorder">
         <tr>
             <td>作成日</td>
@@ -28,31 +25,97 @@
             <td></td>
         </tr>
     </table>
-    <h1>
-    </h1>
-    
-    <a href="#ref">[]</a>
 
-    <h2 id="ref">
-        参考
-    </h2>
-    <ol>
-        <li>『』 ページ名 ()
-            <br><a href="">
+    <div>
+        <h1>
+        </h1>
 
-            </a>
-        </li>
-        <!-- <li>『』 ページ名 ()
+        <div>
+            <h2>
+                背景
+            </h2>
+
+            <div>
+                <p>
+
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                内容
+            </h2>
+
+            <div>
+                <p>
+
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <ol>
+                <li>
+                    <a href="#con">
+                        まとめ
+                    </a>
+                </li>
+                <li>
+                    <a href="#ref">
+                        参考
+                    </a>
+                </li>
+            </ol>
+        </div>
+
+
+        <div>
+            <h2 id="con">
+                まとめ
+            </h2>
+
+            <div>
+                <p>
+
+                </p>
+            </div>
+        </div>
+
+        <!-- 参考リスト -->
+        <a href="#ref">[]</a>
+        <div>
+            <h2 id="ref">
+                参考
+            </h2>
+            
+            <ol>
+                <li>『』 ページ名 ()
+                    <br><a href="">
+
+                    </a>
+                </li>
+                <!-- <li>『』 ページ名 ()
             <br><a href="">
 
             </a>
         </li> -->
-    </ol>
+            </ol>
+        </div>
+
+    </div>
+
+    <!-- 同じジャンルの記事リスト -->
+    <div id="relatedList"></div>
+    </div>
+
     <script>
         $(document).ready(function () {
-            var dir = "../../../"
-            writeHeader(dir);
-            writeBreadcrumb(dir,"")
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "",
+            );
         });
     </script>
 </body>
