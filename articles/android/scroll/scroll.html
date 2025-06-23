@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>触れるスクロールバーを作る</title>
+    <title>ボタンでスクロール/触れるスクロールバー</title>
     <link rel="styleSheet" href="./../../../style.css" />
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="./../../../main.js"></script>
@@ -28,8 +28,111 @@
 
     <div>
         <h1>
-            触れるスクロールバーを作る
+            ボタンでスクロール/触れるスクロールバー
         </h1>
+
+        <div>
+            <h2>
+                背景
+            </h2>
+
+            <div>
+                <p>
+                    アプリを作っているときに、タップ以外の操作でスクロールを呼びたかった。要素数が多いときに頑張ってスクロールするのはめんどくさいので、一気にスクロールできるようにしてみたかった。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                内容
+            </h2>
+
+            <div>
+                <ol>
+                    <li>
+                        <a href="#list">
+                            スクロールリストを作成
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#button">
+                            ボタンでスクロール
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#bar">
+                            スクロールバーを表示
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#move">
+                            スクロールバーをいじるとスクロール
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#con">
+                            まとめ
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div>
+            <h2 id="list">
+                スクロールリストを作成
+            </h2>
+
+            <div>
+                <p>
+                    LazyColumnを利用して作りました。
+                </p>
+                <p>
+                    要素ごとにわかりやすいように枠線をつけています。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2 id="button">
+                ボタンでスクロール
+            </h2>
+
+            <div>
+                <p></p>
+            </div>
+        </div>
+
+        <div>
+            <h2 id="bar">
+                スクロールバーを表示
+            </h2>
+
+            <div>
+                <p></p>
+            </div>
+        </div>
+
+        <div>
+            <h2 id="move">
+                スクロールバーをいじるとスクロール
+            </h2>
+
+            <div>
+                <p></p>
+            </div>
+        </div>
+
+        <div>
+            <h2 id="con">
+                まとめ
+            </h2>
+
+            <div>
+                <p></p>
+            </div>
+        </div>
 
         <a href="#ref">[]</a>
 
@@ -51,9 +154,10 @@
         </li> -->
             </ol>
         </div>
+    </div>
 
-        <!-- 同じジャンルの記事リスト -->
-        <div id="relatedList"></div>
+    <!-- 同じジャンルの記事リスト -->
+    <div id="relatedList"></div>
     </div>
 
     <script>
