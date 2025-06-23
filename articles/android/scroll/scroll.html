@@ -326,6 +326,24 @@ fun App() {
                     </a>
                     です。
                 </p>
+            </div>
+            
+<pre>
+<code class="filename">ScrollBar.kt</code>
+<code>val updateVisibility: suspend () -> Unit = {
+    isVisible = if (isAlwaysShowScrollBar || listState.isScrollInProgress || isPressed) {
+        true
+    } else {
+        // 操作をやめてから800ms後に非表示にする
+        delay(800)
+        // 常に表示 or スクロール中　or tap中　は表示
+        isAlwaysShowScrollBar || listState.isScrollInProgress || isPressed
+    }
+}
+</code>
+</pre>
+
+            <div>
                 <p>
                     表示状態を変更する関数を作り、もともとの表示条件に加えスクロールバーをタップ中は表示することにしました。
                 </p>
@@ -372,7 +390,7 @@ scope.launch {
                     awaitPointerEventでタップを取得。タップ位置をviewの高さと比較して割合を出し、その割合の位置にあるアイテムにスクロールします。やはり負になると困るので制御を入れます。
                 </p>
                 <p>
-                   lazyColumnで全体ビューの高さを取得できないのでアイテムの数でスクロールするようにしています。試してませんが、高さが違うアイテムが入っているとちょっと困りそうです。
+                    lazyColumnで全体ビューの高さを取得できないのでアイテムの数でスクロールするようにしています。試してませんが、高さが違うアイテムが入っているとちょっと困りそうです。
                 </p>
                 <p>
                     animateScrollToItemにするとスクロールが終わってから再度スクロールするので移動がカクついてしまったので不採用です。
@@ -538,7 +556,7 @@ fun BoxScope.ScrollBar(
                     以上、スクロールを外部からいじる方法について調べ、スクロールバーの拡張を行いました。
                 </p>
             </div>
-            
+
             <div>
                 <p>
                     今後の課題は、gester周りについて詳しくなることですかね。
