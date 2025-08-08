@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title> WAチェックシート</title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+    <script type="text/javascript"
+        asyncsrc="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=MML_SVG"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2025/08/08</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/08/08</td>
+        </tr>
+    </table>
+
+    <div>
+        <h1>
+            WAチェックシート
+        </h1>
+
+        <div>
+            <h2>
+                背景
+            </h2>
+            <div>
+                <p>
+                    WAが出たときに原因になりうるミスまとめ。チートシート的に使えると嬉しい。
+                </p>
+                <p>
+                    アルゴリズムレベルのミスは頑張って考えるしかないとは思う。
+                </p>
+                <p>
+                    再発しそうなＷＡ出したら追記していく。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                内容
+            </h2>
+
+            <table>
+
+                <tr>
+                    <th>問題文を読む</th>
+                    <td>解く問題が違うと当然WA
+                        <br>類題を解いたことがあるときほど要注意</td>
+                </tr>
+                <tr>
+                    <th>オーバーフロー</th>
+                    <td>int同士の掛け算でもlong long の範囲になる。もう全部long long でやった方が安全
+                        <br>intでやってる場合、小さいケースが通るときはオーバーフローは一回疑う。
+                    </td>
+                </tr>
+                <tr>
+                    <th>初期値ミス</th>
+                    <td>最小値、最大値はほんとに上回らない？大丈夫？</td>
+                </tr>
+                <tr>
+                    <th>添え字ミス</th>
+                    <td>i / j を間違ってない？
+                        <br> i / j 以外の命名が好ましい
+                    </td>
+                </tr>
+                <tr>
+                    <th>境界条件</th>
+                    <td>開区間・閉区間を間違ってない？</td>
+                </tr>
+                <tr>
+                    <th>エッジケース</th>
+                    <td>0・1の場合に変なことが起こらない？
+                        <br>他にも変なことは起こらない？
+                    </td>
+                </tr>
+                <!-- <tr>
+                    <th></th>
+                    <td></td>
+                </tr> -->
+            </table>
+        </div>
+    </div>
+
+    <!-- 同じジャンルの記事リスト -->
+    <div id="relatedList"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "kyopro",
+            );
+        });
+    </script>
+</body>
+
+</html>
