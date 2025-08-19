@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+    <script type="text/javascript"
+        asyncsrc="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=MML_SVG"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2025/08/10</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/08/14</td>
+        </tr>
+    </table>
+
+    <div>
+        <h1>
+            問題分類
+        </h1>
+
+        <div>
+            <h2>
+                背景
+            </h2>
+
+            <div>
+                <p>
+                    解いた問題が増えてきて類題をパッと出せなくなってきたのでメモしておきます。解いた範囲でまとめます。
+                </p>
+                <p>
+                    当然ですが解法に触れまくるので自力で解きたい人は要注意。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                競プロ典型 90 問
+            </h2>
+
+            <div>
+                <p>
+                    <a href="https://atcoder.jp/contests/typical90">
+                        https://atcoder.jp/contests/typical90
+                    </a>
+                </p>
+            </div>
+
+            <div>
+                <table class="left">
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_a">
+                                001 - Yokan Party（★4）
+                            </a>
+                            <br>みんなに分けたときの最小値の最大化
+                            <ul>
+                                <li>貪欲</li>
+                                <li>決め打ち二分探索</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_b">
+                                002 - Encyclopedia of Parentheses（★3）
+                            </a>
+                            <br>括弧列の種類数
+                            <ul>
+                                <li>全探索</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_c">
+                                003 - Longest Circular Road（★4）
+                            </a>
+                            <br>辺を一本足して最大のサイクルを作る
+                            <ul>
+                                <li>木の直径</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_d">
+                                004 - Cross Sum（★2）
+                            </a>
+                            <br>あるマスのある行と列の和を出す
+                            <ul>
+                                <li>前処理</li>
+                                <li>包除原理</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_e">
+                                005 - Restricted Digits（★7）
+                            </a>
+                            <br>K種の数字でN桁の数を作って、Bの倍数になる種類数
+                            <ul>
+                                <li>桁DP</li>
+                                <li>行列累乗</li>
+                                <li>ダブリング</li>
+                                <li>返し二乗法</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_f">
+                                006 - Smallest Subsequence（★5）
+                            </a>
+                            <br>長さNの文字列SのK文字の部分列の辞書順最小
+                            <ul>
+                                <li>
+                                    貪欲
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_g">
+                                007 - CP Classes（★3）
+                            </a>
+                            <br>レーティングAとレーティングBの差の絶対値の和を最小化
+                            <ul>
+                                <li>ソート</li>
+                                <li>二分探索</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_h">
+                                008 - AtCounter（★4）
+                            </a>
+                            <br>N文字の文字列Sから部分文字列でAtCoderとなる種類数
+                            <ul>
+                                <li>DP</li>
+                                <li>耳DP</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_i">
+                                009 - Three Point Angle（★6）
+                            </a>
+                            <br>XY平面で、もっとも180度に近い角をなす三点を探す
+                            <ul>
+                                <li>ソート</li>
+                                <li>二分探索</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_j">
+                                010 - Score Sum Queries（★2）
+                            </a>
+                            <br>２つのクラスのL ~ R の点数の合計をQ回出す
+                            <ul>
+                                <li>累積和</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_k">
+                                011 - Gravy Jobs（★6）
+                            </a>
+                            <br>締め切りがDiで、連続するCi日を使ってSiの報酬をもらう。報酬の合計を最大化。
+                            <ul>
+                                <li>ソート</li>
+                                <li>DP</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_l">
+                                012 - Red Painting（★4）
+                            </a>
+                            <br>HWのグリッドに対して２つのクエリが与えられるので処理
+                            <br>・マスを塗る
+                            <br>・2マス間を塗られたマスだけで移動できるか判定する
+                            <ul>
+                                <li>UnionFind</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_m">
+                                013 - Passing（★5）
+                            </a>
+                            <br>ある点を経由した最短距離を出す
+                            <ul>
+                                <li>始点と終点からダイクストラ</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_n">
+                                014 - We Used to Sing a Song Together（★3）
+                            </a>
+                            <br>始点と終点の距離の和を最小化
+                            <ul>
+                                <li>ソート</li>
+                                <li>貪欲</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_o">
+                                015 - Don't be too close（★6）
+                            </a>
+                            <br>一定以上離れた数値をピックする方法の種類数
+                            <ul>
+                                <li>調和級数</li>
+                                <li>組み合わせ</li>
+                                <li>二項係数</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_p">
+                                016 - Minimum Coins（★3）
+                            </a>
+                            <br>3つの基底でNを作るとき、必要な要素の最小化
+                            <ul>
+                                <li>工夫した全探索</li>
+                                <li>途中結果から最後を確定</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_q">
+                                017 - Crossing Segments（★7）
+                            </a>
+                            <br>交差する弦の数
+                            <ul>
+                                <li>条件整理</li>
+                                <li>余事象</li>
+                                <li>終点でソート</li>
+                                <li>Binary Indexed Tree(BIT)</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_r">
+                                018 - Statue of Chokudai（★3）
+                            </a>
+                            <br>時間によって変わる位置から、ある地点を見たときの角度
+                            <ul>
+                                <li>三角関数</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_s">
+                                019 - Pick Two（★6）
+                            </a>
+                            <br>連続要素を取り除くコストを２数の差の絶対値、全要素を除去した時のコストの最小化
+                            <ul>
+                                <li></li>
+                                <li>区間DP</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_t">
+                                020 - Log Inequality（★3）
+                            </a>
+                            <br>対数の大小の比較
+                            <ul>
+                                <li>誤差</li>
+                                <li>整数範囲で計算</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_u">
+                                021 - Come Back in One Piece（★5）
+                            </a>
+                            <br>DAGの最大サイクルを探す
+                            <ul>
+                                <li>強連結分解(SCC)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_v">
+                                022 - Cubic Cake（★2）
+                            </a>
+                            <br>直方体を立方体に分割したとき、最大の立方体求める
+                            <ul>
+                                <li>最大公約数(GCD)</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_w">
+                                023 - Avoid War（★7）
+                            </a>
+                            <br>周囲8マスに別のコマがない置き方の種類数
+                            <ul>
+                                <li>bit全探索</li>
+                                <li>bitDP</li>
+                                <li>左上からDP/影響範囲だけ保持</li>
+                                <li>存在する状態だけチェック</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_x">
+                                024 - Select +／- One（★2）
+                            </a>
+                            <br>2つの数列をK回の1の加減算の操作で一致させる
+                            <ul>
+                                <li>偶奇の一致(パリティ)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_y">
+                                025 - Digit Product Equation（★7）
+                            </a>
+                            <br>各桁の積と元の数字の関係を条件を満たす数字の種類数
+                            <ul>
+                                <li>工夫した全探索</li>
+                                <li>ソート</li>
+                                <li>重複組み合わせ</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_z">
+                                026 - Independent Set on a Tree（★4）
+                            </a>
+                            <br>木から隣り合わない頂点を取り出す方法
+                            <ul>
+                                <li>二部グラフ</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_aa">
+                                027 - Sign Up Requests （★2）
+                            </a>
+                            <br>存在管理。あるidが存在しないなら処理をする。
+                            <ul>
+                                <li>map</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ab">
+                                028 - Cluttered Paper（★4）
+                            </a>
+                            <br>紙を敷き詰めて指定枚数重なっている場所の面積
+                            <ul>
+                                <li>２次元imos</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ac">
+                                029 - Long Bricks（★5）
+                            </a>
+                            <br>長さの異なるブロックを置いてそれぞれの高さを求める
+                            <ul>
+                                <li>座標圧縮</li>
+                                <li>区間最大/区間更新のlazySegTree</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ad">
+                                030 - K Factors（★5）
+                            </a>
+                            <br>素因数がk個ある数字の種類数
+                            <ul>
+                                <li>素因数分解</li>
+                                <li>約数列挙</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ae">
+                                031 - VS AtCoder（★6）
+                            </a>
+                            <br>山から石を取るゲームの必勝判定
+                            <ul>
+                                <li>Grundy数</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_af">
+                                032 - AtCoder Ekiden（★3）
+                            </a>
+                            <br>N人で駅伝。険悪な二人は襷をつなげない。かかる時間の最小化
+                            <ul>
+                                <li>全探索</li>
+                                <li>別解 bitDP</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ag">
+                                033 - Not Too Bright（★2）
+                            </a>
+                            <br>指定領域に条件を満たすように明かりを配置したとき、置ける最大値
+                            <ul>
+                                <li>1のコーナーケースに注意</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ah">
+                                034 - There are few types of elements（★4）
+                            </a>
+                            <br>連続部分列に登場する要素がK個になる、最長部分列を求める
+                            <ul>
+                                <li>尺取り法</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ai">
+                                035 - Preserve Connectivity（★7）
+                            </a>
+                            <br>指定した頂点が連結状態であるのに必要な枝の数を最小化
+                            <ul>
+                                <li>木DP</li>
+                                <li>最近共通祖先(LCA)</li>
+                                <li>木の座標圧縮</li>
+                                <li>頂点の距離から枝数を出す</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_aj">
+                                036 - Max Manhattan Distance（★5）
+                            </a>
+                            <br>マンハッタン距離の最大値を出す
+                            <ul>
+                                <li>マンハッタン距離</li>
+                                <li>45度回転</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ak">
+                                037 - Don't Leave the Spice（★5）
+                            </a>
+                            <br>L~Rの間で自由に使えるスパイスをちょうどW使い、作った料理の価値を最大化する
+                            <ul>
+                                <li>DP</li>
+                                <li>区間最大SegTree</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_al">
+                                038 - Large LCM（★3）
+                            </a>
+                            <br>AとBの最小公倍数を出すが、大きい場合はlargeと出す
+                            <ul>
+                                <li>かける前に割る</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_am">
+                                039 - Tree Distance（★5）
+                            </a>
+                            <br>木の頂点間距離の和
+                            <ul>
+                                <li>主客転倒</li>
+                                <li>枝を何回通るかで処理</li>
+                                <li>木DP</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_an">
+                                040 - Get More Money（★7）</a>
+                            <br>鍵とお金がある家にW円払って入る。ただし、家に入るには鍵が必要。スコアの最大化
+                            <ul>
+                                <li>燃やす埋める問題</li>
+                                <li>最大フロー/最小カット</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ao">
+                                041 - Piles in AtCoder Farm（★7）
+                            </a>
+                            <br>多角形を作り、内部の格子点の数を数え上げ
+                            <ul>
+                                <li>凸包</li>
+                                <li>割り算の切り上げ</li>
+                                <li>ピックの定理</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ap">
+                                042 - Multiple of 9（★4）
+                            </a>
+                            <br>9の倍数かつ、桁の和がKの数字の種類数
+                            <ul>
+                                <li>倍数判定</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_aq">
+                                043 - Maze Challenge with Lack of Sleep（★4）
+                            </a>
+                            <br>迷路攻略で曲がる回数を最小化
+                            <ul>
+                                <li>拡張BFS</li>
+                                <li>拡張ダイクストラ</li>
+                                <li>01-BFS</li>
+                                <li>方向ごとのパラメータを持つ</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ar">
+                                044 - Shift and Swapping（★3）
+                            </a>
+                            <br>数列のシフトとスワップ処理をしたときに、Aiの値を出す
+                            <ul>
+                                <li>シフト回数を保持</li>
+                                <li>オフセットを載せてスワップ</li>
+                                <li>見かけ上の変化</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_as">
+                                045 - Simple Grouping（★6）
+                            </a>
+                            <br>N個の頂点をK個にグルーピング。距離の最大値を最小化
+                            <ul>
+                                <li>bitDP</li>
+                                <li>部分集合の部分集合</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_at">
+                                046 - I Love 46（★3）
+                            </a>
+                            <br>3つの数列から数字を取ってきて、和を46の倍数にする種類数
+                            <ul>
+                                <li>modで分類</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_au">
+                                047 - Monochromatic Diagonal（★7）
+                            </a>
+                            <br>一定のルールに従ってRGBでグリッドを塗る。斜線の数を数え上げ
+                            <ul>
+                                <li>数字に置き換え</li>
+                                <li>ローリングハッシュ</li>
+                                <li>Z-Algolithm</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_av">
+                                048 - I will not drop out（★3）
+                            </a>
+                            <br>満点がA点、部分点がB点のテストで時間内に取る点を最大化
+                            <ul>
+                                <li>時間あたりにとれる点数でソート</li>
+                                <li>貪欲</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_aw">
+                                049 - Flip Digits 2（★6）
+                            </a>
+                            <br>L~Rのビットを反転させるアイテムを使って文字列を変換。一致可能か判定し、可能ならコストの最小化
+                            <ul>
+                                <li>隣接する2つが一致してるかどうかを管理</li>
+                                <li>最小全域木</li>
+                                <li>クラスカル法</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ax">
+                                050 - Stair Jump（★3）
+                            </a>
+                            <br>1かL進んでちょうどN進む方法の種類数
+                            <ul>
+                                <li>DP</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ay">
+                                051 - Typical Shop（★5）
+                            </a>
+                            <br>N個の商品からK個選んで、合計をP以下にする種類数
+                            <ul>
+                                <li>半分全列挙</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_az">
+                                052 - Dice Product（★3）
+                            </a>
+                            <br>サイコロの出目の積が得点。得点の和を出す
+                            <ul>
+                                <li>和を取ってから積を出す</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ba">
+                                053 - Discrete Dowsing（★7）
+                            </a>
+                            <br>極大値を１つ持つ数列の極大値の位置を求める。数値は開くまで不明
+                            <ul>
+                                <li>三分探索</li>
+                                <li>二分探索</li>
+                                <li>微分</li>
+                                <li>黄金分割探索</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bb">
+                                054 - Takahashi Number（★6）
+                            </a>
+                            <br>すべての頂点に対してのある頂点からの最短距離
+                            <ul>
+                                <li>完全グラフ</li>
+                                <li>中点を追加して辺を減らす</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bc">
+                                055 - Select 5（★2）
+                            </a>
+                            <br>数列から5つ選んで乗じたときの余りがQになる種類数
+                            <ul>
+                                <li>多重ループ</li>
+                                <li>定数倍</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bd">
+                                056 - Lucky Bag（★5）
+                            </a>
+                            <br>Ai円とBi円の福袋から選んで、ちょうどS円になるようにする。可能かどうかと購入方法を出す
+                            <ul>
+                                <li>DP復元</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_be">
+                                057 - Flip Flap（★6）
+                            </a>
+                            <br>一部の状態を変更する操作で、目標状態を作る操作の種類数
+                            <ul>
+                                <li>操作の合体/置き換え</li>
+                                <li>行列の掃き出し</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bf">
+                                058 - Original Calculator（★4）
+                            </a>
+                            <br>元の数字と桁和を足してmodを取り数字を変更。K回操作を行ったときの値
+                            <ul>
+                                <li>周期性</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bg">
+                                059 - Many Graph Queries（★7）
+                            </a>
+                            <br>DAGで、aからbに到達できるか判断
+                            <ul>
+                                <li>トポロジカル順</li>
+                                <li>DP</li>
+                                <li>bit演算で高速化</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bh">
+                                060 - Chimera（★5）
+                            </a>
+                            <br>数列Aから極大値を1つ持つ部分列Bを作る。最長部分列の長さを求める
+                            <ul>
+                                <li>両端から処理</li>
+                                <li>最長増加部分列(LIS)</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bi">
+                                061 - Deck（★2）
+                            </a>
+                            <br>先頭と最後尾に入れる操作と、x番目の要素を出力する操作
+                            <ul>
+                                <li>deque</li>
+                                <li>大きな配列の真ん中で操作</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bj">
+                                062 - Paint All（★6）
+                            </a>
+                            <br>条件つき操作で、すべての操作を完了する
+                            <ul>
+                                <li>DAG</li>
+                                <li>逆から操作</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bk">
+                                063 - Monochromatic Subgrid（★4）
+                            </a>
+                            <br>HWのグリッドのうち、一部の行列を取りだして出現する数字が１つになるようにする
+                            <ul>
+                                <li>小さい制約で全探索</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bl">
+                                064 - Uplift（★3）
+                            </a>
+                            <br>区間加算減算の操作と、連続数の差の絶対値の和を求める
+                            <ul>
+                                <li>境界だけ操作</li>
+                                <li>階差</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bm">
+                                065 - RGB Balls 2（★7）
+                            </a>
+                            <br>制約を満たすボールの選び方の種類数
+                            <ul>
+                                <li>組み合わせ/二項係数</li>
+                                <li>式変形</li>
+                                <li>下限/上限</li>
+                                <li>畳み込み</li>
+                                <li>FFT</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bn">
+                                066 - Various Arrays（★5）
+                            </a>
+                            <br>ランダムで作られる数列の転倒数の期待値
+                            <ul>
+                                <li>期待値</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bo">
+                                067 - Base 8 to 9（★2）
+                            </a>
+                            <br>8進数を9進数に変換。出た数字を一部変更。K回繰り返した値
+                            <ul>
+                                <li>N進法</li>
+                                <li>オーバーフロー</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bp">
+                                068 - Paired Information（★5）
+                            </a>
+                            <br>2つの項の関係が与えられる。ある数を固定した場合、別の数が一意に定まるか判定
+                            <ul>
+                                <li>UnionFind</li>
+                                <li>クエリ先読み</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bq">
+                                069 - Colorful Blocks 2（★3）
+                            </a>
+                            <br>条件を満たすようにする種類数
+                            <ul>
+                                <li>漸化式</li>
+                                <li>繰り返し２乗法</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_br">
+                                070 - Plant Planning（★4）
+                            </a>
+                            <br>マンハッタン距離の総和の最小化
+                            <ul>
+                                <li>XYの独立操作</li>
+                                <li>変化量の観察</li>
+                                <li>中央値で最小値</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bs">
+                                071 - Fuzzy Priority（★7）
+                            </a>
+                            <br>条件を満たす順列をK個見つける
+                            <ul>
+                                <li>DAG</li>
+                                <li>トポロジカルソート</li>
+                                <li>DFS</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bt">
+                                072 - Loop Railway Plan（★4）
+                            </a>
+                            <br>入れないマスがあるグリッドで、最大ループを求める
+                            <ul>
+                                <li>全探索</li>
+                                <li>DFS</li>
+                                <li>バックトラック</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bu">
+                                073 - We Need Both a and b（★5）
+                            </a>
+                            <br>ある木にa・b両方の文字を含むように枝を削除する方法の種類数
+                            <ul>
+                                <li>木DP</li>
+                                <li>特徴ごとにDP</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bv">
+                                074 - ABC String 2（★6）
+                            </a>
+                            <br>操作できる最大数を求める
+                            <ul>
+                                <li>観察/実験</li>
+                                <li>数字で考える</li>
+                                <li>不変量</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bw">
+                                075 - Magic For Balls（★3）
+                            </a>
+                            <br>素因数分解した数字を２つ作る。操作回数の最小化
+                            <ul>
+                                <li>素因数分解</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bx">
+                                076 - Cake Cut（★3）
+                            </a>
+                            <br>全体の1/10になるように連続部分列を選択する
+                            <ul>
+                                <li>円環の延長</li>
+                                <li>累積和</li>
+                                <li>二分探索</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_by">
+                                077 - Planes on a 2D Plane（★7）
+                            </a>
+                            <br>時間で移動するものを、条件を満たすように配置
+                            <ul>
+                                <li>方向でBIT全探索(N≦6)</li>
+                                <li>DAG</li>
+                                <li>二部マッチング</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_bz">
+                                078 - Easy Graph Problem（★2）
+                            </a>
+                            <br>自身より頂点番号が小さい頂点がただ１つ存在する頂点の個数
+                            <ul>
+                                <li>グラフ</li>
+                                <li>ソート</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ca">
+                                079 - Two by Two（★3）
+                            </a>
+                            <br>2*2のマスに操作を行い、別のグリッドと一致できるか判定
+                            <ul>
+                                <li>前から操作</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_cb">
+                                080 - Let's Share Bit（★6）
+                            </a>
+                            <br>数列の要素すべてとbitAndをとっても0にならないもの種類数
+                            <ul>
+                                <li>包除原理</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_cc">
+                                081 - Friendly Group（★5）
+                            </a>
+                            <br>条件を満たすようにグループ分け。グループの要素数の最大値
+                            <ul>
+                                <li>二次元平面にプロット</li>
+                                <li>累積和</li>
+                                <li>包除原理</li>
+                                <li>全探索</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_cd">
+                                082 - Counting Numbers（★3）
+                            </a>
+                            <br>L~Rの間の数字xをx回書く。文字数を求める
+                            <ul>
+                                <li>桁ごとに繰り返し</li>
+                                <li>オーバーフロー</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ce">
+                                083 - Colorful Graph（★6）
+                            </a>
+                            <br>グラフの頂点と隣接頂点に色を付ける。色を出力する。
+                            <ul>
+                                <li>スターグラフ/ウニグラフ</li>
+                                <li>平方分割</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_cf">
+                                084 - There are two types of characters（★3）084 - There are two types of characters（★3）
+                            </a>
+                            <br>連続区間に〇と×が含まれる区間の数を求める
+                            <ul>
+                                <li>余事象</li>
+                                <li>ランレングス圧縮</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_cg">
+                                085 - Multiplication 085（★4）
+                            </a>
+                            <br>a*b*C = K となるabcの種類数
+                            <ul>
+                                <li>素因数分解</li>
+                                <li>約数列挙</li>
+                                <li>工夫した全探索</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ch">
+                                086 - Snuke's Favorite Arrays（★5）
+                            </a>
+                            <br>bitORの条件を満たす数列の種類数
+                            <ul>
+                                <li>bitごとに処理</li>
+                                <li>bit全探索</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ci">
+                                087 - Chokudai's Demand（★5）
+                            </a>経路を結ぶ費用を設定し、条件を満たす費用の最大値を求める
+                            <ul>
+                                <li>ワーシャルフロイド</li>
+                                <li>広義単調減少</li>
+                                <li>二分探索</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_cj">
+                                088 - Similar but Different Ways（★6）
+                            </a>
+                            <br>数列Aから条件を満たすようにカードを選ぶ方法を1つ出力
+                            <ul>
+                                <li>鳩ノ巣原理</li>
+                                <li>DFS</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_ck">
+                                089 - Partitions and Inversions（★7）
+                            </a>
+                            <br>数列Aを分割し、各区間のバブルソートに必要な手数の回数の和がK以下になる分割方法の種類数
+                            <ul>
+                                <li>切る/切らないの累乗(K=0)</li>
+                                <li>全探索</li>
+                                <li>転倒数</li>
+                                <li>尺取り法</li>
+                                <li>Binary Indexed Tree(BIT)</li>
+                                <li>座標圧縮</li>
+                                <li>DP</li>
+                                <li>累積和のDP</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <a href="https://atcoder.jp/contests/typical90/tasks/typical90_cl">
+                                090 - Tenkei90's Last Problem（★7）
+                            </a>
+                            <br>連続部分列の最小値＊長さがK以下になる連続部分列の種類数
+                            <ul>
+                                <li>DP</li>
+                                <li>行列累乗</li>
+                                <li>全探索</li>
+                                <li>掛け算の不等式は割り算でまとめる</li>
+                                <li>多項間漸化式</li>
+                                <li>FFT</li>
+                                <li>高速きたまさ法</li>
+                                <li>ボストン森法</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 同じジャンルの記事リスト -->
+    <div id="relatedList"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "",
+            );
+        });
+    </script>
+</body>
+
+</html>
