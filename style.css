@@ -1,8 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
-    padding-left: 200px;
-    padding-right: 200px;
+    padding-left: 20px;
+    padding-right: 20px;
     background-color: #afd147;
 }
 
@@ -78,6 +78,10 @@ table.fixWidth {
     table-layout: fixed;
 }
 
+table.left {
+    text-align: start;
+}
+
 div {
     margin: 10px;
 }
@@ -117,6 +121,10 @@ td {
 
 th {
     background-color: #f2f2f2;
+}
+
+table.left td {
+    text-align: left;
 }
 
 table.noBorder {
@@ -191,8 +199,8 @@ pre {
     padding: 20px;
     padding-left: 40px;
     padding-right: 40px;
-    margin-left: -240px;
-    margin-right: -240px;
+    margin-left: -40px;
+    margin-right: -40px;
     margin-top: -40px;
     background-color: #e94709;
     border: #000000 solid 5px;
