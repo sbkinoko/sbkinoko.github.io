@@ -123,11 +123,6 @@ th {
     background-color: #f2f2f2;
 }
 
-header {
-    padding-left: 100;
-    padding-right: 100;
-}
-
 table.left td {
     text-align: left;
 }
@@ -204,8 +199,8 @@ pre {
     padding: 20px;
     padding-left: 40px;
     padding-right: 40px;
-    margin-left: -240px;
-    margin-right: -240px;
+    margin-left: -40px;
+    margin-right: -40px;
     margin-top: -40px;
     background-color: #e94709;
     border: #000000 solid 5px;
