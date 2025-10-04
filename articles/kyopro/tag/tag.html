@@ -1661,7 +1661,7 @@
                         <br> ヨットゲームの期待値を求める
                         <ul>
                             <li>
-                                期待値dp
+                                期待値DP
                             </li>
                             <li>
                                 メモ化再起
@@ -1865,7 +1865,7 @@
                                 modで分類
                             </li>
                             <li>
-                                dp
+                                DP
                             </li>
                         </ul>
                     </td>
@@ -1879,7 +1879,7 @@
                                 Aho-Corasick法
                             </li>
                             <li>
-                                dp
+                                DP
                             </li>
                         </ul>
                     </td>
@@ -1948,7 +1948,7 @@
                         <br>隣接する2数のxorを取って置き換える。最後に1になる部分文字列の種類数を求める
                         <ul>
                             <li>
-                                dp
+                                DP
                             </li>
                             <li>
                                 不変量
@@ -2042,7 +2042,7 @@
                         <br>指定したスコアより低い場合、スコアが下がり、指定したスコア以上の場合スコアが上がる。初期値を与えたときの最終スコアを出す
                         <ul>
                             <li>
-                                後ろからdp
+                                後ろからDP
                             </li>
                             <li>変化が一定の場合は簡略化</li>
                             <li>累積和</li>
@@ -2178,7 +2178,7 @@
                         <br>色が塗られてないパスを選択し、そのパスを塗る。パスにある頂点の数字の和を求める。
                         <ul>
                             <li>
-                                木dp
+                                木DP
                             </li>
                             <li>
                                 端点の管理
@@ -2203,6 +2203,99 @@
                     <td>
                     </td>
                 </tr>
+                <tr>
+                    <th rowspan="3">abc415</th>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc415/tasks/abc415_a">
+                            A - Unsupported Type
+                        </a>
+                        <br>数列AにXが含まれるかチェック
+                        <ul>
+                            <li>
+                                setで管理
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc415/tasks/abc415_b">
+                            B - Pick Two
+                        </a>
+                        <br>前から#の位置を2つずつ出力
+                        <ul>
+                            <li>
+                                for文
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc415/tasks/abc415_c">
+                            C - Mixture
+                        </a>
+                        <br>N個の薬を混ぜると2^Nの状態がある。各状態が許されるかどうかが与えられるので、全部混ぜた状態を作れるか判定する
+                        <ul>
+                            <li>
+                                bitDP
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc415/tasks/abc415_d">
+                            D - Get Many Stickers
+                        </a>
+                        <br>コーラ瓶Ai本を持っていくとコーラをBi本もらえる。
+                        交換回数の最大化。
+                        <ul>
+                            <li>
+                                貪欲
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc415/tasks/abc415_e">
+                            E - Hungry Takahashi
+                        </a>
+                        <br>H*Wのマスを移動。マスi,jにはコインがAijあり立ち入ると回収できる。k日目はPkのコインを支払う。ゴールにたどりつくのに必要な最小の開始枚数を求める。
+                        <ul>
+                            <li>
+                                二分探索
+                            </li>
+                            <li>
+                                後ろからDP
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc415/tasks/abc415_f">
+                            F - Max Combo
+                        </a>
+                        <br>長さNの文字列があり、1文字を変更するクエリと区間L~Rの中にある同じ文字が続く長さの最長を求める。
+                        <ul>
+                            <li>
+                                左の文字数、右の文字数、区間内の最大連続数を保持したSegTree
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc415/tasks/abc415_g">
+                            G - Get Many Cola
+                        </a>
+                        <br>コーラ瓶Ai本を持っていくとコーラをBi本もらえる。
+                        飲める量の最大化。
+                        <ul>
+                            <li>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
             </table>
         </div>
 
@@ -2266,7 +2359,7 @@
                                 DFS
                             </li>
                             <li>
-                                木dp
+                                木DP
                             </li>
                         </ul>
                     </td>
