@@ -24,12 +24,7 @@ def fetch_html(url: str) -> str:
 url = "https://atcoder.jp/contests/" + name + "/editorial?editorialLang=ja"
 html = fetch_html(url)
 
-
-with open("page.txt", "w", encoding="utf-8") as o:
-    o.write(html)
-
-
-with open("table.txt", "w", encoding="utf-8") as o:
+with open("articles/kyopro/tag/table.txt", "w", encoding="utf-8") as o:
 
     def myWirte(s: str):
         o.write(s + "\n")
