@@ -1188,6 +1188,153 @@
             <table class="left">
                 <tr>
                     <th rowspan="3">
+                        <a hre="https://atcoder.jp/contests/abc429">
+                            ABC429
+                        </a>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc429/tasks/abc429_a">
+                            A - Too Many Requests
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc429/editorial/14278">
+                            公式解説(mechanicalpenciI)
+                        </a>
+                        <br>1 ~ N がM以下か判定
+                        <ul>
+                            <li>
+                                for
+                            </li>
+                            <li>
+                                if
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc429/tasks/abc429_b">
+                            B - N - 1
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc429/editorial/14255">
+                            公式解説(sounansya)
+                        </a>
+                        <br>全体の和から項目を１つ引いてMになるか判定
+                        <ul>
+                            <li>
+                                累積和
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc429/tasks/abc429_c">
+                            C - Odd One Subsequence
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc429/editorial/14283">
+                            公式解説(mechanicalpenciI)
+                        </a>
+                        <br>Aから3つ選択。2つの数字が同じ、1つ別の選び方
+                        <ul>
+                            <li>
+                                数字ごとにカウント
+                            </li>
+                            <li>
+                                コンビネーション
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc429/tasks/abc429_d">
+                            D - On AtCoder Conference
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc429/editorial/14279">
+                            公式解説(mechanicalpenciI)
+                        </a>
+                        <br>地点nからC人すれ違うまで進む。同じ場所に人がいるのでCとは限らない。すべての地点からC人以上であうまで移動したとき、出会った合計の人数。
+                        <ul>
+                            <li>
+                                尺取り法
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc429/tasks/abc429_e">
+                            E - Hit and Away
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc429/editorial/14284">
+                            公式解説(mechanicalpenciI)
+                        </a>
+                        <br>SとDの2種類の頂点が与えられる。Dから距離が近い2つのS距離の和。
+                        <ul>
+                            <li>
+                                多始点BFS
+                            </li>
+                            <li>
+                                始点・距離の管理
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc429/tasks/abc429_f">
+                            F - Shortest Path Query
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc429/editorial/14274">
+                            公式解説(sounansya)
+                        </a>
+                        <br>高さ3の迷路が与えられる。ゴールまでの距離をQ回出す。毎回1マスだけ壁と道が反転する。
+                        <ul>
+                            <li>
+                                セグ木
+                            </li>
+                            <li>
+                                横方向に戻ることはないので、縦の移動量だけ管理
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc429/tasks/abc429_g">
+                            G - Sum of Pow of Mod of Linear
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc429/editorial/14242">
+                            公式解説(sounansya)
+                        </a>
+                        <br>
+                        <math>
+                            <munderover>
+                                <mi>
+                                    &sum;
+                                </mi>
+                                <mrow>
+                                    <mi>k</mi>
+                                    <mo>=</mo>
+                                    <mn>0</mn>
+                                </mrow>
+                                <mi>N−1</mi>
+                            </munderover>
+                            <mi>X ^((Ak+B)modM)</mi>
+                        </math>
+                        を R で割ったあまりを求める
+                        <ul>
+                            <li>
+                                未確認
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th rowspan="3">
                         <a hre="https://atcoder.jp/contests/abc428">
                             ABC428
                         </a>
@@ -1285,9 +1432,19 @@
                         <a href="https://atcoder.jp/contests/abc428/editorial/14251">
                             公式解説(sheyasutaka)
                         </a>
-                        <br>未確認
+                        <br>長さが単調増加になるように区間がある。操作は次の３つ<br>
+                        ・ある区間より小さな区間をその区間の右端に揃える
+                        <br>・ある区間より小さな区間をその区間の左端に揃える
+                        <br> ・点x+1/2を含む区間数を出す
                         <ul>
                             <li>
+                                区間更新のlazySegTree
+                            </li>
+                            <li>
+                                そろっている位置が右端か左端か管理
+                            </li>
+                            <li>
+                                端点に注目してグループで管理
                             </li>
                         </ul>
                     </td>
@@ -4226,9 +4383,13 @@
                         <a href="https://atcoder.jp/contests/abc359/editorial/10260">
                             公式解説(nok0)
                         </a>
-                        <br>未確認
+                        <br>出次数の2乗と頂点の重みをかけたものの総和の最小値を求める
                         <ul>
                             <li>
+                                貪欲
+                            </li>
+                            <li>
+                                ２乗は分解して、辺を追加するときのコストを(2d+1)Aiとする。
                             </li>
                         </ul>
                     </td>
@@ -4253,6 +4414,140 @@
                     <td>
                     </td>
                 </tr>
+                <tr>
+                    <th rowspan="3">
+                        <a hre="https://atcoder.jp/contests/abc358">
+                            ABC358
+                        </a>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc358/tasks/abc358_a">
+                            A - Welcome to AtCoder Land
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc358/editorial/10219">
+                            公式解説(yuto1115)
+                        </a>
+                        <br>文字列比較
+                        <ul>
+                            <li>
+                                stringの比較
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc358/tasks/abc358_b">
+                            B - Ticket Counter
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc358/editorial/10220">
+                            公式解説(yuto1115)
+                        </a>
+                        <br>到着時間と処理時間が与えられるので、実際に購入が終わる時間を出す
+                        <ul>
+                            <li>
+                                到着と前の処理のminを取る
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc358/tasks/abc358_c">
+                            C - Popcorn
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc358/editorial/10221">
+                            公式解説(yuto1115)
+                        </a>
+                        <br>M種類のうち一部を売っている売り場がN個。コンプに必要な売り場数。
+                        <ul>
+                            <li>
+                                全探索
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc358/tasks/abc358_d">
+                            D - Souvenirs
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc358/editorial/10225">
+                            公式解説(cn449)
+                        </a>
+                        <br>Bを超えるAをペアにする。選択したAの最小値
+                        <ul>
+                            <li>
+                                ソート
+                            </li>
+                            <li>
+                                マッチング
+                            </li>
+                            <li>
+                                二分探索
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc358/tasks/abc358_e">
+                            E - Alphabet Tiles
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc358/editorial/10224">
+                            公式解説(cn449)
+                        </a>
+                        <br>K文字以下の文字列の作り方。各アルファベットの使用可能回数も与えられる。
+                        <ul>
+                            <li>
+                                コンビネーション
+                            </li>
+                            <li>
+                                パスカルの三角形
+                            </li>
+                            <li>
+                                dp
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc358/tasks/abc358_f">
+                            F - Easiest Maze
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc358/editorial/10222">
+                            公式解説(yuto1115)
+                        </a>
+                        <br>指定された経路長になる一本道を作れるか判定。実際に作る
+                        <ul>
+                            <li>
+                                達成可能か判定
+                            </li>
+                            <li>
+                                移動は必ず+2ずつ
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="https://atcoder.jp/contests/abc358/tasks/abc358_g">
+                            G - AtCoder Tour
+                        </a>
+                        <br>
+                        <a href="https://atcoder.jp/contests/abc358/editorial/10226">
+                            公式解説(cn449)
+                        </a>
+                        <br>
+                        <ul>
+                            <li>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+
 
 
             </table>
