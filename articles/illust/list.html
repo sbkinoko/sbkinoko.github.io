@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>イラスト関連</title>
+    <link rel="styleSheet" href="./../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../main.js"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <div id="illustList"></div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../"
+            writeHeader(
+                dir
+            );
+            writeBreadcrumb(
+                dir,
+                "genre"
+            )
+            writeIllustList(
+                dir,
+                "<h2>",
+                "</h2>",
+            );
+        });
+    </script>
+</body>
+
+</html>

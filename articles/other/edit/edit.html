@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>新規として保存しか出ない</title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+</head>
+<!--
+ &lt <
+    <ol>
+        <li></li>
+    </ol>
+ -->
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2024/10/14</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/06/06</td>
+        </tr>
+    </table>
+
+    <div>
+        <h1>
+            YouTubeLiveの結果を編集すると新規として保存しか出ない
+        </h1>
+        <div>
+            <p>
+                タイトル通りです。
+            </p>
+            <p>
+                YouTubeで配信をした際、ちょっと配信に載せたくないものが入っちゃうことってありますよね。こういうときに配信終了後に慌ててトリミングしても画像の様に「新規として保存」しか出なくて困ります。
+            </p>
+        </div>
+
+        <div class="box1">
+            <img src="直後.png" width="100%">
+        </div>
+
+        <div>
+            <p>
+                こういうときはおとなしく一度非公開にしておきましょう。
+            </p>
+            <p>
+                時間が経つと保存が表示されるようになります。一日も待てば十分なはずです。
+            </p>
+            <p>
+                カットしたい部分をカットして保存できたら再度公開です。
+            </p>
+        </div>
+
+        <div class="box1">
+            <img src="しばらく後.png" width="100%">
+        </div>
+
+        <div>
+            <p>
+                ついでの情報として、エディタの機能もしばらくすると充実します
+            </p>
+        </div>
+
+        <table>
+            <tr>
+                <th>直後</th>
+                <th>しばらく後</th>
+            </tr>
+            <tr>
+                <td><img src="エディタ_直後.png"></td>
+                <td><img src="エディタ_しばらく後.png"></td>
+            </tr>
+        </table>
+
+        <div id="relatedList"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+              articleHeaderFooter(
+                dir,
+                "other",
+            );
+        });
+    </script>
+</body>
+
+</html>

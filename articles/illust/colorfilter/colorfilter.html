@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>フォルダ内のレイヤーにだけ色調補正をかける</title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+    <script type="text/javascript"
+        asyncsrc="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=MML_SVG"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2023/06/15</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2023/06/15</td>
+        </tr>
+    </table>
+
+    <div>
+        <h1>
+            フォルダ内のレイヤーにだけ色調補正をかける
+        </h1>
+
+        <div>
+            <h2>
+                背景
+            </h2>
+
+            <div>
+                <p>
+                    photoshopを利用していた時、デフォルト状態で色調補正をかけると全体にかかってしまったので、一部のレイヤーにだけかける方法を調べました。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                色調補正のかけ方
+            </h2>
+
+            <div>
+                <p>
+                    色調補正windowから使いたいフィルタを選択します。色調補正windowが表示されていない場合は ウィンドウ > 色調補正 で表示状態にします
+                </p>
+            </div>
+
+            <div>
+                <img class="normalImg" src="window.png">
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                グループ内のレイヤにだけ補正をかける
+            </h2>
+
+            <div>
+                <p>
+                    なにも設定を変えずにフィルタを作成すると、すべてのレイヤを対象としてフィルタが機能します。
+                </p>
+            </div>
+
+            <div>
+                <img class="normalImg" src="filter1.gif">
+            </div>
+
+            <div>
+                <p>
+                    フォルダ内に色調補正がはいっているのに、赤と青の円が両方とも色が変わっています。
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    フォルダの設定を変えて、フォルダ内だけに影響がでるようにします。
+                </p>
+                <p>
+                    フォルダのマークをダブルクリック、もしくは右クリックからレイヤー効果を開きます。レイヤー効果のタブにある「通常の描画」項目内の「描画モード」で「通常」を選択します
+                    <a href="#ref">[1]</a>。
+                </p>
+            </div>
+
+            <div>
+                <img class="normalImg" src="filter2.gif">
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                まとめ
+            </h2>
+
+            <div>
+                <p>
+                    これでフォルダ内のレイヤーにだけ影響が出るようになりました。
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    デフォルトの設定が通常じゃないのって不思議ですね。
+                </p>
+                <p>
+                    デジタルで描くなら、そろそろ他のモードも理屈から理解したいところです。
+                </p>
+                <p>
+                    とまぁ今回はこの辺で。ではまた。
+                </p>
+            </div>
+        </div>
+
+        <!-- 参考リスト -->
+        <div>
+            <h2 id="ref">
+                参考
+            </h2>
+            <ol>
+                <li>『【Photoshop】調整レイヤーの効果をフォルダ内だけにする方法』 tumblr (2025/06/15)
+                    <br><a
+                        href="https://www.tumblr.com/memob/30780937006/photoshop%E8%AA%BF%E6%95%B4%E3%83%AC%E3%82%A4%E3%83%A4%E3%83%BC%E3%81%AE%E5%8A%B9%E6%9E%9C%E3%82%92%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E5%86%85%E3%81%A0%E3%81%91%E3%81%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95">
+                        https://www.tumblr.com/memob/30780937006/photoshop%E8%AA%BF%E6%95%B4%E3%83%AC%E3%82%A4%E3%83%A4%E3%83%BC%E3%81%AE%E5%8A%B9%E6%9E%9C%E3%82%92%E3%83%95%E3%82%A9%E3%83%AB%E3%83%80%E5%86%85%E3%81%A0%E3%81%91%E3%81%AB%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95
+                    </a>
+                </li>
+                <!-- <li>『』 ページ名 ()
+            <br><a href="">
+
+            </a>
+        </li> -->
+            </ol>
+        </div>
+
+        <!-- 同じジャンルの記事リスト -->
+        <div id="relatedList"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "illust",
+            );
+        });
+    </script>
+</body>
+
+</html>

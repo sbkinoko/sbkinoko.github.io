@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>wip</title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <ol>
+        <li>
+            <p>
+                枠線をつける
+                <br>ここの1
+                <br><a
+                    href="https://saruwakakun.com/html-css/reference/box">https://saruwakakun.com/html-css/reference/box</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                数字付き段落
+                <br><a
+                    href="https://web-designer.cman.jp/html_ref/abc_list/ol/">https://web-designer.cman.jp/html_ref/abc_list/ol/</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                指定位置にリンク
+                <br><a
+                    href="https://www.tagindex.com/html_tag/link/a_url_id.html">https://www.tagindex.com/html_tag/link/a_url_id.html</a>
+            </p>
+        </li>
+        <li>
+            <p>
+                コードブロックの作成
+                <br><a href="https://catnose.me/learning/html/code">https://catnose.me/learning/html/code</a>
+                <br>スクロールの背景色とcodeの背景色を揃えた
+            </p>
+        </li>
+        <li>
+            <p>javascriptで共通化
+                <br><a href="https://webmoyou.com/web/298/">https://webmoyou.com/web/298/</a>
+                <br>jqueryを読み込み
+                <br><a
+                    href="https://pisuke-code.com/jquery-is-not-defined-solution/">https://pisuke-code.com/jquery-is-not-defined-solution/</a>
+            </p>
+        </li>
+    </ol>
+
+    <div id="relatedList"></div>
+
+    <!--
+    <li>
+        <p>
+            <br><a href=""></a>
+        </p>
+    </li> 
+    -->
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "html",
+            );
+        });
+    </script>
+</body>
+
+</html>

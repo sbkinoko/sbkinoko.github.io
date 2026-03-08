@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ボタンでスクロール</title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+    <script type="text/javascript"
+        asyncsrc="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=MML_SVG"></script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2025/06/23</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/07/22</td>
+        </tr>
+    </table>
+
+    <div>
+        <h1>
+            ボタンでスクロール
+        </h1>
+
+        <div>
+            <h2>
+                背景
+            </h2>
+
+            <div>
+                <p>
+                    アプリを作っているときに、タップ以外の操作でスクロールを呼びたかった。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2>
+                内容
+            </h2>
+
+            <div>
+                <ol>
+                    <li>
+                        <a href="#list">
+                            スクロールリストを作成
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#button">
+                            ボタンでスクロール
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#con">
+                            まとめ
+                        </a>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div>
+            <h2 id="list">
+                スクロールリストを作成
+            </h2>
+
+            <div>
+                <p>
+                    LazyColumnを利用して作りました。
+                </p>
+                <p>
+                    要素ごとにわかりやすいように枠線をつけています。
+                </p>
+                <p>
+                    ここは別段説明することはないと思います。差分は
+                    <a href="https://github.com/sbkinoko/ScrollApp/pull/15/files">
+                        こちら
+                    </a>
+                    です。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2 id="button">
+                ボタンでスクロール
+            </h2>
+
+            <div>
+                <p>
+                    ボタンでスクロールできるようにしていきます。
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    ボタンでスクロールするためにはボタンが必要なので配置してあげます。差分は
+                    <a href="https://github.com/sbkinoko/ScrollApp/pull/16/files">
+                        こちら
+                    </a>
+                    です。Composeでボタンを置いただけです。clickableにしているのは、触っていることがわかりやすいようにするためです。
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    で、ボタンにスクロール機能を付けていきます。差分は<a href="https://github.com/sbkinoko/ScrollApp/pull/17/files">
+                        こちら
+                    </a>
+                    です。
+                </p>
+                <p>
+                    タップでも長押しでもスクロールできるようにしてあげます。
+                </p>
+            </div>
+
+            <div>
+
+                <pre>
+<code class="filename">ModifierExt.kt</code>
+<code>fun Modifier.isPressed(
+    buttonState: ButtonState,
+    update: (ButtonState) -> Unit,
+): Modifier {
+    return this.pointerInput(Unit) {
+        awaitEachGesture {
+            awaitPointerEvent()
+            update(buttonState)
+
+            // 押されている間はtrue
+            while (
+                awaitPointerEvent().changes.any {
+                    it.pressed
+                }
+            ) {
+               // なにもしない
+            }
+
+            //　放されたらfalse
+            update(ButtonState.None)
+        }
+    }
+}
+            </code></pre>
+            </div>
+
+            <div>
+                <p>
+                    ボタンの長押し検知用に作ったpointerInputです。
+                </p>
+                <p>
+                    buttonStateがどのボタンが押しているかを指定し、updateで親で保持しているstateを更新します。
+                </p>
+                <p>
+                    タップされたときに引数で指定されたボタンを押下状態にして、タップをやめたときにボタンの押下状態を解除します。
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    長押しを検知するModifierのcombinedClickableや
+                    、PointerInput内で呼べるdetectTapGesturestがありますが
+                    <a href="#ref">
+                        [1]
+                    </a>
+                    、長押しになったことを検知するだけなので今回は使えません。
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    前に作ったのがpointerInputだったのでponiterInputを利用しましたが、pointerIntoropFilterというメソッドでも同様のことが出来そうです
+                    <a href="#ref">
+                        [2]
+                    </a>
+                    。
+                </p>
+            </div>
+
+            <pre>
+<code class="filename">App.kt</code>
+<code>@Composable
+@Preview
+fun App() {
+    val scrollState = rememberLazyListState()
+
+    var isButtonPressed by remember {
+        mutableStateOf(ButtonState.None)
+    }
+
+    LaunchedEffect(isButtonPressed) {
+        val delayTime = 100L
+        var dif = 1
+        while (true) {
+            when (isButtonPressed) {
+                ButtonState.Up -> scrollState.animateScrollToItem(
+                    max(
+                        scrollState.firstVisibleItemIndex - dif,
+                        0,
+                    ),
+                )
+
+                ButtonState.Down -> scrollState.animateScrollToItem(
+                    scrollState.firstVisibleItemIndex + dif,
+                )
+
+                ButtonState.None -> return@LaunchedEffect
+            }
+            delay(delayTime)
+            dif++
+        }
+    }
+
+
+    ～省略～
+    
+} 
+    </code>
+</pre>
+            <div>
+                <p>
+                    ボタンの状態が変わったときに非同期処理が呼ばれ、押されている間は上下にスクロールし、放された場合なにもしません。
+                </p>
+                <p>
+                    difは移動量です。上に移動するときは、先頭のアイテム番号を小さくし、下に移動するときは先頭のアイテムを大きくします。itemIndexが0になると困るので0にならないようにします。大きい方は問題ないです。
+                </p>
+            </div>
+
+            <img class="normalImg" src="button_scroll.gif">
+
+        </div>
+
+
+        <div>
+            <h2 id="con">
+                まとめ
+            </h2>
+
+            <div>
+                <p>
+                    以上、スクロールを外部からいじる方法について調べ、リストのタップ操作以外でスクロールできるような実装をしました。
+                </p>
+                <p>
+                    スクロールバーも別記事で作成している(<a href="../scroll_bar/scroll_bar.html">こちら</a>)ので、興味がある方はそちらもみてくださいませ。
+                </p>
+                <p>
+                    ではまた。
+                </p>
+            </div>
+        </div>
+
+        <!-- 参考リスト -->
+        <div>
+            <h2 id="ref">
+                参考
+            </h2>
+            <ol>
+                <li>『タップして押す』 Developers (2025/06/23)
+                    <br><a
+                        href="https://developer.android.com/develop/ui/compose/touch-input/pointer-input/tap-and-press?hl=ja">
+                        https://developer.android.com/develop/ui/compose/touch-input/pointer-input/tap-and-press?hl=ja
+                    </a>
+                </li>
+
+                <li>『Jetpack Composeで長押し中インクリメントするボタンを作る』 Zenn (2025/06/23)
+                    <br><a href="https://zenn.dev/tada_k/articles/352aea81d6d74d">
+                        https://zenn.dev/tada_k/articles/352aea81d6d74d
+                    </a>
+                </li>
+
+                <!-- <li>『』 ページ名 ()
+            <br><a href="">
+
+            </a>
+        </li> -->
+            </ol>
+        </div>
+    </div>
+
+    <!-- 同じジャンルの記事リスト -->
+    <div id="relatedList"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "android",
+            );
+        });
+    </script>
+</body>
+
+</html>

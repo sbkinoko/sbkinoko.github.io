@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>小物の表示非表示を切り替える</title>
+    <link rel="styleSheet" href="./../../../style.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./../../../main.js"></script>
+</head>
+<!--
+ &lt <
+    <ol>
+        <li></li>
+    </ol>
+ -->
+
+<body>
+    <div id="header"></div>
+    <div id="breadcrumb"></div>
+
+    <table class="noBorder">
+        <tr>
+            <td>作成日</td>
+            <td>2024/12/01</td>
+        </tr>
+        <tr>
+            <td>最終更新日</td>
+            <td>2025/06/06</td>
+        </tr>
+    </table>
+
+    <div>
+        <h1>
+            小物の表示非表示を切り替える
+        </h1>
+
+        <div>
+            <h2>
+                やりたいこと
+            </h2>
+
+            <p>
+                眼鏡と帽子を作ったので表示非表示を切り替えたいなと思いました。
+            </p>
+        </div>
+
+        <div>
+            <h2>
+                環境
+            </h2>
+
+            <p>
+                使用しているのは「<a href="https://www.live2d.com/">Live2D</a>」と「<a href="https://nizimalive.com/">nizima
+                    LIVE</a>」です。
+            </p>
+        </div>
+
+        <div>
+            <h2>
+                困ったこと
+            </h2>
+
+            <p>
+                nizimaからレイヤーのオンオフが直接できるのかと思っていたのですができず。アイテムからできるのかと思いきや別途追加しないといけない様子<a
+                    href="#ref">[1]</a>。もう動きを登録してしまったあとなのでそれもやりたくない……。
+            </p>
+        </div>
+
+        <div>
+            <h2>
+                やったこと
+            </h2>
+
+            <div>
+                <p>
+                    知恵袋にて同様の質問をしている方<a href="#id">[2]</a>を発見。
+                </p>
+                <p>
+                    質問と回答から考えるに、表情パラメータとして設定するとうまくできそうです。
+                </p>
+                <p>
+                    ということでLive2D側パラメータを追加して、値の変更で透明度を変えられるようにしました。パラメータの追加自体は右下の+マークからできます。
+                </p>
+            </div>
+
+            <div class="box1">
+                <img width="200" src="parameter.png">
+            </div>
+
+            <div>
+                <p>
+                    パラメータの追加をしたらnizima側で設定を進めます。
+                </p>
+                <p>
+                    「表情・モーション」から「新規表情作成/カスタムモデル新規編集」を開きます。
+                </p>
+                <p>
+                    設定したパラメータにチェックを入れ、パラメータを変更するように設定します。デフォルトの500msだとゆっくり消えて気になったので50msに変更しました。
+                </p>
+            </div>
+
+            <div class="box1">
+                <img width="200" src="motion.png">
+            </div>
+
+            <div>
+                <p>
+                    設定ができたら、「表情・モーション」でトグルスイッチをオンオフすることでパラメータの変更をワンクリックで行えるようになります。
+                </p>
+            </div>
+
+            <table width="400">
+                <tr>
+                    <th width="200">ON</th>
+                    <th width="200">OFF</th>
+                </tr>
+                <tr>
+                    <td><img width="200" src="on.png"></td>
+                    <td><img width="200" src="off.png"></td>
+                </tr>
+            </table>
+
+            <div>
+                <p>
+                    独立したパラメータで設定すれば、衝突することなく小物のオンオフを切り替えられるようになりました
+                </p>
+            </div>
+
+            <table width="400">
+                <tr>
+                    <th width="100" colspan="2" rowspan="2"></th>
+                    <th colspan="2" width="200">眼鏡</th>
+                </tr>
+                <tr>
+                    <th width="100">ON</th>
+                    <th width="100">OFF</th>
+                </tr>
+                <tr>
+                    <th width="50" rowspan="2">帽子</th>
+                    <th width="50">ON</th>
+                    <td><img src="onon.png" width="200"></td>
+                    <td><img src="onoff.png" width="200"></td>
+                </tr>
+                <tr>
+                    <th width="50">OFF</th>
+                    <td><img src="offon.png" width="200"></td>
+                    <td><img src="offoff.png" width="200"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <h2>
+                他でやりたいこと
+            </h2>
+
+            <div>
+                <p>
+                    表情・モーションのパラメータの変更モードで
+                </p>
+            </div>
+
+            <ul>
+                <li>
+                    (+)加算
+                </li>
+                <li>
+                    (*)乗算
+                </li>
+                <li>
+                    (=)上書き
+                </li>
+            </ul>
+
+            <div>
+                <p>
+                    なるものがあるので調べてみたいです。割と名前から想像できますが。
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    今後の課題も見つけたとこで、今回はこの辺でおしまいです。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2 id="ref">
+                参考
+            </h2>
+            <ol>
+                <li>
+                    アイテム登録方法 (2024/12/01)
+                    <br>
+                    <a href="https://docs.live2d.com/nizimalive/tutorials/how-to-register-item/">
+                        https://docs.live2d.com/nizimalive/tutorials/how-to-register-item/
+                    </a>
+                </li>
+                <li>
+                    Yahho Japan 知恵袋 (2024/12/01)
+                    <br>
+                    <a href="https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13250096658">
+                        https://detail.chiebukuro.yahoo.co.jp/qa/question_detail/q13250096658
+                    </a>
+                </li>
+            </ol>
+        </div>
+
+        <div id="relatedList"></div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var dir = "./../../../"
+            articleHeaderFooter(
+                dir,
+                "illust",
+            );
+        });
+    </script>
+</body>
+
+</html>
