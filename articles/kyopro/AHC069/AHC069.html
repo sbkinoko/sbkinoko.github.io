@@ -22,7 +22,7 @@
         </tr>
         <tr>
             <td>最終更新日</td>
-            <td>2026/07/31</td>
+            <td>2026/08/10</td>
         </tr>
     </table>
 
@@ -83,6 +83,26 @@
                 <li>
                     <a href="#day5">
                         5日目
+                    </a>
+                </li>
+                <li>
+                    <a href="#day6">
+                        6日目
+                    </a>
+                </li>
+                <li>
+                    <a href="#day7">
+                        7日目
+                    </a>
+                </li>
+                <li>
+                    <a href="#day8">
+                        8日目
+                    </a>
+                </li>
+                <li>
+                    <a href="#day9">
+                        9日目
                     </a>
                 </li>
                 <li>
@@ -257,6 +277,9 @@
                     <p>
                         インタラクティブなのに最後にまとめて答えを出そうとしたポンをかました後に再度提出。
                     </p>
+                    <p>
+                        直前のTLEもこれな気がする。
+                    </p>
 
                     <table class="center">
                         <tr>
@@ -405,12 +428,12 @@
                     理想と現実は往々にして違うものです。そんなに器用にサイズもよくわからない長方形をいい感じに配置する技術なんてなかった。適当に配置してからスライドするにしても初期解に依存しすぎますし、長方形の重複を許して配置なんてした日にはもう何もわかりません。
                 </p>
                 <p>
-                    ということで諦めて5*5で区切ってみました。あとはこれを適当にマージしていい感じにします。5*5を最悪７こつなげれば150はカバーできる(といいな)と思っているのでこれで行きます。正方形は諦める。
+                    ということで諦めて5*5で区切ってみました。あとはこれを適当にマージしていい感じにします。5*5を最悪７個つなげれば150はカバーできる(といいな)と思っているのでこれで行きます。正方形は諦める。
                 </p>
             </div>
             <div>
                 <p>
-                    後忘れそうなので先にメモっておきますが、各パラメータごとに制限をかけて提出してみるというのをしてみたいですね。強い設定、弱い設定を探したいです。
+                    あと、忘れそうなので先にメモっておきますが、各パラメータごとに制限をかけて提出してみるというのをしてみたいですね。強い設定、弱い設定を探したいです。
                     R毎と池の数枚に出してみたいなとは思ってます。
                 </p>
             </div>
@@ -541,12 +564,19 @@
                 <p>
                     Rがダメなら池の量で分別しようとしようと思ってました、やりましょう。
                 </p>
+            </div>
+            <div>
+                <p>
+                    ただ池の量を見るだけだと正方形にある池と、点在している池の評価が同じになってしまいます。これだと約に立ちません。使えそうな評価を考えないといけません。
+                </p>
                 <p>
                     フィールド全体を埋めるグループを作ってCを出すとかですかね。単純に池の量で見ても何の特徴も得られない気がします。
                 </p>
                 <p>
                     有効なマスを4つ以上の芝からなる集合としその芝の数をS、その集合の周囲の長さをLとします。
-                    Lの和/Sの和で比較してみました。
+                    Lの和/Sの和で比較してみました(多分)。
+                </p>
+                <p>
                     0.035で分割しました。
                     0.035以下が21個(左)、超過が29個(右)でした。
                 </p>
@@ -568,9 +598,658 @@
                         こんなことをしながらパラメータを調整、26に乗りました。スコアじわ伸び。
                     </p>
                 </div>
+
                 <div class="center">
                     <img class="normalImg" src="day7_06.png">
                 </div>
+
+            </div>
+        </div>
+
+        <div>
+            <h2 id="day8">
+                day8
+            </h2>
+
+            <div>
+                <p>
+                    池の分布を評価するためになんとなく評価をしました。これを使って広そうなエリアを探すこともできそうなことに気付きました。
+                </p>
+                <p>
+                    そもそも、もともとの評価があってるか抜粋して確認してみましょう。
+                </p>
+            </div>
+
+            <table class="center">
+                <tr>
+                    <td rowspan="2"> 疎</td>
+                    <td>21</td>
+                    <td>664</td>
+                </tr>
+                <tr>
+                    <td> <img class="normalImg" src="day8_05.png"></td>
+                    <td> <img class="normalImg" src="day8_06.png"></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">中 </td>
+                    <td> 643</td>
+                    <td> 214</td>
+                </tr>
+                <tr>
+                    <td> <img class="normalImg" src="day8_03.png"></td>
+                    <td> <img class="normalImg" src="day8_04.png"></td>
+                </tr>
+                <tr>
+                    <td rowspan="2">密 </td>
+                    <td> 142</td>
+                    <td> 27 </td>
+                </tr>
+                <tr>
+                    <td> <img class="normalImg" src="day8_01.png"></td>
+                    <td> <img class="normalImg" src="day8_02.png"></td>
+                </tr>
+            </table>
+
+            <div>
+                <p>
+                    有効な芝生マス―芝生マスの周囲の長さでソートして、最初の2つ、真ん中の2つ、最後の2つを出しました。sqrt(芝生マス)/Lだったかもしれない。覚えてない……。スクショも取っちゃったのでそのまま行きます。
+                </p>
+                <p>
+                    すごい！！なんとなくあってる！！！
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    評価に使っていた値をこれに差し替えてみましょうか。
+                </p>
+            </div>
+
+            <div class="center">
+                <table>
+                    <tr>
+                        <td> 新</td>
+                        <td> 旧</td>
+                    </tr>
+                    <tr>
+                        <td> <img class="normalImg" src="day8_07.png"></td>
+                        <td> <img class="normalImg" src="day3_05.png"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div>
+                <p>
+                    最大値、左は7、右は8の位置を見るとより良いように見えます。
+                </p>
+                <p>
+                    サイズが4未満の場所を0にするのを忘れていたのでちょっと変なことになってますが、まあいいでしょう。修正していくらか実行してみます。
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h2 id="day9">
+                day9
+            </h2>
+
+            <div>
+                <p>
+                    何をいじったか忘れました。
+                </p>
+                <p>
+                    とりあえずマスのスコアを出せるようになったのでVが小さい場合は埋めるマスのスコアを最小、Vが大きい場合は周の長さを最小にすることを評価にしてみましょう。ここで、Vの評価はこれまでのスコアの平均のに対する割合としましょう。
+                </p>
+                <p>
+                    これで一回提出、ベストは出ましたが、ビジュアライザを眺めているとまだ制約が弱そうでした。評価に使っていた値をペアにしてvの値によってfirst・secondを入れ替える仕様にして再提出。
+                </p>
+            </div>
+
+            <div class="center">
+                <table>
+                    <tr>
+                        <td> <img class="normalImg" src="day9_01.png"></td>
+                        <td> <img class="normalImg" src="day9_02.png"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div>
+                <p>
+                    スコアはじわじわ伸び続けています。が、上位陣の6割強。そろそろ移動を取り入れたいところです。
+                </p>
+                <p>
+                    が、別にいい案もないんですよね…。「真ん中の方を陣取っている評価値が低いグループを端に追いやる」とか「別のグループを避けるために歪な形になっているグループを、避けたグループがいなくなったからきれいな形にする」とかですかね。これらはどちらも後から来た評価値の高いグループの形をきれいにするための操作です。
+                </p>
+                <p>
+                    でもうまく実装するすべが思いつきません。計算量が爆発しそうですし、特徴の抽出ができる気もしません。
+                </p>
+            </div>
+
+            <div>
+                <p>
+                    弱いケースを眺めて改善する方法も考えましょう。これも今更ですが。
+                </p>
+                <p>
+                    最初の100件のV和に対するスコアの割合を出しました。
+                </p>
+            </div>
+            <div class="center">
+                <details>
+                    <summary>
+                        最初の100件のVの和に対するスコアの割合
+                    </summary>
+
+                    <p>
+                        評価がわかりにくかったので0~100に正規化しました。0が悪いフィールド、100がいいフィールドです。
+                    </p>
+
+                    <table>
+                        <tr>
+                            <td>V和の割合</td>
+                            <td>seed</td>
+                            <td>フィールドのスコア</td>
+                            <td>&nbsp;</td>
+                            <td>V和の割合</td>
+                            <td>seed</td>
+                            <td>フィールドのスコア</td>
+                            <td>&nbsp;</td>
+                            <td>V和の割合</td>
+                            <td>seed</td>
+                            <td>フィールドのスコア</td>
+                            <td>&nbsp;</td>
+                            <td>V和の割合</td>
+                            <td>seed</td>
+                            <td>フィールドのスコア</td>
+                        </tr>
+                        <tr>
+                            <td>16</td>
+                            <td>11</td>
+                            <td>1</td>
+                            <td>&nbsp;</td>
+                            <td>17</td>
+                            <td>9</td>
+                            <td>4</td>
+                            <td>&nbsp;</td>
+                            <td>18</td>
+                            <td>96</td>
+                            <td>7</td>
+                            <td>&nbsp;</td>
+                            <td>19</td>
+                            <td>84</td>
+                            <td>4</td>
+                        </tr>
+                        <tr>
+                            <td>19</td>
+                            <td>92</td>
+                            <td>2</td>
+                            <td>&nbsp;</td>
+                            <td>20</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>&nbsp;</td>
+                            <td>20</td>
+                            <td>26</td>
+                            <td>5</td>
+                            <td>&nbsp;</td>
+                            <td>21</td>
+                            <td>3</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>21</td>
+                            <td>13</td>
+                            <td>11</td>
+                            <td>&nbsp;</td>
+                            <td>21</td>
+                            <td>25</td>
+                            <td>0</td>
+                            <td>&nbsp;</td>
+                            <td>21</td>
+                            <td>55</td>
+                            <td>2</td>
+                            <td>&nbsp;</td>
+                            <td>22</td>
+                            <td>16</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>22</td>
+                            <td>47</td>
+                            <td>14</td>
+                            <td>&nbsp;</td>
+                            <td>22</td>
+                            <td>82</td>
+                            <td>16</td>
+                            <td>&nbsp;</td>
+                            <td>23</td>
+                            <td>19</td>
+                            <td>0</td>
+                            <td>&nbsp;</td>
+                            <td>23</td>
+                            <td>60</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>24</td>
+                            <td>46</td>
+                            <td>9</td>
+                            <td>&nbsp;</td>
+                            <td>24</td>
+                            <td>53</td>
+                            <td>8</td>
+                            <td>&nbsp;</td>
+                            <td>24</td>
+                            <td>80</td>
+                            <td>22</td>
+                            <td>&nbsp;</td>
+                            <td>26</td>
+                            <td>18</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>26</td>
+                            <td>32</td>
+                            <td>29</td>
+                            <td>&nbsp;</td>
+                            <td>26</td>
+                            <td>37</td>
+                            <td>28</td>
+                            <td>&nbsp;</td>
+                            <td>26</td>
+                            <td>49</td>
+                            <td>14</td>
+                            <td>&nbsp;</td>
+                            <td>27</td>
+                            <td>44</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>27</td>
+                            <td>95</td>
+                            <td>2</td>
+                            <td>&nbsp;</td>
+                            <td>28</td>
+                            <td>24</td>
+                            <td>29</td>
+                            <td>&nbsp;</td>
+                            <td>28</td>
+                            <td>34</td>
+                            <td>15</td>
+                            <td>&nbsp;</td>
+                            <td>29</td>
+                            <td>27</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td>29</td>
+                            <td>48</td>
+                            <td>4</td>
+                            <td>&nbsp;</td>
+                            <td>29</td>
+                            <td>59</td>
+                            <td>49</td>
+                            <td>&nbsp;</td>
+                            <td>30</td>
+                            <td>14</td>
+                            <td>2</td>
+                            <td>&nbsp;</td>
+                            <td>30</td>
+                            <td>23</td>
+                            <td>33</td>
+                        </tr>
+                        <tr>
+                            <td>30</td>
+                            <td>94</td>
+                            <td>7</td>
+                            <td>&nbsp;</td>
+                            <td>31</td>
+                            <td>12</td>
+                            <td>36</td>
+                            <td>&nbsp;</td>
+                            <td>31</td>
+                            <td>69</td>
+                            <td>12</td>
+                            <td>&nbsp;</td>
+                            <td>31</td>
+                            <td>81</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>32</td>
+                            <td>72</td>
+                            <td>39</td>
+                            <td>&nbsp;</td>
+                            <td>32</td>
+                            <td>76</td>
+                            <td>38</td>
+                            <td>&nbsp;</td>
+                            <td>32</td>
+                            <td>77</td>
+                            <td>38</td>
+                            <td>&nbsp;</td>
+                            <td>32</td>
+                            <td>90</td>
+                            <td>42</td>
+                        </tr>
+                        <tr>
+                            <td>33</td>
+                            <td>40</td>
+                            <td>21</td>
+                            <td>&nbsp;</td>
+                            <td>33</td>
+                            <td>75</td>
+                            <td>22</td>
+                            <td>&nbsp;</td>
+                            <td>34</td>
+                            <td>38</td>
+                            <td>53</td>
+                            <td>&nbsp;</td>
+                            <td>34</td>
+                            <td>66</td>
+                            <td>47</td>
+                        </tr>
+                        <tr>
+                            <td>34</td>
+                            <td>86</td>
+                            <td>64</td>
+                            <td>&nbsp;</td>
+                            <td>35</td>
+                            <td>6</td>
+                            <td>15</td>
+                            <td>&nbsp;</td>
+                            <td>36</td>
+                            <td>29</td>
+                            <td>28</td>
+                            <td>&nbsp;</td>
+                            <td>36</td>
+                            <td>42</td>
+                            <td>16</td>
+                        </tr>
+                        <tr>
+                            <td>36</td>
+                            <td>62</td>
+                            <td>22</td>
+                            <td>&nbsp;</td>
+                            <td>37</td>
+                            <td>15</td>
+                            <td>7</td>
+                            <td>&nbsp;</td>
+                            <td>37</td>
+                            <td>83</td>
+                            <td>33</td>
+                            <td>&nbsp;</td>
+                            <td>37</td>
+                            <td>87</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>37</td>
+                            <td>89</td>
+                            <td>9</td>
+                            <td>&nbsp;</td>
+                            <td>38</td>
+                            <td>73</td>
+                            <td>8</td>
+                            <td>&nbsp;</td>
+                            <td>38</td>
+                            <td>98</td>
+                            <td>26</td>
+                            <td>&nbsp;</td>
+                            <td>39</td>
+                            <td>63</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <td>39</td>
+                            <td>91</td>
+                            <td>5</td>
+                            <td>&nbsp;</td>
+                            <td>39</td>
+                            <td>99</td>
+                            <td>21</td>
+                            <td>&nbsp;</td>
+                            <td>40</td>
+                            <td>33</td>
+                            <td>42</td>
+                            <td>&nbsp;</td>
+                            <td>40</td>
+                            <td>74</td>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <td>41</td>
+                            <td>52</td>
+                            <td>40</td>
+                            <td>&nbsp;</td>
+                            <td>41</td>
+                            <td>67</td>
+                            <td>0</td>
+                            <td>&nbsp;</td>
+                            <td>41</td>
+                            <td>71</td>
+                            <td>15</td>
+                            <td>&nbsp;</td>
+                            <td>42</td>
+                            <td>30</td>
+                            <td>23</td>
+                        </tr>
+                        <tr>
+                            <td>42</td>
+                            <td>54</td>
+                            <td>45</td>
+                            <td>&nbsp;</td>
+                            <td>42</td>
+                            <td>56</td>
+                            <td>18</td>
+                            <td>&nbsp;</td>
+                            <td>43</td>
+                            <td>35</td>
+                            <td>2</td>
+                            <td>&nbsp;</td>
+                            <td>43</td>
+                            <td>58</td>
+                            <td>16</td>
+                        </tr>
+                        <tr>
+                            <td>44</td>
+                            <td>78</td>
+                            <td>52</td>
+                            <td>&nbsp;</td>
+                            <td>45</td>
+                            <td>85</td>
+                            <td>49</td>
+                            <td>&nbsp;</td>
+                            <td>46</td>
+                            <td>4</td>
+                            <td>32</td>
+                            <td>&nbsp;</td>
+                            <td>46</td>
+                            <td>7</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>46</td>
+                            <td>39</td>
+                            <td>25</td>
+                            <td>&nbsp;</td>
+                            <td>47</td>
+                            <td>5</td>
+                            <td>57</td>
+                            <td>&nbsp;</td>
+                            <td>47</td>
+                            <td>50</td>
+                            <td>18</td>
+                            <td>&nbsp;</td>
+                            <td>47</td>
+                            <td>68</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>49</td>
+                            <td>43</td>
+                            <td>11</td>
+                            <td>&nbsp;</td>
+                            <td>49</td>
+                            <td>64</td>
+                            <td>15</td>
+                            <td>&nbsp;</td>
+                            <td>50</td>
+                            <td>45</td>
+                            <td>39</td>
+                            <td>&nbsp;</td>
+                            <td>51</td>
+                            <td>70</td>
+                            <td>18</td>
+                        </tr>
+                        <tr>
+                            <td>54</td>
+                            <td>1</td>
+                            <td>42</td>
+                            <td>&nbsp;</td>
+                            <td>54</td>
+                            <td>79</td>
+                            <td>49</td>
+                            <td>&nbsp;</td>
+                            <td>56</td>
+                            <td>65</td>
+                            <td>54</td>
+                            <td>&nbsp;</td>
+                            <td>57</td>
+                            <td>0</td>
+                            <td>19</td>
+                        </tr>
+                        <tr>
+                            <td>57</td>
+                            <td>10</td>
+                            <td>59</td>
+                            <td>&nbsp;</td>
+                            <td>58</td>
+                            <td>31</td>
+                            <td>49</td>
+                            <td>&nbsp;</td>
+                            <td>58</td>
+                            <td>61</td>
+                            <td>63</td>
+                            <td>&nbsp;</td>
+                            <td>59</td>
+                            <td>51</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td>60</td>
+                            <td>8</td>
+                            <td>42</td>
+                            <td>&nbsp;</td>
+                            <td>60</td>
+                            <td>93</td>
+                            <td>67</td>
+                            <td>&nbsp;</td>
+                            <td>61</td>
+                            <td>57</td>
+                            <td>61</td>
+                            <td>&nbsp;</td>
+                            <td>62</td>
+                            <td>22</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>65</td>
+                            <td>21</td>
+                            <td>100</td>
+                            <td>&nbsp;</td>
+                            <td>67</td>
+                            <td>88</td>
+                            <td>45</td>
+                            <td>&nbsp;</td>
+                            <td>74</td>
+                            <td>17</td>
+                            <td>74</td>
+                            <td>&nbsp;</td>
+                            <td>80</td>
+                            <td>28</td>
+                            <td>35</td>
+                        </tr>
+                        <tr>
+                            <td>80</td>
+                            <td>41</td>
+                            <td>30</td>
+                            <td>&nbsp;</td>
+                            <td>82</td>
+                            <td>97</td>
+                            <td>70</td>
+                            <td>&nbsp;</td>
+                            <td>84</td>
+                            <td>20</td>
+                            <td>92</td>
+                            <td>&nbsp;</td>
+                            <td>90</td>
+                            <td>36</td>
+                            <td>70</td>
+                        </tr>
+                    </table>
+                    </table>
+                </details>
+            </div>
+
+            <div>
+                <p>
+                    一番いいのがseed36の90%、一番弱いのがseed11に対する16%でした。
+                </p>
+            </div>
+
+            <div class="center">
+                <table>
+                    <tr>
+                        <td>seed 36 90%</td>
+                        <td>seed 6 36%</td>
+                        <td>seed11 16%</td>
+                    </tr>
+                    <tr>
+                        <td> <img class="normalImg" src="day9_03.png"></td>
+                        <td> <img class="normalImg" src="day9_04.png"></td>
+                        <td> <img class="normalImg" src="day9_05.png"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div>
+                <p>
+                    おおむねフィールドの良しあしに影響受けてます。
+                </p>
+                <p>
+                    反例になりそうなケースも見ておきましょう
+                </p>
+            </div>
+
+            <div class="center">
+                <table>
+                    <tr>
+                        <td>seed 91 39%</td>
+                        <td>seed 67 41%</td>
+                        <td>seed 22 62%</td>
+                    </tr>
+                    <tr>
+                        <td> <img class="normalImg" src="day9_08.png"></td>
+                        <td> <img class="normalImg" src="day9_07.png"></td>
+                        <td> <img class="normalImg" src="day9_06.png"></td>
+                    </tr>
+                </table>
+            </div>
+
+            <div>
+                <p>
+                    ん～なんもわからん。
+                </p>
+            </div>
+
+            <div style="padding-top:100px">
+                <p>
+                    何もわからんままABCでぼこぼこにされて心が折れました。このまま終了です。
+                </p>
+                <p>
+                    まさかのday10はなし。
+                </p>
             </div>
         </div>
 
@@ -581,36 +1260,37 @@
 
             <div>
                 <p>
-
+                    まとめるほどの内容はないですね。
+                </p>
+                <p>
+                    スコア自体は伸ばせなかったものの、今までやりたいと思っていたケースごとの分析に挑戦できたのはよかったと思います。
+                </p>
+                <p>
+                    場の分析でなんとなくつかんだ傾向を生かしきれなかったのが次回の課題でしょうか。
                 </p>
             </div>
+            <div>
+                <p>
+                    ABCでぼこぼこにされて心が折れたのも問題ですが、最近短期のAHCがある日に予定が重なりすぎて全然出れてないのもよくないです。モチベにつながっていない。次回、8月末のAHCもすでに予定あり。どうしてこんなに間が悪いのか。
+                </p>
+                <p>
+                    アルゴに比べて圧倒的に場数が少ないのでもう少しお勉強を頑張らないといけないなと思いました。
+                </p>
+            </div>
+            <div>
+                <p>
+                    以上簡単ではありますがまとめです。
+                </p>
+                <p>
+                    なんだかんだ記録を書きながら戦うと楽しいのでまた書けたらいいですね。ではまた。
+                </p>
+            </div>
+
         </div>
 
-        <!-- 参考リスト -->
-        <a href="#ref">[]</a>
-        <div>
-            <h2 id="ref">
-                参考
-            </h2>
 
-            <ol>
-                <li>『』 ページ名 ()
-                    <br><a href="">
-
-                    </a>
-                </li>
-                <!-- <li>『』 ページ名 ()
-            <br><a href="">
-
-            </a>
-        </li> -->
-            </ol>
-        </div>
-
-    </div>
-
-    <!-- 同じジャンルの記事リスト -->
-    <div id="relatedList"></div>
+        <!-- 同じジャンルの記事リスト -->
+        <div id="relatedList"></div>
     </div>
 
     <script>
